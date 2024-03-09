@@ -91,7 +91,7 @@ const getUser = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'There was an error with the server' });
     }
-}
+};
 
 // Editing User Information 
 const editUser = async (req, res) => {
@@ -108,7 +108,7 @@ const editUser = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'There was an error with the server' });
     }
-}
+};
 
 // Changing User Password
 const changeUserPassword = async (req, res) => {
@@ -124,12 +124,12 @@ const changeUserPassword = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'There was an error with the server' });
     }
-}
+};
 
 // Deleting User 
 const deleteUser = async (req, res) => {
     const userId = req.params.id; 
-    const userExists = await knex("users").where("id", userId).first();
+    const userExists = await db("users").where("id", userId).first();
     if (!userExists) {
         return res.status(404).json({ error: "User not found" });
     }
@@ -139,7 +139,7 @@ const deleteUser = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'There was an error with the server' });
     }
-}
+};
 
 module.exports = {
   signUpUser,

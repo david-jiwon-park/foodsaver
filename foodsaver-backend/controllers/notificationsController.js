@@ -11,12 +11,12 @@ const getUserNotifications = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'There was an error with the server' });
     }
-}
+};
 
 const editUserNotifications = async (req, res) => {
     const userId = req.params.id; 
     try {
-        const updatedData = await db("users").where("user_id", userId).update({
+        const updatedData = await db("notifications").where("user_id", userId).update({
             enabled: req.body.enabled, 
             days_before: req.body.days_before,
         });
@@ -27,9 +27,9 @@ const editUserNotifications = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'There was an error with the server' });
     }
-}
+};
 
 module.exports = {
     getUserNotifications,
     editUserNotifications
-  };
+};
