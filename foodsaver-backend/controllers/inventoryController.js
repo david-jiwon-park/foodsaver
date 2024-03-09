@@ -1,22 +1,30 @@
 const db = require('knex')(require('../knexfile'));
 
+// Getting Inventory list for a specific user
 const getInventory = async (req, res) => {
-    const userId = req.params.id; 
+    const userId = req.params.userId; 
+    const userExists = await db("users").where("id", userId).first();
+    if (!userExists) {
+        return res.status(404).json({ error: "User not found" });
+    }
     try {
-        const userInventory = await db("inventory").where("user_id", userId).first();
-        if (!userInventory) {
-            return res.status(404).json({ error: "User not found" });
-        }
+        const userInventory = await db("inventory").where("user_id", userId);
         res.status(200).json(userInventory);
     } catch (error) {
         res.status(500).json({ message: 'There was an error with the server' });
     }
 }
 
+// Adding food item to Inventory list  
 const addInventory = async (req, res) => {
+    const userId = req.params.userId; 
+    const userExists = await db("users").where("id", userId).first();
+    if (!userExists) {
+        return res.status(404).json({ error: "User not found" });
+    }
     try {
         await db("inventory").insert({
-            user_id: req.body.user_id, 
+            user_id: userId, 
             food_item: req.body.food_item,
             exp_date: req.body.exp_date, 
             discarded: 0
@@ -29,6 +37,7 @@ const addInventory = async (req, res) => {
     }
 };
 
+// Editing food item in Inventory list
 const editInventory = async (req, res) => {
     const inventoryId = req.params.id; 
     try {
@@ -45,11 +54,12 @@ const editInventory = async (req, res) => {
     }
 };
 
+// Discarding food item in Inventory list by updating the "discarded" property
 const discardInventory = async (req, res) => {
     const inventoryId = req.params.id; 
     try {
         const updatedData = await db("inventory").where("id", inventoryId).update({
-            food_item: req.body.discarded,
+            discarded: req.body.discarded,
         });
         if (updatedData === 0) {
             return res.status(404).json({ error: "Inventory item not found" });

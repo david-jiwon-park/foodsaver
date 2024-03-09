@@ -1,7 +1,29 @@
 const db = require('knex')(require('../knexfile'));
 
+// All users will be given default notification settings upon account creation 
+const createDefaultNotifications = async (req, res) => {
+    const userId = req.params.userId; 
+    const userExists = await db("users").where("id", userId).first();
+    if (!userExists) {
+        return res.status(404).json({ error: "User not found" });
+    }
+    try {
+        await db("notifications").insert({
+            user_id: userId, 
+            enabled: 1, 
+            days_before: 2
+        });
+        res.status(201).json({
+            message: "Default notification settings created successfully",
+          });
+    } catch (err) {
+        res.status(500).json({ error: "Internal server error" });
+    }
+};
+
+// Getting the User Notification Settings for a specific user
 const getUserNotifications = async (req, res) => {
-    const userId = req.params.id; 
+    const userId = req.params.userId; 
     try {
         const userNotifications = await db("notifications").where("user_id", userId).first();
         if (!userNotifications) {
@@ -13,8 +35,9 @@ const getUserNotifications = async (req, res) => {
     }
 };
 
+// Editing User Notification Settings 
 const editUserNotifications = async (req, res) => {
-    const userId = req.params.id; 
+    const userId = req.params.userId; 
     try {
         const updatedData = await db("notifications").where("user_id", userId).update({
             enabled: req.body.enabled, 
@@ -30,6 +53,7 @@ const editUserNotifications = async (req, res) => {
 };
 
 module.exports = {
+    createDefaultNotifications,
     getUserNotifications,
     editUserNotifications
 };
