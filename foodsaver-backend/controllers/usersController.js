@@ -81,7 +81,7 @@ const loginUser = async (req, res) => {
 const getUser = async (req, res) => {
     const userId = req.params.id; 
     try {
-        const user = await db("users").where({ userId }).first();
+        const user = await db("users").where("id", userId).first();
         if (!user) {
             return res.status(404).json({ error: "User not found" });
         }
@@ -97,7 +97,7 @@ const getUser = async (req, res) => {
 const editUser = async (req, res) => {
     const userId = req.params.id; 
     try {
-        const updatedData = await db("users").where({ userId }).update({
+        const updatedData = await db("users").where("id", userId).update({
             name: req.body.name, 
             email: req.body.email,
         });
@@ -114,7 +114,7 @@ const editUser = async (req, res) => {
 const changeUserPassword = async (req, res) => {
     const userId = req.params.id; 
     try {
-        const updatedData = await db("users").where({ userId }).update({
+        const updatedData = await db("users").where("id", userId).update({
             password: bcrypt.hashSync(req.body.password, 10)
         });
         if (updatedData === 0) {
