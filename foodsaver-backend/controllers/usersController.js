@@ -83,11 +83,15 @@ const getUser = async (req, res) => {
     try {
         const user = await db("users").where("id", userId).first();
         if (!user) {
-            return res.status(404).json({ error: "User not found" });
+          return res.status(404).json({ error: "User not found" });
         }
-        res.status(200).json({
-            name: user[0].name, 
-            email: user[0].email});
+        const filteredUserInfo = {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          created_at: user.created_at
+        };
+        res.status(200).json(filteredUserInfo);
     } catch (error) {
         res.status(500).json({ message: 'There was an error with the server' });
     }
@@ -100,21 +104,6 @@ const editUser = async (req, res) => {
         const updatedData = await db("users").where("id", userId).update({
             name: req.body.name, 
             email: req.body.email,
-        });
-        if (updatedData === 0) {
-            return res.status(404).json({ error: "User not found" });
-        } 
-        res.json({ message: "User updated successfully" });
-    } catch (error) {
-        res.status(500).json({ message: 'There was an error with the server' });
-    }
-};
-
-// Changing User Password
-const changeUserPassword = async (req, res) => {
-    const userId = req.params.id; 
-    try {
-        const updatedData = await db("users").where("id", userId).update({
             password: bcrypt.hashSync(req.body.password, 10)
         });
         if (updatedData === 0) {
@@ -146,6 +135,5 @@ module.exports = {
   loginUser,
   getUser,
   editUser, 
-  changeUserPassword,
   deleteUser
 };

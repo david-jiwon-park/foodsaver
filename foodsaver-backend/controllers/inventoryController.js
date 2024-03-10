@@ -44,6 +44,7 @@ const editInventory = async (req, res) => {
         const updatedData = await db("inventory").where("id", inventoryId).update({
             food_item: req.body.food_item,
             exp_date: req.body.exp_date, 
+            discarded: req.body.discarded
         });
         if (updatedData === 0) {
             return res.status(404).json({ error: "Inventory item not found" });
@@ -54,25 +55,8 @@ const editInventory = async (req, res) => {
     }
 };
 
-// Discarding food item in Inventory list by updating the "discarded" property
-const discardInventory = async (req, res) => {
-    const inventoryId = req.params.id; 
-    try {
-        const updatedData = await db("inventory").where("id", inventoryId).update({
-            discarded: req.body.discarded,
-        });
-        if (updatedData === 0) {
-            return res.status(404).json({ error: "Inventory item not found" });
-        } 
-        res.json({ message: "Inventory item has been discarded" });
-    } catch (error) {
-        res.status(500).json({ message: 'There was an error with the server' });
-    }
-};
-
 module.exports = {
     getInventory,
     addInventory,
     editInventory, 
-    discardInventory
 };
