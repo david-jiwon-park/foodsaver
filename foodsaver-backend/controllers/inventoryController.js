@@ -2,7 +2,7 @@ const db = require('knex')(require('../knexfile'));
 
 // Getting Inventory list for a specific user
 const getInventory = async (req, res) => {
-    const userId = req.params.userId; 
+    const userId = req.userData.id; 
     const userExists = await db("users").where("id", userId).first();
     if (!userExists) {
         return res.status(404).json({ error: "User not found" });
@@ -17,7 +17,7 @@ const getInventory = async (req, res) => {
 
 // Adding food item to Inventory list  
 const addInventory = async (req, res) => {
-    const userId = req.params.userId; 
+    const userId = req.userData.id; 
     const userExists = await db("users").where("id", userId).first();
     if (!userExists) {
         return res.status(404).json({ error: "User not found" });

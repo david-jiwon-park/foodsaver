@@ -79,7 +79,7 @@ const loginUser = async (req, res) => {
 
 // Getting User Information 
 const getUser = async (req, res) => {
-    const userId = req.params.id; 
+    const userId = req.userData.id; 
     try {
         const user = await db("users").where("id", userId).first();
         if (!user) {
@@ -99,7 +99,7 @@ const getUser = async (req, res) => {
 
 // Editing User Information 
 const editUser = async (req, res) => {
-    const userId = req.params.id; 
+    const userId = req.userData.id; 
     try {
         const updatedData = await db("users").where("id", userId).update({
             name: req.body.name, 
@@ -117,7 +117,7 @@ const editUser = async (req, res) => {
 
 // Deleting User 
 const deleteUser = async (req, res) => {
-    const userId = req.params.id; 
+    const userId = req.userData.id; 
     const userExists = await db("users").where("id", userId).first();
     if (!userExists) {
         return res.status(404).json({ error: "User not found" });

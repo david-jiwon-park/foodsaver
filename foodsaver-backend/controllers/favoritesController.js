@@ -2,7 +2,7 @@ const db = require('knex')(require('../knexfile'));
 
 // Getting Favorites list for a specific user
 const getFavorites = async (req, res) => {
-    const userId = req.params.userId; 
+    const userId = req.userData.id; 
     const userExists = await db("users").where("id", userId).first();
     if (!userExists) {
         return res.status(404).json({ error: "User not found" });
@@ -17,7 +17,7 @@ const getFavorites = async (req, res) => {
 
 // Adding a recipe to Favorites list
 const addFavorites = async (req, res) => {
-    const userId = req.params.userId; 
+    const userId = req.userData.id; 
     const userExists = await db("users").where("id", userId).first();
     if (!userExists) {
         return res.status(404).json({ error: "User not found" });

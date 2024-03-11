@@ -2,7 +2,7 @@ const db = require('knex')(require('../knexfile'));
 
 // All users will be given default notification settings upon account creation 
 const createDefaultNotifications = async (req, res) => {
-    const userId = req.params.userId; 
+    const userId = req.userData.id; 
     const userExists = await db("users").where("id", userId).first();
     if (!userExists) {
         return res.status(404).json({ error: "User not found" });
@@ -23,7 +23,7 @@ const createDefaultNotifications = async (req, res) => {
 
 // Getting the User Notification Settings for a specific user
 const getUserNotifications = async (req, res) => {
-    const userId = req.params.userId; 
+    const userId = req.userData.id; 
     try {
         const userNotifications = await db("notifications").where("user_id", userId).first();
         if (!userNotifications) {
@@ -37,7 +37,7 @@ const getUserNotifications = async (req, res) => {
 
 // Editing User Notification Settings 
 const editUserNotifications = async (req, res) => {
-    const userId = req.params.userId; 
+    const userId = req.userData.id; 
     try {
         const updatedData = await db("notifications").where("user_id", userId).update({
             enabled: req.body.enabled, 
