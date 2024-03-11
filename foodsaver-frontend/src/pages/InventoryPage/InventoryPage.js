@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
 import Header from '../../components/Header/Header'
+import AddFoodModal from '../../components/AddFoodModal/AddFoodModal';
 import getUserInventory from '../../utils/getUserInventory';
 
 const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
   const [userInventory, setUserInventory] = useState([]);
+  const [isAddFoodModalOpen, setIsAddFoodModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -16,7 +18,15 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
     } else {
       navigate('/login');
     }
-    }, [isLoggedIn]);
+    }, [isLoggedIn, isAddFoodModalOpen]);
+
+  const handleOpenAddFoodModal = () => {
+    setIsAddFoodModalOpen(true);
+  };
+
+  const handleCloseAddFoodModal = () => {
+    setIsAddFoodModalOpen(false);
+  };
 
   return (
     <div>
@@ -25,6 +35,12 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
       />
       <div>
         <h1>Inventory</h1>
+        <button onClick={() => handleOpenAddFoodModal()}>Add Food</button>
+        <AddFoodModal 
+          isOpen={isAddFoodModalOpen} 
+          onClose={handleCloseAddFoodModal} 
+        />
+
         {userInventory.filter((item) => {
           return item.discarded == 0
         })

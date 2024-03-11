@@ -34,7 +34,7 @@ const App = () => {
                 isLoggedIn={isLoggedIn}
                 setIsLoggedIn={setIsLoggedIn}
             />
-          }
+            }
           /> 
           <Route 
             path="/recipes" 
