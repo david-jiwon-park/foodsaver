@@ -37,6 +37,6 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
       </div>
     </div>
   )
-}
+};
 
 export default InventoryPage;
