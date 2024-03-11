@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
-import './LogInForm.scss';
+import './LoginForm.scss';
 
-const LoginForm = ({ isLoggedIn, setIsLoggedIn }) => {
+const LoginForm = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
   const formRef = useRef();
   const [isLoginError, setIsLoginError] = useState(false);
@@ -69,7 +69,7 @@ const LoginForm = ({ isLoggedIn, setIsLoggedIn }) => {
         </Link> 
       </form>
     </div>
-);
+  );
 };
 
 export default LoginForm;

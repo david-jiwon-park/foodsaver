@@ -42,7 +42,7 @@ const SignupForm = () => {
             id="name"
             name="name"
             type="text"
-            placeholder="Email Address"
+            placeholder="Name"
           />
 
           <label className="SignUpForm__label" htmlFor="email">Email</label>
@@ -56,13 +56,12 @@ const SignupForm = () => {
 
           <label className="SignUpForm__label" htmlFor="password">Password</label>
           <input
-            onChange={onChange}
+            className="SignUpForm__input"
             id="password"
             name="password"
             type="password"
-            value={password}
             placeholder="Password"
-            className="SignUpForm__input"
+            
           />
 
         <button>Sign Up</button>

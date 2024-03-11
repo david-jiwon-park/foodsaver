@@ -23,7 +23,6 @@ const App = () => {
             path="/login" 
             element={
               <LoginPage
-                isLoggedIn={isLoggedIn}
                 setIsLoggedIn={setIsLoggedIn}
               />
             }
@@ -33,6 +32,7 @@ const App = () => {
             element={
               <InventoryPage
                 isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
             />
           }
           /> 
@@ -41,6 +41,7 @@ const App = () => {
             element={
               <RecipesPage
                 isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
               />
             }
           /> 
@@ -49,6 +50,7 @@ const App = () => {
             element={
               <UserProfilePage
                 isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
               />
             }
           />

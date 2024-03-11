@@ -1,6 +1,6 @@
 import SignupForm from '../../components/SignupForm/SignupForm';
 
-const SignupLoginPage = () => {
+const SignupPage = () => {
   return (
     <>
       <SignupForm />
@@ -8,4 +8,4 @@ const SignupLoginPage = () => {
   );
 };
 
-export default SignupLoginPage;
+export default SignupPage;

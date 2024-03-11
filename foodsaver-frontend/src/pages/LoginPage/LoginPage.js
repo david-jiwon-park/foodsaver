@@ -1,10 +1,9 @@
-import LoginForm from '../../components/SignupForm/SignupForm';
+import LoginForm from '../../components/LoginForm/LoginForm';
 
-const LoginPage = ({ isLoggedIn, setIsLoggedIn }) => {
+const LoginPage = ({ setIsLoggedIn }) => {
   return (
     <>
       <LoginForm 
-        isLoggedIn={isLoggedIn}
         setIsLoggedIn={setIsLoggedIn}
       />
     </>

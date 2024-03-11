@@ -1,8 +1,14 @@
+import Header from '../../components/Header/Header'
 
-const RecipesPage = ({ isLoggedIn }) => {
+const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
 
     return (
-        <div>Hello World</div>
+        <div>
+            <Header 
+                setIsLoggedIn={setIsLoggedIn}
+            />
+            <h1>Recipes Page</h1>
+        </div>
     )
 }
 
