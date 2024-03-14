@@ -13,6 +13,7 @@ const Header = ({ setIsLoggedIn }) => {
     <div>
         <Link className="header__nav-link" to="/">Inventory</Link>
         <Link className="header__nav-link" to="/recipes">Recipes</Link>
+        <Link className="header__nav-link" to="/favorites">Favorites</Link>
         <Link className="header__nav-link" to="/profile">User Profile</Link>
 
         <button className="UserProfile__logout-button" onClick={handleLogOut}>

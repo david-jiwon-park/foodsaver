@@ -34,7 +34,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
     })
     .catch((error) => {
       setIsLoginError(true);
-      setErrorMessage(error.response.data.error.message);
+      // setErrorMessage(error.response.data.error.message);
     });
   };
 

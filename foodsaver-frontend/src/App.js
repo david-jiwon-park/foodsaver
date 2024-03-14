@@ -5,6 +5,7 @@ import SignupPage from './pages/SignupPage/SignupPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import InventoryPage from './pages/InventoryPage/InventoryPage';
 import RecipesPage from './pages/RecipesPage/RecipesPage';
+import FavoritesPage from './pages/FavoritesPage/FavoritesPage';
 import UserProfilePage from './pages/UserProfilePage/UserProfilePage';
 
 
@@ -40,6 +41,15 @@ const App = () => {
             path="/recipes" 
             element={
               <RecipesPage
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
+              />
+            }
+          /> 
+          <Route 
+            path="/favorites" 
+            element={
+              <FavoritesPage
                 isLoggedIn={isLoggedIn}
                 setIsLoggedIn={setIsLoggedIn}
               />
