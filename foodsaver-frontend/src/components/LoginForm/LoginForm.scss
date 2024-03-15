@@ -1,0 +1,74 @@
+// Login Form Styling 
+
+@import '../../styles/partials/fonts';
+@import '../../styles/partials/mixins';
+@import '../../styles/partials/variables';
+
+.login-form {
+    background-color: $white;
+    height: 60%;
+    width: 100%;
+    margin: 1.5rem;
+    padding: 1rem 2rem;
+    border-radius: 20px;
+    &__heading {
+        font-family: $header-font;
+        font-size: 3rem;
+    }
+    &__form {
+        display: flex;
+        flex-direction: column;
+    }
+    &__input-container {
+        padding: 0.35rem 0;
+    }
+    &__input {
+        outline: none;
+        box-sizing: border-box;
+        width: 100%;
+        height: 2.5rem;
+        background-color: $color-field-background;
+        border: none;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        line-height: 1.25rem;
+        font-family: $base-font;
+        color: $black;
+        padding-left: 1.25rem;
+        &::placeholder {
+            font-size: 0.8rem;
+            line-height: 1.25rem;
+            font-family: $base-font;
+            color: $color-placeholder-text;
+        }
+        &:focus {
+            border: 2px solid $color-main;
+        }
+    }
+    &__login-button {
+        margin-top: 4rem;
+        background-color: $color-main;
+        border: none;
+        box-sizing: border-box;
+        width: 100%;
+        height: 2.5rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        line-height: 1.25rem;
+        font-weight: 600;
+        font-family: $base-font;
+        color: $black;
+    }
+    &__link-container {
+        padding-top: 0.5rem;
+        font-size: 0.8rem;
+        line-height: 1.25rem;
+    }
+    &__signup-link {
+        text-decoration: none;
+        color: $color-signup-link;
+        font-weight: 600;
+        padding-left: 0.25rem;
+    }
+
+}

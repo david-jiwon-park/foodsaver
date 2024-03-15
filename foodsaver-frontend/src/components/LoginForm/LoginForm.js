@@ -1,8 +1,7 @@
+import './LoginForm.scss';
 import { useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-
-import './LoginForm.scss';
 
 const LoginForm = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
@@ -34,39 +33,44 @@ const LoginForm = ({ setIsLoggedIn }) => {
     })
     .catch((error) => {
       setIsLoginError(true);
-      // setErrorMessage(error.response.data.error.message);
+      setErrorMessage(error.response.data.error.message);
     });
   };
 
 
   return (
-    <div className="LogInForm">
-      <h1>Login</h1>
+    <div className="login-form">
+      <h1 className="login-form__heading">Log In</h1>
       {isLoginError && <label style={{ color: "red" }}>{errorMessage}</label>}
-      <form className="LogInForm__form" onSubmit={onSubmit} ref={formRef}>
+      <form className="login-form__form" onSubmit={onSubmit} ref={formRef}>
         
-        <label className="LogInForm__label" htmlFor="email">Email</label>
-        <input
-          className="LogInForm__input"
-          id="email"
-          name="email"
-          type="email"
-          placeholder="Email Address"
-        />
-      
-        <label className="LogInForm__label" htmlFor="password">Password</label>
-        <input
-          className="LogInForm__input"
-          id="password"
-          name="password"
-          type="password"
-          placeholder="Password"
-        />
-    
-        <button>Log In</button>
-        <Link to='/signup'>
-          New to FoodSaver? Sign up here!
-        </Link> 
+        <div className="login-form__input-container">
+          <input
+            className="login-form__input"
+            id="email"
+            name="email"
+            type="email"
+            placeholder="Email"
+          />
+        </div>
+        
+        <div className="login-form__input-container">
+          <input
+            className="login-form__input"
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Password"
+          />
+        </div>
+
+        <button className="login-form__login-button">Log In</button>
+
+          <p className="login-form__link-container">Don't have an account?
+            <Link className="login-form__signup-link" to='/signup'>
+              Sign up here!
+           </Link> 
+          </p>
       </form>
     </div>
   );
