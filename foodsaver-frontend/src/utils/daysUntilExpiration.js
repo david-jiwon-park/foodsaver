@@ -12,10 +12,7 @@ export const daysUntilExpiration = (date) => {
   // Return the appropriate result based on the comparison
   if (days <= 0) {
     return 'Expired!';
-  } else if (days === 1) {
-    return `${days} day`;
-  }
-  else {
-    return `${days} days`;
+  } else {
+    return days;
   }
 }

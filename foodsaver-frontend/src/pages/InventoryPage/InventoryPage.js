@@ -1,12 +1,15 @@
+import './InventoryPage.scss';
 import { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header'
 import AddFoodModal from '../../components/AddFoodModal/AddFoodModal';
 import DeleteFoodModal from '../../components/DeleteFoodModal/DeleteFoodModal';
 import EditFoodModal from '../../components/EditFoodModal/EditFoodModal';
 import getUserInventory from '../../utils/getUserInventory';
 import { daysUntilExpiration } from '../../utils/daysUntilExpiration';
+import addIcon from '../../assets/icons/add-icon.png';
+import editIcon from '../../assets/icons/edit-icon.svg';
+import deleteIcon from '../../assets/icons/delete-icon.svg';
 
 const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
@@ -17,7 +20,7 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
   const [modalFoodId, setModalFoodId] = useState(null);
   const [modalFoodName, setModalFoodName] = useState("");
   const [modalFoodExpDate, setModalFoodExpDate] = useState(null);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     // Get the user's inventory list if they are logged in 
@@ -54,28 +57,52 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
     setIsEditFoodModalOpen(false);
   };
 
+  let itemContainerClass = "inventory-page__item-container";
+  const checkExpDate = (date) => {
+    if (daysUntilExpiration(date) === "Expired!") {
+      itemContainerClass = "inventory-page__item-container inventory-page__item-container--expired";
+    } else if (daysUntilExpiration(date) <= 3) {
+      itemContainerClass = "inventory-page__item-container inventory-page__item-container--warning";
+    } else {
+      itemContainerClass = "inventory-page__item-container";
+    }
+    return itemContainerClass;
+  };
+
   return (
-    <div>
+    <>
       <Header 
         setIsLoggedIn={setIsLoggedIn}
       />
-      <div>
-        <h1>Inventory</h1>
-        <button onClick={() => handleOpenAddFoodModal()}>Add Food</button>
+      <div className="inventory-page">
+        <div className="inventory-page__heading-container">
+          <h1 className="inventory-page__heading">Inventory</h1>
+          <div className="inventory-page__add-button-container">
+            <button className="inventory-page__add-button" onClick={() => handleOpenAddFoodModal()}>Add Item</button>
+            <img className="inventory-page__add-icon" src={addIcon} alt="add icon"/>
+          </div>
+        </div>
+
         <AddFoodModal 
           isOpen={isAddFoodModalOpen} 
           onClose={handleCloseAddFoodModal} 
         />
 
+        <div className="inventory-page__subheading-container">
+          <h4 className="inventory-page__subheading">Food Item</h4>
+          <h4 className="inventory-page__subheading">Expires In</h4>
+        </div>
+
+
         {userInventory.filter((item) => {
           return item.discarded == 0
         })
         .map((item) => (
-          <div key={item.id}>
-            <h3>{item.food_item}</h3>
-            <p>{daysUntilExpiration(item.exp_date)}</p>
-            <button onClick={() => handleOpenEditFoodModal(item.id, item.food_item, item.exp_date)}>Edit Food</button>
-            <button onClick={() => handleOpenDeleteFoodModal(item.id, item.food_item)}>Delete Food</button>
+          <div className={checkExpDate(item.exp_date)} key={item.id}>
+            <p className="inventory-page__item-name">{item.food_item}</p>
+            <p className="inventory-page__item-exp">{daysUntilExpiration(item.exp_date)}</p>
+            <img className="inventory-page__edit-icon" src={editIcon} alt="edit icon" onClick={() => handleOpenEditFoodModal(item.id, item.food_item, item.exp_date)}/>
+            <img className="inventory-page__delete-icon" src={deleteIcon} alt="delete icon" onClick={() => handleOpenDeleteFoodModal(item.id, item.food_item)}/>
           </div>
         ))}
         <EditFoodModal 
@@ -92,7 +119,7 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
           foodName={modalFoodName}
         />
       </div>
-    </div>
+    </>
   )
 };
 

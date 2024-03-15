@@ -1,0 +1,83 @@
+// Inventory Page Styling 
+
+@import '../../styles/partials/fonts';
+@import '../../styles/partials/mixins';
+@import '../../styles/partials/variables';
+
+.inventory-page {
+    padding: 0.5rem 1.5rem 0;
+    &__heading-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__heading {
+        font-family: $header-font;
+        font-size: 3rem;
+    }
+    &__add-button-container {
+        position: relative;
+    }
+    &__add-button {
+        height: 2rem;
+        width: 6.5rem;
+        background-color: $color-main;
+        border: none;
+        font-size: 0.75rem;
+        line-height: 1.25rem;
+        font-family: $base-font;
+        font-weight: 600;
+        border-radius: 5px;
+        padding-left: 1.2rem;
+    }
+    &__add-icon {
+        position: absolute;
+        top: 0.4rem;
+        left: 0.5rem;
+        height: 1.2rem;
+    }
+    &__subheading-container {
+        display: flex;
+        width: 100%;
+        padding-bottom: 0.75rem;
+    }
+    &__subheading {
+        font-size: 1rem;
+        line-height: 1.5rem;
+        width: 42%;
+        padding-right: 0.75rem;
+    }
+    &__item-container {
+        display: flex;
+        align-items: center;
+        margin: 0.75rem -0.5rem;
+        padding: 0 0.75rem;
+        background-color: $color-item-background;
+        height: 3rem;
+        &--expired {
+            background-color: $color-expired;
+        }
+        &--warning {
+            background-color: $color-expiry-warning;
+        }
+    }
+    &__item-name {
+        font-size: 0.85rem;
+        line-height: 1.2rem;
+        width: 42%;
+    }
+    &__item-exp {
+        font-size: 0.85rem;
+        line-height: 1.2rem;
+        padding-left: 0.75rem;
+
+    }
+    &__edit-icon {
+        margin-left: auto;
+        margin-right: 0.5rem;
+        height: 1.5rem;
+    }
+    &__delete-icon {
+        height: 1.5rem;
+    }
+}

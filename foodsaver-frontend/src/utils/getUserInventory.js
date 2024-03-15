@@ -10,7 +10,8 @@ const getUserInventory = ({ setUserInventory }) => {
       },
     })
     .then((response) => {
-      setUserInventory(response.data);
+      const sortedData = response.data.sort((a, b) => new Date(a.exp_date) - new Date(b.exp_date));
+      setUserInventory(sortedData);
       window.scrollTo(0, 0);
     })
     .catch((error) => {
