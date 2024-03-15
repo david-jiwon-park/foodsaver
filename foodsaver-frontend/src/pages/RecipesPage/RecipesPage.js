@@ -13,7 +13,7 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
     if (isLoggedIn) {
       getUserInventory({ setUserInventory });
     } else {
-      navigate('/login');
+      navigate('/');
     }
     }, [isLoggedIn]);
     

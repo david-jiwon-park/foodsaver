@@ -24,7 +24,7 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
     if (isLoggedIn) {
       getUserInventory({ setUserInventory });
     } else {
-      navigate('/login');
+      navigate('/');
     }
     }, [isLoggedIn, isAddFoodModalOpen, isDeleteFoodModalOpen, isEditFoodModalOpen]);
 

@@ -16,7 +16,7 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
       getUserInfo({ setUserInfo });
       getNotificationSettings({ setNotificationSettings });
     } else {
-      navigate('/login');
+      navigate('/');
     }
     }, [isLoggedIn]);
 

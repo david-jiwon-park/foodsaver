@@ -13,7 +13,7 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
     if (isLoggedIn) {
       getUserFavorites({ setUserFavorites });
     } else {
-      navigate('/login');
+      navigate('/');
     }
     }, [isLoggedIn, userFavorites]);
     

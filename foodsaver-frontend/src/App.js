@@ -1,6 +1,7 @@
 import './App.scss';
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import IntroPage from './pages/IntroPage/IntroPage';
 import SignupPage from './pages/SignupPage/SignupPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import InventoryPage from './pages/InventoryPage/InventoryPage';
@@ -13,9 +14,17 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(JSON.parse(sessionStorage.getItem('loggedIn')));
 
   return (
-    <div>
+    <div className='app'>
       <BrowserRouter>
         <Routes>
+        <Route 
+            path="/" 
+            element={
+              <IntroPage
+                isLoggedIn={isLoggedIn}
+            />
+            }
+          /> 
           <Route 
             path="/signup" 
             element={<SignupPage/>}
@@ -29,7 +38,7 @@ const App = () => {
             }
           />
           <Route 
-            path="/" 
+            path="/inventory" 
             element={
               <InventoryPage
                 isLoggedIn={isLoggedIn}
