@@ -58,7 +58,7 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
   };
 
   let itemContainerClass = "inventory-page__item-container";
-  const checkExpDate = (date) => {
+  const expDateStyling = (date) => {
     if (daysUntilExpiration(date) === "Expired!") {
       itemContainerClass = "inventory-page__item-container inventory-page__item-container--expired";
     } else if (daysUntilExpiration(date) <= 3) {
@@ -67,6 +67,16 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
       itemContainerClass = "inventory-page__item-container";
     }
     return itemContainerClass;
+  };
+
+  const expDateText = (date) => {
+    if (daysUntilExpiration(date) === "Expired!") {
+      return;
+    } else if (daysUntilExpiration(date) === 1) {
+      return 'day'
+    } else {
+      return "days";
+    }
   };
 
   return (
@@ -98,9 +108,9 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
           return item.discarded == 0
         })
         .map((item) => (
-          <div className={checkExpDate(item.exp_date)} key={item.id}>
+          <div className={expDateStyling(item.exp_date)} key={item.id}>
             <p className="inventory-page__item-name">{item.food_item}</p>
-            <p className="inventory-page__item-exp">{daysUntilExpiration(item.exp_date)}</p>
+            <p className="inventory-page__item-exp">{daysUntilExpiration(item.exp_date)} {expDateText(item.exp_date)}</p>
             <img className="inventory-page__edit-icon" src={editIcon} alt="edit icon" onClick={() => handleOpenEditFoodModal(item.id, item.food_item, item.exp_date)}/>
             <img className="inventory-page__delete-icon" src={deleteIcon} alt="delete icon" onClick={() => handleOpenDeleteFoodModal(item.id, item.food_item)}/>
           </div>
