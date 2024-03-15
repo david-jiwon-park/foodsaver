@@ -5,11 +5,12 @@
 @import '../../styles/partials/variables';
 
 .inventory-page {
-    padding: 0.5rem 1.5rem 0;
+    padding: 5rem 1.5rem 0;
     &__heading-container {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        padding-bottom: 0.5rem;
     }
     &__heading {
         font-family: $header-font;
@@ -39,10 +40,10 @@
     &__subheading-container {
         display: flex;
         width: 100%;
-        padding-bottom: 0.75rem;
+        padding-bottom: 0.2rem;
     }
     &__subheading {
-        font-size: 1rem;
+        font-size: 1.1rem;
         line-height: 1.5rem;
         width: 42%;
         padding-right: 0.75rem;
@@ -62,13 +63,13 @@
         }
     }
     &__item-name {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         line-height: 1.2rem;
         font-weight: 600;
         width: 42%;
     }
     &__item-exp {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         line-height: 1.2rem;
         font-weight: 600;
         padding-left: 0.75rem;

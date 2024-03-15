@@ -5,13 +5,20 @@
 @import '../../styles/partials/variables';
 
 .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     box-sizing: border-box;
     height: 4.5rem;
     background-color: $color-main;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     padding: 0.5rem 1.5rem;
+    z-index: 1000;
+    &__container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
     &__heading {
         font-family: $header-font;
         font-size: 2.5rem;
