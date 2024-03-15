@@ -20,6 +20,13 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
     }
     }, [isLoggedIn]);
 
+    const handleLogout = () => {
+      sessionStorage.setItem('loggedIn', JSON.stringify(false));
+      sessionStorage.clear();
+      setIsLoggedIn(false);
+      navigate('/');
+    };
+
     const { name, email } = userInfo;
     const { enabled, days_before } = notificationSettings;
 
@@ -44,6 +51,11 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
       <p>{days_before} days before expiration</p>
 
       <button>Delete Account</button>
+
+      <button className="UserProfile__logout-button" onClick={handleLogout}>
+          Sign Out
+      </button>
+
 
     </div>
   )

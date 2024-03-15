@@ -1,0 +1,23 @@
+// Header Styling 
+
+@import '../../styles/partials/fonts';
+@import '../../styles/partials/mixins';
+@import '../../styles/partials/variables';
+
+.header {
+    box-sizing: border-box;
+    height: 4.5rem;
+    background-color: $color-main;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1.5rem;
+    &__heading {
+        font-family: $header-font;
+        font-size: 2.5rem;
+    }
+    &__nav-icon {
+        height: 1rem;
+    }
+
+}

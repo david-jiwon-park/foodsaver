@@ -84,13 +84,13 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
           foodId={modalFoodId} 
           foodName={modalFoodName}
           foodExpDate={modalFoodExpDate}
-          />
+        />
         <DeleteFoodModal 
           isOpen={isDeleteFoodModalOpen} 
           onClose={handleCloseDeleteFoodModal} 
           foodId={modalFoodId} 
           foodName={modalFoodName}
-          />
+        />
       </div>
     </div>
   )

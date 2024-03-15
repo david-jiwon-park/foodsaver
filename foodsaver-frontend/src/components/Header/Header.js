@@ -1,24 +1,31 @@
-import { Link, useNavigate } from 'react-router-dom';
+import './Header.scss'
+import { useState } from 'react';
+import navIcon from '../../assets/icons/nav-icon.png'
+import Nav from '../Nav/Nav';
 
 const Header = ({ setIsLoggedIn }) => {
-  const navigate = useNavigate();
-  const handleLogOut = () => {
-    sessionStorage.setItem('loggedIn', JSON.stringify(false));
-    sessionStorage.clear();
-    setIsLoggedIn(false);
-    navigate('/login');
+  const [isNavOpen, setIsNavOpen] = useState(false);
+
+  const toggleNav = () => {
+    if (isNavOpen == false) {
+      setIsNavOpen(true);
+    } else {
+      setIsNavOpen(false);
+    }
   };
 
   return(
-    <div>
-        <Link className="header__nav-link" to="/">Inventory</Link>
-        <Link className="header__nav-link" to="/recipes">Recipes</Link>
-        <Link className="header__nav-link" to="/favorites">Favorites</Link>
-        <Link className="header__nav-link" to="/profile">User Profile</Link>
+    <div className="header">
+      <h1 className="header__heading">Food Saver</h1>
+      <img className="header__nav-icon" src={navIcon} alt='nav icon' onClick={() => toggleNav()}/>
+ 
+      
+      <Nav 
+        isOpen={isNavOpen} 
+        setIsLoggedIn={setIsLoggedIn} 
+      />
 
-        <button className="UserProfile__logout-button" onClick={handleLogOut}>
-            Log Out
-        </button>
+
     </div>
 
     )
