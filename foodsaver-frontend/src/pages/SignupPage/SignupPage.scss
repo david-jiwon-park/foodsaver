@@ -1,0 +1,16 @@
+// Signup Page Styling 
+
+@import '../../styles/partials/fonts';
+@import '../../styles/partials/mixins';
+@import '../../styles/partials/variables';
+
+.signup-page {
+    height: 100vh;
+    background-color: $color-main;
+    background-image: url('../../assets/icons/food-icons.png');
+    background-size: cover; 
+    background-position: center; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

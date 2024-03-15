@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './SignupForm.scss';
+import backArrow from '../../assets/icons/back-arrow.png';
 
 const SignupForm = () => {
   const navigate = useNavigate();
@@ -32,42 +33,52 @@ const SignupForm = () => {
   };
 
   return (
-    <div className="SignUpForm">
-      <h1>Sign Up</h1>
-      <form className="SignUpForm__form" onSubmit={onSubmit} ref={formRef}>
+    <div className="signup-form">
+      <div className="signup-form__heading-container">
+        <Link to='/'>
+          <img className="signup-form__back-arrow" src={backArrow} alt='back arrow'/>
+        </Link>
+        <h1 className="signup-form__heading">Sign Up</h1>
+      </div>
+      <form className="signup-form__form" onSubmit={onSubmit} ref={formRef}>
           
-          <label className="SignUpForm__label" htmlFor="name">Name</label>
+        <div className="signup-form__input-container">
           <input
-            className="SignUpForm__input"
+            className="signup-form__input"
             id="name"
             name="name"
             type="text"
             placeholder="Name"
           />
+        </div>
 
-          <label className="SignUpForm__label" htmlFor="email">Email</label>
+        <div className="signup-form__input-container">
           <input
-            className="SignUpForm__input"
+            className="signup-form__input"
             id="email"
             name="email"
             type="email"
             placeholder="Email Address"
           />
+        </div>
 
-          <label className="SignUpForm__label" htmlFor="password">Password</label>
+        <div className="signup-form__input-container">
           <input
-            className="SignUpForm__input"
+            className="signup-form__input"
             id="password"
             name="password"
             type="password"
             placeholder="Password"
-            
           />
+        </div>
 
-        <button>Sign Up</button>
-        <Link to='/login'>
-          Got an account? Log in here!
-        </Link> 
+        <button className="signup-form__signup-button">Sign Up</button>
+        
+        <p className="signup-form__link-container">Got an account?
+          <Link className="signup-form__login-link" to='/login'>
+            Log in here!
+          </Link> 
+        </p>
       </form>
     </div>
  

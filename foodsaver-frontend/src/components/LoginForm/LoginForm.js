@@ -2,6 +2,7 @@ import './LoginForm.scss';
 import { useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import backArrow from '../../assets/icons/back-arrow.png';
 
 const LoginForm = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
@@ -40,7 +41,12 @@ const LoginForm = ({ setIsLoggedIn }) => {
 
   return (
     <div className="login-form">
-      <h1 className="login-form__heading">Log In</h1>
+      <div className="login-form__heading-container">
+        <Link to='/'>
+          <img className="login-form__back-arrow" src={backArrow} alt='back arrow'/>
+        </Link>
+        <h1 className="login-form__heading">Log In</h1>
+      </div>
       {isLoginError && <label style={{ color: "red" }}>{errorMessage}</label>}
       <form className="login-form__form" onSubmit={onSubmit} ref={formRef}>
         
@@ -66,11 +72,11 @@ const LoginForm = ({ setIsLoggedIn }) => {
 
         <button className="login-form__login-button">Log In</button>
 
-          <p className="login-form__link-container">Don't have an account?
-            <Link className="login-form__signup-link" to='/signup'>
-              Sign up here!
-           </Link> 
-          </p>
+        <p className="login-form__link-container">Don't have an account?
+          <Link className="login-form__signup-link" to='/signup'>
+            Sign up here!
+          </Link> 
+        </p>
       </form>
     </div>
   );
