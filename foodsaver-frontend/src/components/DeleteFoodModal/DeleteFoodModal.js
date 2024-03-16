@@ -2,6 +2,7 @@
 
 import './DeleteFoodModal.scss';
 import axios from 'axios';
+import deleteIcon from '../../assets/icons/delete-icon.svg';
 
 
 const DeleteFoodModal = ({ isOpen, onClose, foodId, foodName }) => {
@@ -29,19 +30,29 @@ const DeleteFoodModal = ({ isOpen, onClose, foodId, foodName }) => {
       })
     };
 
-    return (
-      <>
-        <div className="overlay">
-        <div className="deleteinvmodal">
+    return (  
+      <div className="overlay">
+        <div className="deletefoodmodal">
 
-          <h1 className="deleteinvmodal__heading">Delete {foodName}?</h1>
-          <p className="deleteinvmodal__text">Please confirm that you’d like to delete {foodName} from the inventory list. <br/>You won’t be able to undo this action.</p>
-          
-          <button className="deleteinvmodal__cancel-button" onClick={onClose}>Cancel</button>
-          <button className="deleteinvmodal__delete-button" onClick={onDelete}>Delete</button>
+          <div className="deletefoodmodal__heading-container">
+            <img className="deletefoodmodal__delete-icon" src={deleteIcon} alt='delete icon'/>
+            <h5 className="deletefoodmodal__heading">Delete Item</h5>
+          </div>
+
+          <div className="deletefoodmodal__text-container">
+            <p className="deletefoodmodal__text">Are you sure you want to delete "{foodName}" from your inventory?</p>
+          </div>
+
+          <div className="deletefoodmodal__button-container">
+            <div className="deletefoodmodal__buttons">
+              <button className="deletefoodmodal__button-cancel" onClick={onClose}>Cancel</button>
+              <button className="deletefoodmodal__button-delete" onClick={onDelete}>Delete</button>
+            </div>
+          </div>
+
         </div>
-        </div>
-      </>
+      </div>
+      
     );
   };
   

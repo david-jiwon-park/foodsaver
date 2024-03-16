@@ -35,6 +35,7 @@ const AddFoodModal = ({ isOpen, onClose}) => {
     <div className="overlay">
       <div className="addfoodmodal">
           <form className="addfoodmodal__form" onSubmit={handleAddFood}>
+            
             <div className="addfoodmodal__heading-container">
               <img className="addfoodmodal__add-icon" src={addIcon} alt='add icon'/>
               <h5 className="addfoodmodal__heading">Add Item</h5>

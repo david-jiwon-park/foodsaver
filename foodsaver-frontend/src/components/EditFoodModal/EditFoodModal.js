@@ -2,6 +2,7 @@
 
 import './EditFoodModal.scss';
 import axios from 'axios';
+import editIcon from '../../assets/icons/edit-icon.svg';
 
 
 const EditFoodModal = ({ isOpen, onClose, foodId, foodName, foodExpDate }) => {
@@ -31,37 +32,48 @@ const EditFoodModal = ({ isOpen, onClose, foodId, foodName, foodExpDate }) => {
     };
 
   return (
-    <>
-      <div className="overlay">
-      <div className="deleteinvmodal">
+    <div className="overlay">
+      <div className="editfoodmodal">
         <form onSubmit={onEdit}>
+
+          <div className="editfoodmodal__heading-container">
+            <img className="editfoodmodal__edit-icon" src={editIcon} alt='edit icon'/>
+            <h5 className="editfoodmodal__heading">Edit Item</h5>
+          </div>
           
-          <label htmlFor="quantity" className="add-inventory__label">Food Item</label>
+          <div className="editfoodmodal__field-container-1">
+            <label htmlFor="quantity" className="editfoodmodal__label">Food Item:</label>
             <input
-                  className="add-inventory__quantity-field"
+                  className="editfoodmodal__field-1"
                   name="food_item"
                   id="food_item"
                   type="text"
                   placeholder={foodName}
                   required>
             </input>
+          </div>
             
-            <label htmlFor="quantity" className="add-inventory__label">Expiration Date</label>
+          <div className="editfoodmodal__field-container-2">
+            <label htmlFor="quantity" className="editfoodmodal__label">Expiration Date:</label>
             <input
-                className="add-inventory__quantity-field"
+                className="editfoodmodal__field-2"
                 name="exp_date"
                 id="exp_date"
                 type="date"
                 placeholder={foodExpDate}
                 required>
             </input>
+          </div>  
 
-          <button type="button" className="deleteinvmodal__cancel-button" onClick={onClose}>Cancel</button>
-          <button type="submit" className="deleteinvmodal__delete-button">Edit</button>
+          <div className="editfoodmodal__button-container">
+            <button type="button" className="editfoodmodal__button-cancel" onClick={onClose}>Cancel</button>
+            <button type="submit" className="editfoodmodal__button-save">Save</button>
+          </div>
+
         </form>
       </div>
-      </div>
-    </>
+    </div>
+    
   );
   };
   
