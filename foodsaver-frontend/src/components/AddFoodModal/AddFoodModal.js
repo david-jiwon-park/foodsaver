@@ -1,6 +1,8 @@
-//Delete Inventory Modal Component
+//Add Inventory Modal Component
 
+import './AddFoodModal.scss';
 import axios from 'axios';
+import addIcon from '../../assets/icons/add-icon.png';
 
 const AddFoodModal = ({ isOpen, onClose}) => {
   if (!isOpen) return null;
@@ -30,36 +32,46 @@ const AddFoodModal = ({ isOpen, onClose}) => {
   };
 
   return (
-    <>
-      <div className="overlay">
-      <div className="deleteinvmodal">
-        <form onSubmit={handleAddFood}>
-          
-          <label htmlFor="quantity" className="add-inventory__label">Food Item</label>
-          <input
-                className="add-inventory__quantity-field"
-                name="food_item"
-                id="food_item"
-                type="text"
-                required>
-          </input>
-          
-          <label htmlFor="quantity" className="add-inventory__label">Expiration Date</label>
-          <input
-              className="add-inventory__quantity-field"
-              name="exp_date"
-              id="exp_date"
-              type="date"
-              required>
-          </input>
+    <div className="overlay">
+      <div className="addfoodmodal">
+          <form className="addfoodmodal__form" onSubmit={handleAddFood}>
+            <div className="addfoodmodal__heading-container">
+              <img className="addfoodmodal__add-icon" src={addIcon} alt='add icon'/>
+              <h5 className="addfoodmodal__heading">Add Item</h5>
+            </div>
+            
+            <div className="addfoodmodal__field-container-1">
+              <label htmlFor="quantity" className="addfoodmodal__label">Food Item:</label>
+              <input
+                    className="addfoodmodal__field-1"
+                    name="food_item"
+                    id="food_item"
+                    type="text"
+                    required>
+              </input>
+            </div>
+            
+            <div className="addfoodmodal__field-container-2">
+              <label htmlFor="quantity" className="addfoodmodal__label">Expiry Date:</label>
+              <input
+                  className="addfoodmodal__field-2"
+                  name="exp_date"
+                  id="exp_date"
+                  type="date"
+                  placeholder=""
+                  required>
+              </input>
+            </div>
 
-          <button type="button" className="deleteinvmodal__cancel-button" onClick={onClose}>Cancel</button>
-          <button type="submit" className="deleteinvmodal__delete-button">Add</button>
-        </form>
+            <div className="addfoodmodal__button-container">
+              <button type="button" className="addfoodmodal__button-cancel" onClick={onClose}>Cancel</button>
+              <button type="submit" className="addfoodmodal__button-add">Add</button>
+            </div>
+
+          </form>
       </div>
-      </div>
-    </>
-  );
+    </div> 
+   );
   };
   
   export default AddFoodModal;

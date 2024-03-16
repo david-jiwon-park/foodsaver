@@ -58,7 +58,7 @@ const SignupForm = () => {
             id="email"
             name="email"
             type="email"
-            placeholder="Email Address"
+            placeholder="Email"
           />
         </div>
 
