@@ -2,9 +2,10 @@ import './RecipesPage.scss';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
 import Header from '../../components/Header/Header';
+import RecipeModal from '../../components/RecipeModal/RecipeModal';
 import getUserInventory from '../../utils/getUserInventory';
+
 
 const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
@@ -12,6 +13,15 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [suggestedRecipes, setSuggestedRecipes] = useState([]);
   const [submitted, setSubmitted] = useState(false);
+  const [isRecipeModalOpen, setIsRecipeModalOpen] = useState(false);
+  
+  const [recipeURI, setRecipeURI] = useState("");
+  const [recipeImage, setRecipeImage] = useState("");
+  const [recipeName, setRecipeName] = useState("");
+  const [recipeServings, setRecipeServings] = useState(null);
+  const [recipeIngredients, setRecipeIngredients] = useState([]);
+  const [recipeNutrition, setRecipeNutrition] = useState(null);
+  const [recipeDirectionsLink, setRecipeDirectionsLink] = useState("");
 
   useEffect(() => {
     // Get the user's inventory list if they are logged in 
@@ -29,7 +39,6 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
       setSelectedIngredients([...selectedIngredients, ingredient]);
     }
   };
-
 
   const findRecipes = (e) => {
     e.preventDefault();
@@ -50,6 +59,22 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
     });
   };
     
+  const handleOpenRecipeModal = (uri, image, name, servings, ingredients, nutrition, directionsLink) => {
+    setRecipeURI(uri);
+    setRecipeImage(image);
+    setRecipeName(name);
+    setRecipeServings(servings);
+    setRecipeIngredients(ingredients);
+    setRecipeNutrition(nutrition);
+    setRecipeDirectionsLink(directionsLink);
+    setIsRecipeModalOpen(true);
+  };
+
+  const handleCloseRecipeModal = () => {
+    setIsRecipeModalOpen(false);
+  };
+
+
   return (
     <>
       <Header 
@@ -87,10 +112,14 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
           <h2 className="recipes-page__subheading recipes-page__subheading--recipes">Suggested Recipes</h2>
           <div className="recipes-page__recipes-outer-container">
             <div className="recipes-page__recipes-inner-container">
-              {suggestedRecipes.map((recipe) => (
-              <div key={recipe.recipe.uri} className="recipes-page__recipe-container">
-                <img className="recipes-page__recipe-image" src={recipe.recipe.image} alt="recipe"/>
-                <p className="recipes-page__recipe-name">{recipe.recipe.label}</p>
+              {suggestedRecipes.map((r) => (
+              <div 
+                key={r.recipe.uri} 
+                className="recipes-page__recipe-container" 
+                onClick={() => handleOpenRecipeModal(r.recipe.uri, r.recipe.image, r.recipe.label, r.recipe.yield, r.recipe.ingredientLines, r.recipe.totalNutrients, r.recipe.url)}
+              >
+                <img className="recipes-page__recipe-image" src={r.recipe.image} alt="recipe"/>
+                <p className="recipes-page__recipe-name">{r.recipe.label}</p>
               </div>
               ))}
             </div>
@@ -99,6 +128,17 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
         )
         : null }
 
+        <RecipeModal 
+          isOpen={isRecipeModalOpen} 
+          onClose={handleCloseRecipeModal} 
+          uri={recipeURI}
+          image={recipeImage}
+          name={recipeName} 
+          servings={recipeServings}
+          ingredients={recipeIngredients}
+          nutrition={recipeNutrition}
+          directionsLink={recipeDirectionsLink}
+        />
       </div>
     </>
   )

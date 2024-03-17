@@ -1,0 +1,77 @@
+// Delete Food Modal Styling 
+
+@import '../../styles/partials/fonts';
+@import '../../styles/partials/mixins';
+@import '../../styles/partials/variables';
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1001; 
+    pointer-events: auto; 
+    background-color: rgba($color-transparent-background, 0.5);
+    overflow: auto;
+}
+
+.recipe-modal {
+    z-index: 1002;
+    padding: 1rem 1rem;
+    box-sizing: border-box;
+    position: fixed;
+    background-color: $white;
+    width: 90%; 
+    height: 85%;
+    border-radius: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow-y: scroll;
+    &__back-arrow {
+        position: fixed;
+        left: 2.5rem;
+        top: 4rem;
+        z-index: 1003;
+    }
+    &__recipe-image-container {
+        display: flex;
+        justify-content: center;
+    }
+    &__recipe-image {
+        height: 7rem;
+        width: 7rem;
+        border-radius: 20px;
+    }
+    &__name {
+        text-align: center;
+        padding-top: 1rem;
+        font-size: 1.1rem;
+        line-height: 1.25rem;
+    }
+    &__servings {
+        text-align: center;
+        padding-top: 0.25rem;
+        font-weight: 400;
+    }
+    &__ingredients-section {
+        padding-top: 0.5rem;
+        width: 100%;
+    }
+    &__section-heading {
+        width: 100%;
+        padding-bottom: 0.25rem;
+        border-bottom: 1px solid $color-divider;
+    }
+    &__ingredient {
+        color: $color-recipe-modal-text;
+        font-size: 0.95rem;
+        line-height: 1rem;
+        padding-bottom: 0.25rem;
+    }
+    &__instructions-section {
+        padding-top: 0.5rem;
+        width: 100%;
+    }
+}
