@@ -1,0 +1,90 @@
+// Recipes Page Styling 
+
+@import '../../styles/partials/fonts';
+@import '../../styles/partials/mixins';
+@import '../../styles/partials/variables';
+
+.recipes-page {
+    padding: 5rem 0rem 0 1.5rem;
+    &__heading {
+        font-family: $header-font;
+        font-size: 3rem;
+    }
+    &__subheading {
+        font-size: 1.25rem;
+        line-height: 1.5rem;
+        padding-bottom: 1rem;
+        &--recipes {
+            padding-top: 1rem;
+        }
+    }
+    &__inventory-outer-container {
+        overflow-x: auto; 
+    }
+    &__inventory-inner-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        width: 150%; 
+    }
+    &__button-inventory {
+        border: none;
+        height: 2.5rem;
+        width: 7.5rem;
+        font-size: 0.8rem;
+        line-height: 1rem;
+        margin: 0 0.5rem 0.5rem 0;
+        font-family: $base-font;
+        background-color: $color-field-background;
+        &--selected {
+            background-color: $color-main;
+        }
+    }
+    &__find-button-container {
+        display: flex;
+        justify-content: center;
+        padding: 1rem;
+    }
+    &__find-button {
+        width: 9rem;
+        height: 2.5rem;
+        background-color: $color-find-button;
+        border: none;
+        border-radius: 20px;
+        font-family: $base-font;
+        font-weight: 600;
+    }
+    &__recipes-outer-container {
+        overflow-x: auto; 
+    }
+    &__recipes-inner-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        width: 200%; 
+    }
+    &__recipe-container {
+        display: flex;
+        flex-direction: column;
+        width: 6.25rem;
+        margin: 0 1rem 1rem 0;
+    }
+    &__recipe-image {
+        height: 6.25rem;
+        border-radius: 20px;
+    }
+    &__recipe-name {
+        display: -webkit-box; 
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2; 
+        text-align: center;
+        font-size: 0.75rem;
+        line-height: 1rem;
+        padding-top: 0.25rem;
+        max-height: 2rem; 
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+    }
+
+}
