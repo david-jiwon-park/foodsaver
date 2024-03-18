@@ -1,0 +1,38 @@
+// Favorites Page Styling 
+
+@import '../../styles/partials/fonts';
+@import '../../styles/partials/mixins';
+@import '../../styles/partials/variables';
+
+.favorites-page {
+    padding: 5rem 0 0;
+    &__heading {
+        font-family: $header-font;
+        font-size: 3rem;
+        padding-left: 1rem;
+        border-bottom: 1px solid $color-divider;
+    }
+    &__recipe-container {
+        display: flex;    
+        align-items: center;
+        border-bottom: 1px solid $color-divider;
+        padding: 0.75rem;
+    }
+    &__recipe-image {
+        height: 6.5rem;
+        border-radius: 20px;
+        margin-right: 0.75rem;
+    }
+    &__recipe-label {
+        font-size: 0.85rem;
+        line-height: 1.2rem;
+        text-align: left;
+    }
+    &__recipe-delete {
+        height: 1.5rem;
+        align-self: flex-start;
+        margin-left: auto;
+        z-index: 500;
+    }
+
+}

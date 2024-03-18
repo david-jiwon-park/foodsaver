@@ -21,7 +21,7 @@ const DeleteFoodModal = ({ isOpen, onClose, foodId, foodName }) => {
         Authorization: `Bearer ${token}`,
       }
     })
-    .then((response) => {
+    .then((_response) => {
       onClose();
     })
     .catch((error) => {

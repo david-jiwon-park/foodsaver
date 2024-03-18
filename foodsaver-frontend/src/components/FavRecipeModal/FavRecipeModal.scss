@@ -1,4 +1,4 @@
-// Recipe Modal Styling 
+// Favorite Recipe Modal Styling 
 
 @import '../../styles/partials/fonts';
 @import '../../styles/partials/mixins';
@@ -33,13 +33,6 @@
         position: fixed;
         left: 2.5rem;
         top: 4rem;
-        z-index: 1003;
-    }
-    &__heart {
-        position: fixed;
-        height: 2.25rem;
-        right: 2.25rem;
-        top: 3.25em;
         z-index: 1003;
     }
     &__recipe-image-container {

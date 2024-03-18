@@ -1,0 +1,89 @@
+// Delete Recipe Modal Styling 
+
+@import '../../styles/partials/fonts';
+@import '../../styles/partials/mixins';
+@import '../../styles/partials/variables';
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1001; 
+    pointer-events: auto; 
+    background-color: rgba($color-transparent-background, 0.5);
+}
+
+.deleterecipemodal {
+    z-index: 1002;
+    box-sizing: border-box;
+    position: fixed;
+    background-color: $white;
+    height: 12rem;
+    width: 90%; 
+    border-radius: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    &__heading-container {
+        width: 100%;
+        border-bottom: 1px solid $color-modal-divider;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &__delete-icon {
+        height: 1.25rem;
+        padding-right: 0.25rem;
+    }
+    &__heading {
+        padding: 0.75rem 0;
+        font-size: 1rem;
+        line-height: 1rem;
+    }
+    &__text-container {
+        box-sizing: border-box;
+        height: 7rem;
+        display: flex;
+        align-items: center;
+    }
+    &__text {
+        font-size: 1rem;
+        line-height: 1rem;
+        text-align: center;
+        padding: 0 1rem;
+    }
+    &__button-container {
+        position: fixed;
+        background-color: $white;
+        height: 1.5rem;
+        width: 100%; 
+        top: 9.5rem;
+        box-sizing: border-box;
+    }
+    &__buttons {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid $color-modal-divider;
+    }
+    &__button-cancel {
+        background-color: $white;
+        border: none;
+        margin: 0.4rem 0 0 2.25rem;
+        font-size: 0.9rem;
+        line-height: 1.25rem;
+        font-family: $base-font;
+    }
+    &__button-delete {
+        background-color: $white;
+        border: none;
+        margin: 0.4rem 2.25rem 0 0;
+        font-size: 0.9rem;
+        line-height: 1.25rem;
+        font-family: $base-font;
+        font-weight: 600;
+        color: $color-delete-button;
+    }
+}
