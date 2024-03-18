@@ -5,6 +5,6 @@ const auth = require('../middleware/auth');
 
 router.get('/', auth, favoritesController.getFavorites); 
 router.post('/', auth, favoritesController.addFavorites); 
-router.delete('/:id', auth, favoritesController.deleteFavorites); 
+router.delete('/:uri', auth, favoritesController.deleteFavorites); 
 
 module.exports = router;

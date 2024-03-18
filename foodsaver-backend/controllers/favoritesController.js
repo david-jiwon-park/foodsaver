@@ -37,8 +37,8 @@ const addFavorites = async (req, res) => {
 
 // Deleting recipe in the Favorites list
 const deleteFavorites = async (req, res) => {
-    const id = req.params.id; 
-    const favoriteExists = await db("favorites").where("id", id).first();
+    const uri = req.params.uri; 
+    const favoriteExists = await db("favorites").where("recipe_uri", uri).first();
     if (!favoriteExists) {
         return res.status(404).json({ error: "Favorite not found" });
     }
