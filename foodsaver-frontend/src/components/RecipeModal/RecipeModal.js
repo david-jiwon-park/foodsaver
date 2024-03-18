@@ -1,16 +1,21 @@
-//Delete Food Modal Component
+//Recipe Modal Component
 
 import './RecipeModal.scss';
 import axios from 'axios';
 import backArrow from '../../assets/icons/back-arrow.png';
-
+import emptyheartIcon from '../../assets/icons/empty-heart-icon.png';
+import fullheartIcon from '../../assets/icons/full-heart-icon.png';
 
 const RecipeModal = ({ isOpen, onClose, uri, image, name, servings, ingredients, nutrition, directionsLink }) => {
   if (!isOpen) return null;
 
+
+
   return (  
     <div className="overlay">
       <img className="recipe-modal__back-arrow" src={backArrow} alt="back arrow" onClick={() => onClose()}/> 
+      <img className="recipe-modal__heart" src={emptyheartIcon} alt="heart"/> 
+      <img className="recipe-modal__heart" src={fullheartIcon} alt="heart"/> 
       <div className="recipe-modal">
         <div className="recipe-modal__recipe-image-container">
           <img className="recipe-modal__recipe-image" src={image} alt="recipe"/>
@@ -93,7 +98,7 @@ const RecipeModal = ({ isOpen, onClose, uri, image, name, servings, ingredients,
         <section className="recipe-modal__instructions-section">
           <h4 className="recipe-modal__section-heading">Cooking Instructions</h4>
           <p className="recipe-modal__instructions-text">For cooking instructions and more details about this recipe, click 
-            <a className="recipe-modal__instructions-link" href={directionsLink} target="_blank"> here!</a>
+            <a className="recipe-modal__instructions-link" href={directionsLink} target="_blank" rel="noreferrer"> here!</a>
           </p>
         </section>
 
