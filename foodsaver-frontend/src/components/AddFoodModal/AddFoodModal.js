@@ -16,7 +16,6 @@ const AddFoodModal = ({ isOpen, onClose}) => {
     .post(`${apiBaseURL}/inventory`, {
       food_item: e.target.food_item.value,
       exp_date: e.target.exp_date.value, 
-      
     }, {
       headers: {
         Authorization: `Bearer ${token}`,

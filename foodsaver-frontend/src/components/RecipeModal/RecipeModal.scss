@@ -25,9 +25,9 @@
     width: 90%; 
     height: 85%;
     border-radius: 20px;
-    top: 50%;
+    top: 2.5rem;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0%);
     overflow-y: scroll;
     &__back-arrow {
         position: fixed;

@@ -6,16 +6,71 @@ import backArrow from '../../assets/icons/back-arrow.png';
 import emptyheartIcon from '../../assets/icons/empty-heart-icon.png';
 import fullheartIcon from '../../assets/icons/full-heart-icon.png';
 
-const RecipeModal = ({ isOpen, onClose, uri, image, name, servings, ingredients, nutrition, directionsLink }) => {
-  if (!isOpen) return null;
+const RecipeModal = ({ isOpen, onClose, uri, image, name, servings, ingredients, nutrition, directionsLink, isFavorited, setIsFavorited }) => {
+  if (!isOpen) return null
+ 
+  // const checkFavorite = (uri) => {
+  //   const results = userFavorites.filter(obj => obj.recipe_uri.includes(uri));
+  //   if (results.length !== 0) {
+  //     setInitialFavStatus(true);
+  //   } else {
+  //     setInitialFavStatus(false);
+  //   }; 
+  // }
 
+  const toggleFavorite = () => {
+    if (isFavorited) {
+      handleUnfavoriteRecipe();
+    } else {
+      handleFavoriteRecipe();
+    }
+    setIsFavorited(!isFavorited);
+  };
+
+  const apiBaseURL = 'http://localhost:8090';
+
+  const handleFavoriteRecipe = () => {
+    const token = sessionStorage.getItem('authToken');
+    axios
+    .post(`${apiBaseURL}/favorites`, {
+      recipe_uri: uri
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  };
+
+  const handleUnfavoriteRecipe = () => {
+    const token = sessionStorage.getItem('authToken');
+    axios
+    .delete(`${apiBaseURL}/favorites/${uri}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  };
 
 
   return (  
     <div className="overlay">
       <img className="recipe-modal__back-arrow" src={backArrow} alt="back arrow" onClick={() => onClose()}/> 
-      <img className="recipe-modal__heart" src={emptyheartIcon} alt="heart"/> 
-      <img className="recipe-modal__heart" src={fullheartIcon} alt="heart"/> 
+      {isFavorited ?  
+        (<img className="recipe-modal__heart" src={fullheartIcon} alt="heart" onClick={() => toggleFavorite()}/>) : 
+        (<img className="recipe-modal__heart" src={emptyheartIcon} alt="heart" onClick={() => toggleFavorite()}/>)
+      }
       <div className="recipe-modal">
         <div className="recipe-modal__recipe-image-container">
           <img className="recipe-modal__recipe-image" src={image} alt="recipe"/>
