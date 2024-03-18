@@ -24,7 +24,7 @@ const addFavorites = async (req, res) => {
     }
     try {
         await db("favorites").insert({
-            recipe_id: req.body.recipe_id,
+            recipe_uri: req.body.recipe_uri,
             user_id: userId, 
         });
         res.status(201).json({
