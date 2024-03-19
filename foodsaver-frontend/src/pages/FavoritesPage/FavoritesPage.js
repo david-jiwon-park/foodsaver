@@ -26,20 +26,26 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      getUserFavorites({ setUserFavorites });
-      getFavoriteRecipeInfo();
+      getUserFavorites()
+      .then((response) => {
+        setUserFavorites(response.data);
+        getFavoriteRecipeInfo(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
     } else {
       navigate('/');
     }
   }, [isLoggedIn, isFavRecipeModalOpen, isDeleteRecipeModalOpen]);
     
-  const getFavoriteRecipeInfo = async () => {
+  const getFavoriteRecipeInfo = async (res) => {
     const apiURLforURI = 'https://api.edamam.com/api/recipes/v2/by-uri?type=public&uri=http%3A%2F%2Fwww.edamam.com%2Fontologies%2Fedamam.owl%23recipe_';
     const appId = '73ad0e04';
     const appKey = '5285fad8f8d27d8157cd7e13a79df213';	
-    const uriArray = userFavorites.map((favorite) => (favorite.recipe_uri))
+    const uriArray = res.map((favorite) => (favorite.recipe_uri))
     
-    const dataPromises = uriArray.map(recipe_uri =>
+    const dataPromises = uriArray.reverse().map(recipe_uri =>
       axios.get(`${apiURLforURI}${recipe_uri}&app_id=${appId}&app_key=${appKey}%09`)
         .then(response => response.data.hits)
         .catch(error => {
@@ -82,7 +88,7 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
     setIsDeleteRecipeModalOpen(false);
   };
 
-  // console.log(userFavorites);
+  console.log(userFavorites);
   console.log(userFavoritesExternalData);
 
   return (

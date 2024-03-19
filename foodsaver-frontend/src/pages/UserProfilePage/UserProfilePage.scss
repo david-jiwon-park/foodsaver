@@ -1,0 +1,75 @@
+// Favorites Page Styling 
+
+@import '../../styles/partials/fonts';
+@import '../../styles/partials/mixins';
+@import '../../styles/partials/variables';
+
+.profile-page {
+    padding: 5rem 1rem 0;
+    &__heading {
+        font-family: $header-font;
+        font-size: 3rem;
+    }
+    &__name-email {
+        display: flex;
+    }
+    &__label-container {
+        width: 25%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    &__label-text {
+        font-size: 1rem;
+        line-height: 1.25rem;
+        &--top {
+            padding-bottom: 1.25rem;
+        }
+    }
+    &__field-container {
+        width: 65%;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    &__field-text {
+        font-size: 0.95rem;
+        line-height: 1.25rem;
+        &--top {
+            padding-bottom: 1.25rem;
+        }
+    }
+    &__edit-name-email{
+        margin-left: auto;
+    }
+    &__password-container {
+        display: flex;
+        padding: 2rem 0 1rem;
+    }
+    &__password-text {
+        font-size: 1rem;
+        line-height: 1.25rem;
+        width: 25%;
+    }
+    &__password-field {
+        border: none;
+        width: 10rem;
+        height: 2rem;
+        border-radius: 20px;
+        background-color: $color-field-background;
+    }
+    &__signout-button {
+        position: fixed;
+        bottom: 1rem;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        background-color: $color-main;
+        border: none;
+        width: 75%;
+        height: 2.25rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        line-height: 1rem;
+        font-family: $base-font;
+        font-weight: 600;
+    }
+}

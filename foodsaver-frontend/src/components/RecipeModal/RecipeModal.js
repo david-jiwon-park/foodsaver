@@ -1,30 +1,50 @@
 //Recipe Modal Component
 
 import './RecipeModal.scss';
+import { useEffect, useState } from 'react';
+import getUserFavorites from '../../utils/getUserFavorites';
 import axios from 'axios';
 import backArrow from '../../assets/icons/back-arrow.png';
 import emptyheartIcon from '../../assets/icons/empty-heart-icon.png';
 import fullheartIcon from '../../assets/icons/full-heart-icon.png';
 
-const RecipeModal = ({ isOpen, onClose, uri, image, name, servings, ingredients, nutrition, directionsLink, isFavorited, setIsFavorited }) => {
+const RecipeModal = ({ isOpen, onClose, uri, image, name, servings, ingredients, nutrition, directionsLink }) => {
+  const [userFavorites, setUserFavorites] = useState([]);
+  const [isFavorited, setIsFavorited] = useState(false);
+
+  const checkFavorite = (uri) => {
+    const results = userFavorites.filter(obj => obj.recipe_uri.includes(uri));
+    setIsFavorited(results.length !== 0);
+  }
+
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    } else {
+      getUserFavorites()
+      .then((response) => {
+        setUserFavorites(response.data);
+        checkFavorite(uri);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    checkFavorite(uri);
+  }, [uri, userFavorites]);
+  
+  // incorporate useEffect, have if statement if isOpen is null or not
   if (!isOpen) return null
  
-  // const checkFavorite = (uri) => {
-  //   const results = userFavorites.filter(obj => obj.recipe_uri.includes(uri));
-  //   if (results.length !== 0) {
-  //     setInitialFavStatus(true);
-  //   } else {
-  //     setInitialFavStatus(false);
-  //   }; 
-  // }
-
   const toggleFavorite = () => {
     if (isFavorited) {
       handleUnfavoriteRecipe();
     } else {
       handleFavoriteRecipe();
     }
-    setIsFavorited(!isFavorited);
   };
 
   const apiBaseURL = 'http://localhost:8090';
@@ -41,6 +61,11 @@ const RecipeModal = ({ isOpen, onClose, uri, image, name, servings, ingredients,
     })
     .then((response) => {
       console.log(response);
+      return getUserFavorites();
+    })
+    .then((response2) => {
+      setUserFavorites(response2.data);
+      checkFavorite(uri);
     })
     .catch((error) => {
       console.log(error);
@@ -57,6 +82,11 @@ const RecipeModal = ({ isOpen, onClose, uri, image, name, servings, ingredients,
     })
     .then((response) => {
       console.log(response);
+      return getUserFavorites();
+    })
+    .then((response2) => {
+      setUserFavorites(response2.data);
+      checkFavorite(uri);
     })
     .catch((error) => {
       console.log(error);

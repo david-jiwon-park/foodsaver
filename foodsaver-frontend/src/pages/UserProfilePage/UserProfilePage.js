@@ -1,8 +1,10 @@
+import './UserProfilePage.scss'
 import Header from '../../components/Header/Header'
 import { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import getUserInfo from '../../utils/getUserInfo';
 import getNotificationSettings from '../../utils/getNotificationSettings';
+import editIcon from '../../assets/icons/edit-icon.svg';
 
 
 const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
@@ -20,7 +22,7 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
     }
     }, [isLoggedIn]);
 
-    const handleLogout = () => {
+    const handleSignOut = () => {
       sessionStorage.setItem('loggedIn', JSON.stringify(false));
       sessionStorage.clear();
       setIsLoggedIn(false);
@@ -32,32 +34,49 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
 
 
   return (
-    <div>
+    <>
       <Header 
           setIsLoggedIn={setIsLoggedIn}
       />
-      <h1>User Profile Page</h1>
-      
-      <h2>User Info</h2>
-      <h5>Name</h5>
-      <p>{name}</p>
-      <h5>Email</h5>
-      <p>{email}</p>
-      <h5>Password</h5>
-      <button>Change Password</button>
+      <div className='profile-page'>
+        <h1 className='profile-page__heading'>User Profile</h1>
+        
+        <section className='profile-page__info'>
+          
+          <div className='profile-page__name-email'>
+            <div className='profile-page__label-container'>
+              <h5 className='profile-page__label-text profile-page__label-text--top'>Name</h5>
+              <h5 className='profile-page__label-text'>Email</h5>
+            </div>
+            <div className='profile-page__field-container'>
+              <p className='profile-page__field-text profile-page__field-text--top'>{name}</p>
+              <p className='profile-page__field-text'>{email}</p>
+            </div>
+            <img className='profile-page__edit-name-email' src={editIcon} alt='edit icon'/>
+          </div>
 
-      <h2>Notifications</h2>
-      <h5>Notification Timing</h5>
-      <p>{days_before} days before expiration</p>
+          <div className='profile-page__password-container'>
+            <h5 className='profile-page__label-text'>Password</h5>
+            <p className='profile-page__password-field'>***************</p>
+            <img className='profile-page__edit-name-email' src={editIcon} alt='edit icon'/>
+          </div>
+        </section>
 
-      <button>Delete Account</button>
+        <h1 className='profile-page__heading'>Preferences</h1>
+        
+          <h5>Notifications</h5>
+          <h5>Notify Me</h5>
+          <p>{days_before} days before expiration</p>
 
-      <button className="UserProfile__logout-button" onClick={handleLogout}>
-          Sign Out
-      </button>
+        {/* <button>Delete Account</button> */}
 
+        <button className="profile-page__signout-button" onClick={handleSignOut}>
+            Sign Out
+        </button>
+      </div>
+        
 
-    </div>
+    </>
   )
 }
 

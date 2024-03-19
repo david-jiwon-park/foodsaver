@@ -5,19 +5,18 @@ import axios from 'axios';
 import Header from '../../components/Header/Header';
 import RecipeModal from '../../components/RecipeModal/RecipeModal';
 import getUserInventory from '../../utils/getUserInventory';
-import getUserFavorites from '../../utils/getUserFavorites';
+// import getUserFavorites from '../../utils/getUserFavorites';
 
 
 const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
   const [userInventory, setUserInventory] = useState([]);
-  const [userFavorites, setUserFavorites] = useState([]);
+  // const [userFavorites, setUserFavorites] = useState([]);
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [suggestedRecipes, setSuggestedRecipes] = useState([]);
   const [submitted, setSubmitted] = useState(false);
   const [isRecipeModalOpen, setIsRecipeModalOpen] = useState(false);
-  const [isFavorited, setIsFavorited] = useState(false);
-  const [initialFavStatus, setInitialFavStatus] = useState(false)
+  // const [isFavorited, setIsFavorited] = useState(false);
   
   const [recipeURI, setRecipeURI] = useState("");
   const [recipeImage, setRecipeImage] = useState("");
@@ -31,7 +30,7 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
     // Get the user's inventory list if they are logged in 
     if (isLoggedIn) {
       getUserInventory({ setUserInventory });
-      getUserFavorites({ setUserFavorites });
+      // getUserFavorites({ setUserFavorites });
     } else {
       navigate('/');
     }
@@ -142,8 +141,9 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
           ingredients={recipeIngredients}
           nutrition={recipeNutrition}
           directionsLink={recipeDirectionsLink}
-          isFavorited={isFavorited}
-          setIsFavorited={setIsFavorited}
+          // userFavorites={userFavorites}
+          // isFavorited={isFavorited}
+          // setIsFavorited={setIsFavorited}
         />
       </div>
     </>
