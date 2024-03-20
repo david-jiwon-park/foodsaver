@@ -6,10 +6,10 @@
 
 .signup-form {
     background-color: $white;
-    height: 65%;
+    height: 25rem;
     width: 100%;
     margin: 1.5rem;
-    padding: 1rem 2rem;
+    padding: 1rem 1.5rem;
     border-radius: 20px;
     &__heading-container {
         display: flex;
@@ -24,6 +24,7 @@
     &__form {
         display: flex;
         flex-direction: column;
+        padding-top: 0.5rem;
     }
     &__input-container {
         padding: 0.35rem 0;
@@ -52,7 +53,7 @@
         }
     }
     &__signup-button {
-        margin-top: 4rem;
+        margin-top: 3.5rem;
         background-color: $color-main;
         border: none;
         box-sizing: border-box;
