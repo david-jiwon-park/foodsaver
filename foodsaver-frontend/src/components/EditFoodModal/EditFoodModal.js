@@ -42,25 +42,25 @@ const EditFoodModal = ({ isOpen, onClose, foodId, foodName, foodExpDate }) => {
           </div>
           
           <div className="editfoodmodal__field-container-1">
-            <label htmlFor="quantity" className="editfoodmodal__label">Food Item:</label>
+            <label htmlFor="food_item" className="editfoodmodal__label">Food Item:</label>
             <input
                   className="editfoodmodal__field-1"
                   name="food_item"
                   id="food_item"
                   type="text"
-                  placeholder={foodName}
+                  defaultValue={foodName}
                   required>
             </input>
           </div>
             
           <div className="editfoodmodal__field-container-2">
-            <label htmlFor="quantity" className="editfoodmodal__label">Expiration Date:</label>
+            <label htmlFor="exp_date" className="editfoodmodal__label">Expiry Date:</label>
             <input
                 className="editfoodmodal__field-2"
                 name="exp_date"
                 id="exp_date"
                 type="date"
-                placeholder={foodExpDate}
+                defaultValue={foodExpDate}
                 required>
             </input>
           </div>  

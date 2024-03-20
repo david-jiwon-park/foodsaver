@@ -2,15 +2,31 @@ import './UserProfilePage.scss'
 import Header from '../../components/Header/Header'
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import EditUserInfoModal from '../../components/EditUserInfoModal/EditUserInfoModal';
 import getUserInfo from '../../utils/getUserInfo';
 import getNotificationSettings from '../../utils/getNotificationSettings';
 import editIcon from '../../assets/icons/edit-icon.svg';
+import axios from 'axios';
 
 
 const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState([]);
   const [notificationSettings, setNotificationSettings] = useState([]);
+  const [isEditUserInfoModalOpen, setIsEditUserInfoModalOpen] = useState(false);
+  const [areNotificationsOn, setAreNotificationsOn] = useState(false);
+  // const [notifyme, setNotifyMe] = useState(null);
+
+  const { name, email } = userInfo;
+  const { enabled, days_before } = notificationSettings;
+
+  const checkNotifications = () => {
+    setAreNotificationsOn(enabled === 1);
+  };
+
+  // const checkNotifyMe = () => {
+  //   setNotifyMe(days_before);
+  // };
 
   useEffect(() => {
     // Get the user profile info if they are logged in 
@@ -20,18 +36,96 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
     } else {
       navigate('/');
     }
-    }, [isLoggedIn]);
+    }, [isLoggedIn, isEditUserInfoModalOpen]);
 
-    const handleSignOut = () => {
-      sessionStorage.setItem('loggedIn', JSON.stringify(false));
-      sessionStorage.clear();
-      setIsLoggedIn(false);
-      navigate('/');
-    };
+  useEffect(() => {
+    checkNotifications();
+  }, [notificationSettings]);
 
-    const { name, email } = userInfo;
-    const { enabled, days_before } = notificationSettings;
 
+  const handleSignOut = () => {
+    sessionStorage.setItem('loggedIn', JSON.stringify(false));
+    sessionStorage.clear();
+    setIsLoggedIn(false);
+    navigate('/');
+  };
+
+ 
+
+  const handleOpenEditUserInfoModal = () => {
+    setIsEditUserInfoModalOpen(true);
+  };
+
+  const handleCloseEditUserInfoModal = () => {
+    setIsEditUserInfoModalOpen(false);
+  };
+
+  const toggleNotifications = () => {
+    if (areNotificationsOn) {
+      handleDisablingNotifications();
+    } else {
+      handleEnablingNotifications();
+    }
+  };
+
+  const apiBaseURL = 'http://localhost:8090';
+
+  const handleDisablingNotifications = () => {
+    const token = sessionStorage.getItem('authToken');
+    axios
+    .put(`${apiBaseURL}/notifications`, {
+      enabled: 0
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    })
+    .then((response) => {
+      console.log(response);
+      getNotificationSettings({ setNotificationSettings });
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  };
+
+  const handleEnablingNotifications = () => {
+    const token = sessionStorage.getItem('authToken');
+    axios
+    .put(`${apiBaseURL}/notifications`, {
+      enabled: 1
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    })
+    .then((response) => {
+      console.log(response);
+      getNotificationSettings({ setNotificationSettings });
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  };
+
+  const changeNotifyMe = (e) => {
+    const token = sessionStorage.getItem('authToken');
+    axios
+    .put(`${apiBaseURL}/notifications`, {
+      days_before: e.target.value
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    })
+    .then((response) => {
+      console.log(response);
+      getNotificationSettings({ setNotificationSettings });
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
 
   return (
     <>
@@ -52,8 +146,15 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
               <p className='profile-page__field-text profile-page__field-text--top'>{name}</p>
               <p className='profile-page__field-text'>{email}</p>
             </div>
-            <img className='profile-page__edit-name-email' src={editIcon} alt='edit icon'/>
+            <img className='profile-page__edit-name-email' src={editIcon} alt='edit icon' onClick={() => handleOpenEditUserInfoModal()}/>
           </div>
+
+          <EditUserInfoModal 
+            isOpen={isEditUserInfoModalOpen} 
+            onClose={handleCloseEditUserInfoModal} 
+            userName={name} 
+            userEmail={email}
+          />
 
           <div className='profile-page__password-container'>
             <h5 className='profile-page__password-text'>Password</h5>
@@ -69,15 +170,27 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
         <form>
           <div className='profile-page__notifications-container'>
             <h5 className='profile-page__notifications-label'>Notifications</h5>
-            <label class="toggle">
-              <input type="checkbox"/>
+            <label className="toggle">
+              <input 
+                type="checkbox" 
+                id="toggleSwitch" 
+                checked={areNotificationsOn}
+                onChange={toggleNotifications}
+              />
               <span className="slider"></span>
             </label>
           </div>
           
-          <div className='profile-page__notify-container'>
+          {areNotificationsOn && 
+          (<div className='profile-page__notify-container'>
             <label htmlFor="notify" className='profile-page__notifications-label'>Notify Me</label>
-              <select className="profile-page__notify-field" name="notify" id="notify" defaultValue={days_before}>
+              <select 
+                className="profile-page__notify-field" 
+                name="notify" 
+                id="notify" 
+                defaultValue={days_before}
+                onChange={changeNotifyMe}
+                >
                 <option value="0">On Exp Date</option>
                 <option value="1">1 Day Before Exp</option>
                 <option value="2">2 Days Before Exp</option>
@@ -85,7 +198,7 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
                 <option value="4">4 Days Before Exp</option>
                 <option value="5">5 Days Before Exp</option>
               </select>
-          </div>
+          </div>)}
         </form>
 
         {/* <button>Delete Account</button> */}

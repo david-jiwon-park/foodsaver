@@ -11,13 +11,11 @@ import getUserInventory from '../../utils/getUserInventory';
 const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
   const [userInventory, setUserInventory] = useState([]);
-  // const [userFavorites, setUserFavorites] = useState([]);
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [suggestedRecipes, setSuggestedRecipes] = useState([]);
   const [submitted, setSubmitted] = useState(false);
   const [isRecipeModalOpen, setIsRecipeModalOpen] = useState(false);
-  // const [isFavorited, setIsFavorited] = useState(false);
-  
+
   const [recipeURI, setRecipeURI] = useState("");
   const [recipeImage, setRecipeImage] = useState("");
   const [recipeName, setRecipeName] = useState("");

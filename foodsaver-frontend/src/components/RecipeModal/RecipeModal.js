@@ -65,7 +65,6 @@ const RecipeModal = ({ isOpen, onClose, uri, image, name, servings, ingredients,
     })
     .then((response2) => {
       setUserFavorites(response2.data);
-      checkFavorite(uri);
     })
     .catch((error) => {
       console.log(error);
@@ -86,7 +85,6 @@ const RecipeModal = ({ isOpen, onClose, uri, image, name, servings, ingredients,
     })
     .then((response2) => {
       setUserFavorites(response2.data);
-      checkFavorite(uri);
     })
     .catch((error) => {
       console.log(error);
