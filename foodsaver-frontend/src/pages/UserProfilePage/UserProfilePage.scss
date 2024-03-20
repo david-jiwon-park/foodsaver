@@ -5,7 +5,7 @@
 @import '../../styles/partials/variables';
 
 .profile-page {
-    padding: 5rem 1rem 0;
+    padding: 5rem 1.2rem 0;
     &__heading {
         font-family: $header-font;
         font-size: 3rem;
@@ -20,7 +20,7 @@
         justify-content: space-between;
     }
     &__label-text {
-        font-size: 1rem;
+        font-size: 0.85rem;
         line-height: 1.25rem;
         &--top {
             padding-bottom: 1.25rem;
@@ -32,7 +32,7 @@
         justify-content: space-between;
     }
     &__field-text {
-        font-size: 0.95rem;
+        font-size: 0.825rem;
         line-height: 1.25rem;
         &--top {
             padding-bottom: 1.25rem;
@@ -43,28 +43,61 @@
     }
     &__password-container {
         display: flex;
+        align-items: center;
         padding: 2rem 0 1rem;
     }
     &__password-text {
-        font-size: 1rem;
+        font-size: 0.85rem;
         line-height: 1.25rem;
         width: 25%;
     }
     &__password-field {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         border: none;
         width: 10rem;
         height: 2rem;
         border-radius: 20px;
         background-color: $color-field-background;
     }
+    &__password {
+        font-size: 1rem;
+        line-height: 1rem;
+    }
+    &__notifications-container {
+        display: flex;
+    }
+    &__notifications-label {
+        font-size: 0.85rem;
+        line-height: 1.25rem;
+        width: 35%;
+        font-weight: 600;
+    }
+    &__notify-container {
+        display: flex;
+        align-items: center;
+        padding-top: 1.5rem;
+    }
+    &__notify-field {
+        border: none;
+        width: 10.5rem;
+        height: 2.25rem;
+        border-radius: 20px;
+        background-color: $color-field-background;
+        font-family: $base-font;
+        padding-left: 0.75rem;
+    }
+    &__signout-button-container {
+        padding-top: 5rem;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+    }
     &__signout-button {
-        position: fixed;
-        bottom: 1rem;
-        left: 50%;
-        transform: translate(-50%, 0%);
         background-color: $color-main;
         border: none;
-        width: 75%;
+        width: 50%;
         height: 2.25rem;
         border-radius: 20px;
         font-size: 0.9rem;
@@ -73,3 +106,43 @@
         font-weight: 600;
     }
 }
+
+
+/* Hide the default checkbox */
+.toggle input {
+    display: none;
+  }
+  
+  /* Style the toggle slider */
+  .slider {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+    background-color: #ccc;
+    border-radius: 15px;
+    transition: background-color 0.3s;
+  }
+  
+  /* Style the slider's indicator */
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+  }
+  
+  /* Style the slider when checked */
+  .toggle input:checked + .slider {
+    background-color: $color-main;
+  }
+  
+  /* Move the slider indicator when checked */
+  .toggle input:checked + .slider:before {
+    transform: translateX(22px);
+  }

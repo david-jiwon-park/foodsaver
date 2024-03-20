@@ -56,23 +56,45 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
           </div>
 
           <div className='profile-page__password-container'>
-            <h5 className='profile-page__label-text'>Password</h5>
-            <p className='profile-page__password-field'>***************</p>
+            <h5 className='profile-page__password-text'>Password</h5>
+            <div className='profile-page__password-field'>
+              <p className='profile-page__password'>**********</p>
+            </div>
             <img className='profile-page__edit-name-email' src={editIcon} alt='edit icon'/>
           </div>
         </section>
 
         <h1 className='profile-page__heading'>Preferences</h1>
         
-          <h5>Notifications</h5>
-          <h5>Notify Me</h5>
-          <p>{days_before} days before expiration</p>
+        <form>
+          <div className='profile-page__notifications-container'>
+            <h5 className='profile-page__notifications-label'>Notifications</h5>
+            <label class="toggle">
+              <input type="checkbox"/>
+              <span className="slider"></span>
+            </label>
+          </div>
+          
+          <div className='profile-page__notify-container'>
+            <label htmlFor="notify" className='profile-page__notifications-label'>Notify Me</label>
+              <select className="profile-page__notify-field" name="notify" id="notify" defaultValue={days_before}>
+                <option value="0">On Exp Date</option>
+                <option value="1">1 Day Before Exp</option>
+                <option value="2">2 Days Before Exp</option>
+                <option value="3">3 Days Before Exp</option>
+                <option value="4">4 Days Before Exp</option>
+                <option value="5">5 Days Before Exp</option>
+              </select>
+          </div>
+        </form>
 
         {/* <button>Delete Account</button> */}
 
-        <button className="profile-page__signout-button" onClick={handleSignOut}>
-            Sign Out
-        </button>
+        <div className="profile-page__signout-button-container">
+          <button className="profile-page__signout-button" onClick={handleSignOut}>
+              Sign Out
+          </button>
+        </div>
       </div>
         
 
