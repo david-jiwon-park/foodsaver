@@ -2,7 +2,7 @@ const db = require('knex')(require('../knexfile'));
 
 // All users will be given default notification settings upon account creation 
 const createDefaultNotifications = async (req, res) => {
-    const userId = req.userData.id; 
+    const userId = req.body.user_id; 
     const userExists = await db("users").where("id", userId).first();
     if (!userExists) {
         return res.status(404).json({ error: "User not found" });

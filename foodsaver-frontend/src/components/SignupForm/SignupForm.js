@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './SignupForm.scss';
 import backArrow from '../../assets/icons/back-arrow.png';
+import insertDefaultNotifications from '../../utils/insertDefaultNotifications';
 
 const SignupForm = () => {
   const navigate = useNavigate();
@@ -22,7 +23,10 @@ const SignupForm = () => {
       email: formRef.current.email.value,
       password: formRef.current.password.value,
     })
-    .then((_res) => {
+    .then((response) => {
+      insertDefaultNotifications(response.data.user);
+    })
+    .then((response2) => {
       alert("Your account has been created!");
       navigate('/login');
     })
