@@ -13,6 +13,7 @@ const EditUserInfoModal = ({ isOpen, onClose, userName, userEmail }) => {
   const onEdit = (e) => {
     e.preventDefault();
     const token = sessionStorage.getItem('authToken');
+    
     axios
     .put(`${apiBaseURL}/users`, {
       name: e.target.name.value,
@@ -23,6 +24,7 @@ const EditUserInfoModal = ({ isOpen, onClose, userName, userEmail }) => {
       }
     })
     .then((response) => {
+      alert("User information has been updated!")
       onClose();
     })
     .catch((error) => {

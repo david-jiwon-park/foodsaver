@@ -102,17 +102,33 @@ const editUser = async (req, res) => {
     const userId = req.userData.id; 
     try {
         const updatedData = await db("users").where("id", userId).update({
-            name: req.body.name, 
-            email: req.body.email,
-            password: bcrypt.hashSync(req.body.password, 10)
+          name: req.body.name, 
+          email: req.body.email,
+          // password: bcrypt.hashSync(req.body.password, 10)
         });
         if (updatedData === 0) {
-            return res.status(404).json({ error: "User not found" });
+          return res.status(404).json({ error: "User not found" });
         } 
         res.json({ message: "User updated successfully" });
     } catch (error) {
-        res.status(500).json({ message: 'There was an error with the server' });
+      res.status(500).json({ message: 'There was an error with the server' });
     }
+};
+
+// Changing User Password 
+const changePassword = async (req, res) => {
+  const userId = req.userData.id; 
+  try {
+      const updatedData = await db("users").where("id", userId).update({
+        password: bcrypt.hashSync(req.body.password, 10)
+      });
+      if (updatedData === 0) {
+        return res.status(404).json({ error: "User not found" });
+      } 
+      res.json({ message: "Password updated successfully" });
+  } catch (error) {
+    res.status(500).json({ message: 'There was an error with the server' });
+  }
 };
 
 // Deleting User 
@@ -135,5 +151,6 @@ module.exports = {
   loginUser,
   getUser,
   editUser, 
+  changePassword,
   deleteUser
 };

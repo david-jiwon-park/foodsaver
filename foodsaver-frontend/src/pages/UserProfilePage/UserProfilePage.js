@@ -3,6 +3,7 @@ import Header from '../../components/Header/Header'
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import EditUserInfoModal from '../../components/EditUserInfoModal/EditUserInfoModal';
+import ChangePasswordModal from '../../components/ChangePasswordModal/ChangePasswordModal';
 import getUserInfo from '../../utils/getUserInfo';
 import getNotificationSettings from '../../utils/getNotificationSettings';
 import editIcon from '../../assets/icons/edit-icon.svg';
@@ -14,8 +15,8 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
   const [userInfo, setUserInfo] = useState([]);
   const [notificationSettings, setNotificationSettings] = useState([]);
   const [isEditUserInfoModalOpen, setIsEditUserInfoModalOpen] = useState(false);
+  const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] = useState(false);
   const [areNotificationsOn, setAreNotificationsOn] = useState(false);
-  // const [notifyme, setNotifyMe] = useState(null);
 
   const { name, email } = userInfo;
   const { enabled, days_before } = notificationSettings;
@@ -23,10 +24,6 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
   const checkNotifications = () => {
     setAreNotificationsOn(enabled === 1);
   };
-
-  // const checkNotifyMe = () => {
-  //   setNotifyMe(days_before);
-  // };
 
   useEffect(() => {
     // Get the user profile info if they are logged in 
@@ -50,14 +47,20 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
     navigate('/');
   };
 
- 
-
   const handleOpenEditUserInfoModal = () => {
     setIsEditUserInfoModalOpen(true);
   };
 
   const handleCloseEditUserInfoModal = () => {
     setIsEditUserInfoModalOpen(false);
+  };
+
+  const handleOpenChangePasswordModal = () => {
+    setIsChangePasswordModalOpen(true);
+  };
+
+  const handleCloseChangePasswordModal = () => {
+    setIsChangePasswordModalOpen(false);
   };
 
   const toggleNotifications = () => {
@@ -161,9 +164,14 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
             <div className='profile-page__password-field'>
               <p className='profile-page__password'>**********</p>
             </div>
-            <img className='profile-page__edit-name-email' src={editIcon} alt='edit icon'/>
+            <img className='profile-page__edit-name-email' src={editIcon} alt='edit icon' onClick={() => handleOpenChangePasswordModal()}/>
           </div>
         </section>
+
+        <ChangePasswordModal 
+            isOpen={isChangePasswordModalOpen} 
+            onClose={handleCloseChangePasswordModal} 
+          />
 
         <h1 className='profile-page__heading'>Preferences</h1>
         
