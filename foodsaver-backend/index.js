@@ -7,6 +7,8 @@ const inventoryRoutes = require("./routes/inventory");
 const notificationsRoutes = require("./routes/notifications");
 const favoritesRoutes = require("./routes/favorites");
 
+require('./emailNotifications/scheduleSendEmail');
+
 const cors = require("cors");
 
 // Middleware to implement Cross Origin Resource Sharing (CORS)
