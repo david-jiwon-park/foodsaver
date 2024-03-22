@@ -4,6 +4,10 @@
 @import '../../styles/partials/mixins';
 @import '../../styles/partials/variables';
 
+span {
+    font-weight: 600;
+}
+
 .inventory-page {
     padding: 5rem 1.5rem 0;
     &__heading-container {
@@ -36,6 +40,11 @@
         top: 0.4rem;
         left: 0.5rem;
         height: 1.2rem;
+    }
+    &__no-inventory-text {
+        padding-top: 0.75rem;
+        font-size: 1.1rem;
+        line-height: 1.5rem;
     }
     &__subheading-container {
         display: flex;
@@ -82,5 +91,11 @@
     }
     &__delete-icon {
         height: 1.5rem;
+    }
+    &__loading {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 }

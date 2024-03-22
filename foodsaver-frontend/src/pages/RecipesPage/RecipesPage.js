@@ -5,7 +5,6 @@ import axios from 'axios';
 import Header from '../../components/Header/Header';
 import RecipeModal from '../../components/RecipeModal/RecipeModal';
 import getUserInventory from '../../utils/getUserInventory';
-// import getUserFavorites from '../../utils/getUserFavorites';
 
 
 const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
@@ -15,6 +14,7 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
   const [suggestedRecipes, setSuggestedRecipes] = useState([]);
   const [submitted, setSubmitted] = useState(false);
   const [isRecipeModalOpen, setIsRecipeModalOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const [recipeURI, setRecipeURI] = useState("");
   const [recipeImage, setRecipeImage] = useState("");
@@ -27,10 +27,17 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
   useEffect(() => {
     // Get the user's inventory list if they are logged in 
     if (isLoggedIn) {
-      getUserInventory({ setUserInventory });
-      // getUserFavorites({ setUserFavorites });
-    } else {
-      navigate('/');
+      getUserInventory()
+      .then((response) => {
+        const sortedData = response.data.sort((a, b) => new Date(a.exp_date) - new Date(b.exp_date));
+        setUserInventory(sortedData);
+        setLoading(false);
+        window.scrollTo(0, 0);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log(error);
+      })
     }
     }, [isLoggedIn]);
 
@@ -81,11 +88,22 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
       <Header 
         setIsLoggedIn={setIsLoggedIn}
       />
-      <div className="recipes-page">
+      {!loading ? 
+      (<div className="recipes-page">
         <h1 className="recipes-page__heading">Recipes</h1>
         <h2 className="recipes-page__subheading">Inventory</h2>
 
-        <form onSubmit={findRecipes}>
+        {userInventory.length === 0 ? 
+        (<> 
+          <p className="recipes-page__no-inventory-text">
+            Your inventory is empty!
+          </p> 
+          <p className="recipes-page__no-inventory-text">
+            Head to the <span>Inventory</span> page to add food!
+          </p>
+        </>) : 
+
+        (<form onSubmit={findRecipes}>
           <div className="recipes-page__inventory-outer-container">
             <div className="recipes-page__inventory-inner-container">
               {userInventory.filter((item) => {
@@ -106,12 +124,22 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
           <div className="recipes-page__find-button-container">
             <button type="submit" className="recipes-page__find-button">Find Recipes</button>
           </div>
-        </form>
+        </form>)}
         
         {submitted ? 
         (<>
           <h2 className="recipes-page__subheading recipes-page__subheading--recipes">Suggested Recipes</h2>
-          <div className="recipes-page__recipes-outer-container">
+          {suggestedRecipes.length === 0 ? 
+          (<>
+            <p className="recipes-page__no-recipes-text">
+              Sorry, we couldn't find any recipes with your selected ingredients.
+            </p>
+            <p className="recipes-page__no-recipes-text">
+              Please try selecting a different set of ingredients!
+            </p>
+          </>)
+          :
+          (<div className="recipes-page__recipes-outer-container">
             <div className="recipes-page__recipes-inner-container">
               {suggestedRecipes.map((r) => (
               <div 
@@ -124,7 +152,7 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
               </div>
               ))}
             </div>
-          </div>
+          </div>)}
         </>
         )
         : null }
@@ -139,11 +167,10 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
           ingredients={recipeIngredients}
           nutrition={recipeNutrition}
           directionsLink={recipeDirectionsLink}
-          // userFavorites={userFavorites}
-          // isFavorited={isFavorited}
-          // setIsFavorited={setIsFavorited}
         />
-      </div>
+      </div>) 
+      : 
+      (<h1 className="recipes-page__loading">Loading...</h1>)}
     </>
   )
 };

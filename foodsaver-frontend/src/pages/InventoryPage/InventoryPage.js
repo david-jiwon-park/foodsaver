@@ -20,12 +20,22 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
   const [modalFoodId, setModalFoodId] = useState(null);
   const [modalFoodName, setModalFoodName] = useState("");
   const [modalFoodExpDate, setModalFoodExpDate] = useState(null);
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Get the user's inventory list if they are logged in 
     if (isLoggedIn) {
-      getUserInventory({ setUserInventory });
+      getUserInventory()
+      .then((response) => {
+        const sortedData = response.data.sort((a, b) => new Date(a.exp_date) - new Date(b.exp_date));
+        setUserInventory(sortedData);
+        setLoading(false);
+        window.scrollTo(0, 0);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log(error);
+      })
     } else {
       navigate('/');
     }
@@ -84,7 +94,8 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
       <Header 
         setIsLoggedIn={setIsLoggedIn}
       />
-      <div className="inventory-page">
+      {!loading ? 
+      (<div className="inventory-page">
         <div className="inventory-page__heading-container">
           <h1 className="inventory-page__heading">Inventory</h1>
           <div className="inventory-page__add-button-container">
@@ -98,23 +109,32 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
           onClose={handleCloseAddFoodModal} 
         />
 
-        <div className="inventory-page__subheading-container">
-          <h4 className="inventory-page__subheading">Food Item</h4>
-          <h4 className="inventory-page__subheading">Expires In</h4>
-        </div>
-
-
-        {userInventory.filter((item) => {
-          return item.discarded == 0
-        })
-        .map((item) => (
-          <div className={expDateStyling(item.exp_date)} key={item.id}>
-            <p className="inventory-page__item-name">{item.food_item}</p>
-            <p className="inventory-page__item-exp">{daysUntilExpiration(item.exp_date)} {expDateText(item.exp_date)}</p>
-            <img className="inventory-page__edit-icon" src={editIcon} alt="edit icon" onClick={() => handleOpenEditFoodModal(item.id, item.food_item, item.exp_date)}/>
-            <img className="inventory-page__delete-icon" src={deleteIcon} alt="delete icon" onClick={() => handleOpenDeleteFoodModal(item.id, item.food_item)}/>
+        {userInventory.length === 0 ? 
+        (<p className="inventory-page__no-inventory-text">
+          Start adding food by clicking the 
+          <span> Add Item </span> 
+          button!
+        </p>)
+        : 
+        (<>
+          <div className="inventory-page__subheading-container">
+            <h4 className="inventory-page__subheading">Food Item</h4>
+            <h4 className="inventory-page__subheading">Expires In</h4>
           </div>
-        ))}
+
+          {userInventory.filter((item) => {
+            return item.discarded == 0
+          })
+          .map((item) => (
+            <div className={expDateStyling(item.exp_date)} key={item.id}>
+              <p className="inventory-page__item-name">{item.food_item}</p>
+              <p className="inventory-page__item-exp">{daysUntilExpiration(item.exp_date)} {expDateText(item.exp_date)}</p>
+              <img className="inventory-page__edit-icon" src={editIcon} alt="edit icon" onClick={() => handleOpenEditFoodModal(item.id, item.food_item, item.exp_date)}/>
+              <img className="inventory-page__delete-icon" src={deleteIcon} alt="delete icon" onClick={() => handleOpenDeleteFoodModal(item.id, item.food_item)}/>
+            </div>
+          ))}
+        </>)}
+
         <EditFoodModal 
           isOpen={isEditFoodModalOpen} 
           onClose={handleCloseEditFoodModal} 
@@ -128,7 +148,9 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
           foodId={modalFoodId} 
           foodName={modalFoodName}
         />
-      </div>
+      </div>) 
+      : 
+      (<h1 className="inventory-page__loading">Loading...</h1>)}
     </>
   )
 };

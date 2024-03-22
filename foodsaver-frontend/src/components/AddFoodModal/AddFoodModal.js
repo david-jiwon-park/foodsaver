@@ -41,7 +41,7 @@ const AddFoodModal = ({ isOpen, onClose}) => {
             </div>
             
             <div className="addfoodmodal__field-container-1">
-              <label htmlFor="quantity" className="addfoodmodal__label">Food Item:</label>
+              <label htmlFor="food_item" className="addfoodmodal__label">Food Item:</label>
               <input
                     className="addfoodmodal__field-1"
                     name="food_item"
@@ -52,7 +52,7 @@ const AddFoodModal = ({ isOpen, onClose}) => {
             </div>
             
             <div className="addfoodmodal__field-container-2">
-              <label htmlFor="quantity" className="addfoodmodal__label">Expiry Date:</label>
+              <label htmlFor="exp_date" className="addfoodmodal__label">Expiry Date:</label>
               <input
                   className="addfoodmodal__field-2"
                   name="exp_date"

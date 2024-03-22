@@ -11,10 +11,10 @@ import xIcon from '../../assets/icons/x-icon.svg';
 
 const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
-  const [userFavorites, setUserFavorites] = useState([]);
   const [userFavoritesExternalData, setUserFavoritesExternalData] = useState([]);
   const [isFavRecipeModalOpen, setIsFavRecipeModalOpen] = useState(false);
   const [isDeleteRecipeModalOpen, setIsDeleteRecipeModalOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const [recipeURI, setRecipeURI] = useState("");
   const [recipeImage, setRecipeImage] = useState("");
@@ -28,10 +28,10 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
     if (isLoggedIn) {
       getUserFavorites()
       .then((response) => {
-        setUserFavorites(response.data);
         getFavoriteRecipeInfo(response.data);
       })
       .catch((error) => {
+        setLoading(false);
         console.log(error);
       })
     } else {
@@ -59,7 +59,13 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
       // Concatenate allData arrays into one array
       const mergedData = [].concat(...allData);
       setUserFavoritesExternalData(mergedData);
+      
+      Promise.all(dataPromises)
+        .then(() => {
+        setLoading(false); 
+      });
     } catch (error) {
+      setLoading(false); 
       console.log(error);
     }
   };
@@ -88,28 +94,34 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
     setIsDeleteRecipeModalOpen(false);
   };
 
-  console.log(userFavorites);
-  console.log(userFavoritesExternalData);
-
   return (
     <>
       <Header 
         setIsLoggedIn={setIsLoggedIn}
       />
-      {userFavoritesExternalData ? 
+      
+      {!loading ? 
       (<div className='favorites-page'>
         <h1 className='favorites-page__heading'>Favorites</h1>
-        {userFavoritesExternalData.map((r) => (
-          <div 
-            key={r.recipe.uri}
-            className='favorites-page__recipe-container'
-            onClick={() => handleOpenFavRecipeModal(r.recipe.image, r.recipe.label, r.recipe.yield, r.recipe.ingredientLines, r.recipe.totalNutrients, r.recipe.url)}
-          >
-            <img className='favorites-page__recipe-image' src={r.recipe.image} alt="recipe"/>
-            <h3 className='favorites-page__recipe-label'>{r.recipe.label}</h3>
-            <img className='favorites-page__recipe-delete' src={xIcon} alt="x-icon" onClick={(e) => handleOpenDeleteRecipeModal(e, r.recipe.label, r.recipe.uri)}/>
-          </div>
-        ))}
+
+        {userFavoritesExternalData.length === 0 ? 
+        (<p className="favorites-page__no-favorites-text">
+          Head to the <span>Recipes</span> page to search for recipes to add as favorites!
+        </p>)
+        : 
+        (<>
+          {userFavoritesExternalData.map((r) => (
+            <div 
+              key={r.recipe.uri}
+              className='favorites-page__recipe-container'
+              onClick={() => handleOpenFavRecipeModal(r.recipe.image, r.recipe.label, r.recipe.yield, r.recipe.ingredientLines, r.recipe.totalNutrients, r.recipe.url)}
+            >
+              <img className='favorites-page__recipe-image' src={r.recipe.image} alt="recipe"/>
+              <h3 className='favorites-page__recipe-label'>{r.recipe.label}</h3>
+              <img className='favorites-page__recipe-delete' src={xIcon} alt="x-icon" onClick={(e) => handleOpenDeleteRecipeModal(e, r.recipe.label, r.recipe.uri)}/>
+            </div>
+          ))}
+        </>)}
 
         <DeleteRecipeModal 
           isOpen={isDeleteRecipeModalOpen} 
@@ -130,7 +142,8 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
         />
 
       </div>)
-      : null}
+      : 
+      (<h1 className="favorites-page__loading">Loading...</h1>)}
     </>
   )
 };

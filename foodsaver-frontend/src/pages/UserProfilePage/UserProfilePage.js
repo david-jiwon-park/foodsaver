@@ -17,6 +17,7 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
   const [isEditUserInfoModalOpen, setIsEditUserInfoModalOpen] = useState(false);
   const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] = useState(false);
   const [areNotificationsOn, setAreNotificationsOn] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const { name, email } = userInfo;
   const { enabled, days_before } = notificationSettings;
@@ -28,8 +29,20 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
   useEffect(() => {
     // Get the user profile info if they are logged in 
     if (isLoggedIn) {
-      getUserInfo({ setUserInfo });
-      getNotificationSettings({ setNotificationSettings });
+      getUserInfo()
+      .then((response) => {
+        setUserInfo(response.data);
+        return getNotificationSettings();
+      })
+      .then((response2) => {
+        setNotificationSettings(response2);
+        setLoading(false);
+        window.scrollTo(0, 0);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log(error);
+      })
     } else {
       navigate('/');
     }
@@ -135,7 +148,8 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
       <Header 
           setIsLoggedIn={setIsLoggedIn}
       />
-      <div className='profile-page'>
+      {!loading ?
+      (<div className='profile-page'>
         <h1 className='profile-page__heading'>User Profile</h1>
         
         <section className='profile-page__info'>
@@ -216,9 +230,9 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
               Sign Out
           </button>
         </div>
-      </div>
-        
-
+      </div>)
+      : 
+      (<h1 className="profile-page__loading">Loading...</h1>)}
     </>
   )
 }

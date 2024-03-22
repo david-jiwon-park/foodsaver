@@ -20,7 +20,7 @@
     box-sizing: border-box;
     position: fixed;
     background-color: $white;
-    height: 12rem;
+    height: 14rem;
     width: 90%; 
     border-radius: 20px;
     top: 50%;
@@ -47,10 +47,11 @@
         height: 7rem;
         display: flex;
         align-items: center;
+        padding-top: 1.25rem;
     }
     &__text {
-        font-size: 1rem;
-        line-height: 1rem;
+        font-size: 0.95rem;
+        line-height: 1.25rem;
         text-align: center;
         padding: 0 1rem;
     }
@@ -59,7 +60,7 @@
         background-color: $white;
         height: 1.5rem;
         width: 100%; 
-        top: 9.5rem;
+        top: 11.5rem;
         box-sizing: border-box;
     }
     &__buttons {

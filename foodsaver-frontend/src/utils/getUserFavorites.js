@@ -9,14 +9,6 @@ const getUserFavorites = () => {
         Authorization: `Bearer ${token}`,
       },
     })
-    // .then((response) => {
-    //   setUserFavorites(response.data);
-    //   window.scrollTo(0, 0);
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    // });
-
 };
 
 export default getUserFavorites;
