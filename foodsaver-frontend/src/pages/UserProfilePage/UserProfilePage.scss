@@ -67,14 +67,18 @@
     }
     &__notifications-container {
         display: flex;
+        align-items: center;
         padding-top: 0.75rem;
     }
     &__notifications-label {
         font-size: 0.85rem;
         line-height: 1.25rem;
-        width: 35%;
+        width: 36%;
         font-weight: 600;
     }
+    // &__notifications-toggle {
+    //     padding-left: 1rem;
+    // }
     &__notify-container {
         display: flex;
         align-items: center;
@@ -88,7 +92,8 @@
         border-radius: 20px;
         background-color: $color-field-background;
         font-family: $base-font;
-        padding-left: 0.75rem;
+        padding-left: 0.85rem;
+        margin-left: 0.7rem;
         appearance: none;
         -webkit-appearance: none;
         -moz-appearance: none; 
@@ -130,6 +135,7 @@
     background-color: #ccc;
     border-radius: 15px;
     transition: background-color 0.3s;
+    margin-left: 0.75rem;
   }
   
   /* Style the slider's indicator */

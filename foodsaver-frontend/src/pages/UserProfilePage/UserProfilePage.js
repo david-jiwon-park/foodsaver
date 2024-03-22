@@ -177,9 +177,10 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
         
         <form>
           <div className='profile-page__notifications-container'>
-            <h5 className='profile-page__notifications-label'>Notifications</h5>
+            <h5 className='profile-page__notifications-label'>Email Notifications</h5>
             <label className="toggle">
               <input 
+                className='profile-page__notifications-toggle'
                 type="checkbox" 
                 id="toggleSwitch" 
                 checked={areNotificationsOn}
@@ -199,7 +200,6 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
                 defaultValue={days_before}
                 onChange={changeNotifyMe}
                 >
-                <option value="0">On Exp Date</option>
                 <option value="1">1 Day Before Exp</option>
                 <option value="2">2 Days Before Exp</option>
                 <option value="3">3 Days Before Exp</option>
