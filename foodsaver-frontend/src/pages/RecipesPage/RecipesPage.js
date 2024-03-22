@@ -14,6 +14,7 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
   const [isRecipeModalOpen, setIsRecipeModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [loadingText, setLoadingText] = useState("");
+  const [loadingError, setLoadingError] = useState(false);
 
   const [recipeURI, setRecipeURI] = useState("");
   const [recipeImage, setRecipeImage] = useState("");
@@ -35,6 +36,7 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
       })
       .catch((error) => {
         setLoading(false);
+        setLoadingError(true);
         console.log(error);
       })
     }
@@ -93,6 +95,10 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
       <Header 
         setIsLoggedIn={setIsLoggedIn}
       />
+      {!loading && loadingError ? 
+      (<h1 className="loading-error">Failed to load page</h1>)
+      : null 
+      }
       {!loading ? 
       (<div className="recipes-page">
         <h1 className="recipes-page__heading">Recipes</h1>

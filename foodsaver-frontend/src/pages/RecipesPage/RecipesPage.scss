@@ -8,6 +8,13 @@ span {
     font-weight: 600;
 }
 
+.loading-error {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .recipes-page {
     padding: 5rem 0rem 0 1.5rem;
     &__heading {

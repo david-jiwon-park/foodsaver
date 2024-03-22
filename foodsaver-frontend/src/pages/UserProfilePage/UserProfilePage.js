@@ -19,6 +19,7 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
   const [areNotificationsOn, setAreNotificationsOn] = useState(false);
   const [loading, setLoading] = useState(true);
   const [loadingText, setLoadingText] = useState("");
+  const [loadingError, setLoadingError] = useState(false);
 
   const { name, email } = userInfo;
   const { enabled, days_before } = notificationSettings;
@@ -42,6 +43,7 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
       })
       .catch((error) => {
         setLoading(false);
+        setLoadingError(true);
         console.log(error);
       })
     } else {
@@ -156,6 +158,10 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
       <Header 
           setIsLoggedIn={setIsLoggedIn}
       />
+      {!loading && loadingError ? 
+      (<h1 className="loading-error">Failed to load page</h1>)
+      : null 
+      }
       {!loading ?
       (<div className='profile-page'>
         <h1 className='profile-page__heading'>User Profile</h1>

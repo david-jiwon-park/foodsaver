@@ -16,6 +16,7 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
   const [isDeleteRecipeModalOpen, setIsDeleteRecipeModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [loadingText, setLoadingText] = useState("");
+  const [loadingError, setLoadingError] = useState(false);
 
   const [recipeURI, setRecipeURI] = useState("");
   const [recipeImage, setRecipeImage] = useState("");
@@ -33,6 +34,7 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
       })
       .catch((error) => {
         setLoading(false);
+        setLoadingError(true);
         console.log(error);
       })
     } else {
@@ -66,8 +68,9 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
         setLoading(false); 
       });
     } catch (error) {
-      setLoading(false); 
-      console.log(error);
+        setLoading(false); 
+        setLoadingError(true);
+        console.log(error);
     }
   };
 
@@ -106,7 +109,10 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
       <Header 
         setIsLoggedIn={setIsLoggedIn}
       />
-      
+      {!loading && loadingError ? 
+      (<h1 className="loading-error">Failed to load page</h1>)
+      : null 
+      }
       {!loading ? 
       (<div className='favorites-page'>
         <h1 className='favorites-page__heading'>Favorites</h1>

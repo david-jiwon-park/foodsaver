@@ -22,6 +22,7 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
   const [modalFoodExpDate, setModalFoodExpDate] = useState(null);
   const [loading, setLoading] = useState(true);
   const [loadingText, setLoadingText] = useState("");
+  const [loadingError, setLoadingError] = useState(false);
 
   useEffect(() => {
     // Get the user's inventory list if they are logged in 
@@ -35,6 +36,7 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
       })
       .catch((error) => {
         setLoading(false);
+        setLoadingError(true);
         console.log(error);
       })
     } else {
@@ -101,6 +103,10 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
       <Header 
         setIsLoggedIn={setIsLoggedIn}
       />
+      {!loading && loadingError ? 
+      (<h1 className="loading-error">Failed to load page</h1>)
+      : null 
+      }
       {!loading ? 
       (<div className="inventory-page">
         <div className="inventory-page__heading-container">
