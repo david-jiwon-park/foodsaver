@@ -99,20 +99,29 @@ const getUser = async (req, res) => {
 
 // Editing User Information 
 const editUser = async (req, res) => {
-    const userId = req.userData.id; 
-    try {
-        const updatedData = await db("users").where("id", userId).update({
-          name: req.body.name, 
-          email: req.body.email,
-          // password: bcrypt.hashSync(req.body.password, 10)
-        });
-        if (updatedData === 0) {
-          return res.status(404).json({ error: "User not found" });
-        } 
-        res.json({ message: "User updated successfully" });
-    } catch (error) {
-      res.status(500).json({ message: 'There was an error with the server' });
+  const userId = req.userData.id; 
+  
+  try {
+    const users = await db('users').whereNot("id", userId).where("email", req.body.email);
+
+    if (users.length !== 0) {
+      return res.status(400).json({
+        message: 'This email has already been used. Please use another email.',
+      });
     }
+
+    const updatedData = await db("users").where("id", userId).update({
+      name: req.body.name, 
+      email: req.body.email,
+    });
+    if (updatedData === 0) {
+      return res.status(404).json({ error: "User not found" });
+    } 
+
+    res.json({ message: "User updated successfully" });
+  } catch (error) {
+    res.status(500).json({ message: 'There was an error with the server. Please try again later.' });
+  }
 };
 
 // Changing User Password 

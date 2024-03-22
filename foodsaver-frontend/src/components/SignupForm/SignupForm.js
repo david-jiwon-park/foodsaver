@@ -34,7 +34,6 @@ const SignupForm = () => {
     .catch((error) => {
       console.log(error);
       setSignUpErrorMessage(error.response.data.message);
-      // alert("There was an issue with creating your account. Please try again later.");
     })
   };
 

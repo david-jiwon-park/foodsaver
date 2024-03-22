@@ -1,11 +1,14 @@
 //Edit User Info Modal Component
 
 import './EditUserInfoModal.scss';
+import { useState } from 'react';
 import axios from 'axios';
 import editIcon from '../../assets/icons/edit-icon.svg';
 
 
 const EditUserInfoModal = ({ isOpen, onClose, userName, userEmail }) => {
+  const [editUserErrorMessage, setEditUserErrorMessage] = useState("");
+  
   if (!isOpen) return null;
 
   const apiBaseURL = 'http://localhost:8090'
@@ -29,7 +32,7 @@ const EditUserInfoModal = ({ isOpen, onClose, userName, userEmail }) => {
     })
     .catch((error) => {
       console.log(error);
-      alert("There was an issue with editing your info. Please try again later.");
+      setEditUserErrorMessage(error.response.data.message);
       })
     };
 
@@ -66,6 +69,8 @@ const EditUserInfoModal = ({ isOpen, onClose, userName, userEmail }) => {
                 required>
             </input>
           </div>  
+
+          <p className="edituserinfomodal__edit-error">{editUserErrorMessage}</p>
 
           <div className="edituserinfomodal__button-container">
             <button type="button" className="edituserinfomodal__button-cancel" onClick={onClose}>Cancel</button>

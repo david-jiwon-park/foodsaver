@@ -20,7 +20,7 @@
     box-sizing: border-box;
     position: fixed;
     background-color: $white;
-    height: 15rem;
+    height: 16rem;
     width: 90%; 
     border-radius: 20px;
     top: 50%;
@@ -50,7 +50,7 @@
         line-height: 1rem;
     }
     &__field-container-1 {
-        padding: 2rem 0 1.5rem;
+        padding: 1.25rem 0 1.25rem;
         width: 100%;
         display: flex;
         justify-content: center;
@@ -87,7 +87,7 @@
         }
     }
     &__field-container-2 {
-        padding-bottom: 2.5rem;
+        padding-bottom: 4.5rem;
         width: 100%;
         display: flex;
         justify-content: center;
@@ -114,6 +114,15 @@
         &:focus {
             border: 2px solid $color-main;
         }
+    }
+    &__edit-error {
+        position: fixed;
+        color: $color-error;
+        font-size: 0.8rem;
+        line-height: 1.1rem;
+        top: 62.5%;
+        left: 15%;
+        width: 80%;
     }
     &__button-container {
         width: 100%;
