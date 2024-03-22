@@ -1,6 +1,5 @@
 import './RecipesPage.scss';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../../components/Header/Header';
 import RecipeModal from '../../components/RecipeModal/RecipeModal';
@@ -8,13 +7,13 @@ import getUserInventory from '../../utils/getUserInventory';
 
 
 const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
-  const navigate = useNavigate();
   const [userInventory, setUserInventory] = useState([]);
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [suggestedRecipes, setSuggestedRecipes] = useState([]);
   const [submitted, setSubmitted] = useState(false);
   const [isRecipeModalOpen, setIsRecipeModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [loadingText, setLoadingText] = useState("");
 
   const [recipeURI, setRecipeURI] = useState("");
   const [recipeImage, setRecipeImage] = useState("");
@@ -82,6 +81,12 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
   const handleCloseRecipeModal = () => {
     setIsRecipeModalOpen(false);
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoadingText("Loading...")
+    }, 800);
+  }, []);
 
   return (
     <>
@@ -170,7 +175,7 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
         />
       </div>) 
       : 
-      (<h1 className="recipes-page__loading">Loading...</h1>)}
+      (<h1 className="recipes-page__loading">{loadingText}</h1>)}
     </>
   )
 };

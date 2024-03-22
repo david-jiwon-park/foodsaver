@@ -15,6 +15,7 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
   const [isFavRecipeModalOpen, setIsFavRecipeModalOpen] = useState(false);
   const [isDeleteRecipeModalOpen, setIsDeleteRecipeModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [loadingText, setLoadingText] = useState("");
 
   const [recipeURI, setRecipeURI] = useState("");
   const [recipeImage, setRecipeImage] = useState("");
@@ -94,6 +95,12 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
     setIsDeleteRecipeModalOpen(false);
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoadingText("Loading...")
+    }, 800);
+  }, []);
+
   return (
     <>
       <Header 
@@ -143,7 +150,7 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
 
       </div>)
       : 
-      (<h1 className="favorites-page__loading">Loading...</h1>)}
+      (<h1 className="favorites-page__loading">{loadingText}</h1>)}
     </>
   )
 };

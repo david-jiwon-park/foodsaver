@@ -18,6 +18,7 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
   const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] = useState(false);
   const [areNotificationsOn, setAreNotificationsOn] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [loadingText, setLoadingText] = useState("");
 
   const { name, email } = userInfo;
   const { enabled, days_before } = notificationSettings;
@@ -143,6 +144,13 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
     })
   }
 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoadingText("Loading...")
+    }, 800);
+  }, []);
+
+
   return (
     <>
       <Header 
@@ -232,7 +240,7 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
         </div>
       </div>)
       : 
-      (<h1 className="profile-page__loading">Loading...</h1>)}
+      (<h1 className="profile-page__loading">{loadingText}</h1>)}
     </>
   )
 }

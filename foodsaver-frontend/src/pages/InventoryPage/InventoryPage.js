@@ -21,6 +21,7 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
   const [modalFoodName, setModalFoodName] = useState("");
   const [modalFoodExpDate, setModalFoodExpDate] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [loadingText, setLoadingText] = useState("");
 
   useEffect(() => {
     // Get the user's inventory list if they are logged in 
@@ -89,6 +90,12 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
     }
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoadingText("Loading...")
+    }, 800);
+  }, []);
+
   return (
     <>
       <Header 
@@ -150,7 +157,7 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
         />
       </div>) 
       : 
-      (<h1 className="inventory-page__loading">Loading...</h1>)}
+      (<h1 className="inventory-page__loading">{loadingText}</h1>)}
     </>
   )
 };
