@@ -52,8 +52,14 @@
             border: 2px solid $color-main;
         }
     }
+    &__signup-error {
+        color: $color-error;
+        font-size: 0.9rem;
+        line-height: 1.1rem;
+        padding-top: 1rem;
+    }
     &__signup-button {
-        margin-top: 3.5rem;
+        margin-top: 2.25rem;
         background-color: $color-main;
         border: none;
         box-sizing: border-box;

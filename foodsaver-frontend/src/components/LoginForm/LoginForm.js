@@ -14,7 +14,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
     e.preventDefault();
 
     if (!formRef.current.email.value  || !formRef.current.password.value) {
-      alert('All fields are required to log in.');
+      return alert('Please enter both your email and password');
     }
 
     axios
@@ -34,7 +34,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
     })
     .catch((error) => {
       setIsLoginError(true);
-      setErrorMessage(error.response.data.error.message);
+      setErrorMessage(error.response.data.message);
     });
   };
 
@@ -47,7 +47,6 @@ const LoginForm = ({ setIsLoggedIn }) => {
         </Link>
         <h1 className="login-form__heading">Log In</h1>
       </div>
-      {isLoginError && <label style={{ color: "red" }}>{errorMessage}</label>}
       <form className="login-form__form" onSubmit={onSubmit} ref={formRef}>
         
         <div className="login-form__input-container">
@@ -69,6 +68,8 @@ const LoginForm = ({ setIsLoggedIn }) => {
             placeholder="Password"
           />
         </div>
+
+        {isLoginError && <p className="login-form__login-error">{errorMessage}</p>}
 
         <button className="login-form__login-button">Log In</button>
 

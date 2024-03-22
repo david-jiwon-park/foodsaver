@@ -17,7 +17,7 @@ const signUpUser = async (req, res) => {
 
     if (users.length !== 0) {
       return res.status(400).json({
-        message: 'This email has already been used.',
+        message: 'This email has already been used. Please use another email.',
       });
     }
 
@@ -39,7 +39,7 @@ const signUpUser = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      message: 'Unable to create user.',
+      message: 'There was an issue with creating your account. Please try again later.',
     });
   }
 };
@@ -49,12 +49,12 @@ const loginUser = async (req, res) => {
   if (!req.body.email || !req.body.password) {
     return res
       .status(400)
-      .json({ error: 'Login requires email and password fields.' });
+      .json({ message: 'Login requires both email and password fields.' });
   }
   try {
     const users = await db('users').where({ email: req.body.email });
     if (users.length === 0) {
-      return res.status(401).json({ error: 'Invalid login credentials.' });
+      return res.status(401).json({ message: 'Invalid login credentials.' });
     }
     const user = users[0];
     const passwordIsValid = await bcrypt.compare(
@@ -62,7 +62,7 @@ const loginUser = async (req, res) => {
       user.password
     );
     if (!passwordIsValid) {
-      return res.status(401).json({ error: 'Incorrect password.' });
+      return res.status(401).json({ message: 'Incorrect password.' });
     }
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
       expiresIn: '24h',
@@ -73,7 +73,7 @@ const loginUser = async (req, res) => {
       token: token,
     });
   } catch (error) {
-    res.status(500).json({ message: 'There was an error with the server' });
+    res.status(500).json({ message: 'There was an error with the server. Please try logging in later.' });
   }
 };
 

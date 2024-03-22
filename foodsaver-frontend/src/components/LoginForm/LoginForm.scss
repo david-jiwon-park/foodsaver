@@ -52,8 +52,14 @@
             border: 2px solid $color-main;
         }
     }
+    &__login-error {
+        color: $color-error;
+        font-size: 0.9rem;
+        line-height: 1.1rem;
+        padding-top: 1rem;
+    }
     &__login-button {
-        margin-top: 4.5rem;
+        margin-top: 4rem;
         background-color: $color-main;
         border: none;
         box-sizing: border-box;

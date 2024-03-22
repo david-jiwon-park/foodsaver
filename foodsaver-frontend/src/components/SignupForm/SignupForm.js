@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './SignupForm.scss';
@@ -6,6 +6,7 @@ import backArrow from '../../assets/icons/back-arrow.png';
 import insertDefaultNotifications from '../../utils/insertDefaultNotifications';
 
 const SignupForm = () => {
+  const [signUpErrorMessage, setSignUpErrorMessage] = useState("");
   const navigate = useNavigate();
   const formRef = useRef();
 
@@ -13,8 +14,7 @@ const SignupForm = () => {
     e.preventDefault();
 
     if (!formRef.current.name.value || !formRef.current.email.value || !formRef.current.password.value) {
-      alert('Make sure to fill out all the fields');
-      return;
+      return alert('Make sure to fill out all the fields');
     }
 
     axios
@@ -27,12 +27,14 @@ const SignupForm = () => {
       insertDefaultNotifications(response.data.user);
     })
     .then((response2) => {
+      setSignUpErrorMessage("");
       alert("Your account has been created!");
       navigate('/login');
     })
     .catch((error) => {
       console.log(error);
-      alert("There was an issue with creating your account. Please try again later.");
+      setSignUpErrorMessage(error.response.data.message);
+      // alert("There was an issue with creating your account. Please try again later.");
     })
   };
 
@@ -75,6 +77,8 @@ const SignupForm = () => {
             placeholder="Password"
           />
         </div>
+
+        <p className="signup-form__signup-error">{signUpErrorMessage}</p>
 
         <button className="signup-form__signup-button">Sign Up</button>
         

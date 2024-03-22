@@ -100,6 +100,10 @@
         background-image: url('../../assets/icons/arrow-drop-down.svg');
         background-repeat: no-repeat;
         background-position: right 0.5rem center;
+        outline: none;
+        &:focus {
+            border: 2px solid $color-main;
+        }
     }
     &__signout-button-container {
         padding-top: 8rem;
