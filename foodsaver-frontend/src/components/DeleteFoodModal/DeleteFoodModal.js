@@ -42,12 +42,10 @@ const DeleteFoodModal = ({ isOpen, onClose, foodId, foodName }) => {
           <div className="deletefoodmodal__text-container">
             <p className="deletefoodmodal__text">Are you sure you want to delete "{foodName}" from your inventory?</p>
           </div>
-
+          
           <div className="deletefoodmodal__button-container">
-            <div className="deletefoodmodal__buttons">
-              <button className="deletefoodmodal__button-cancel" onClick={onClose}>Cancel</button>
-              <button className="deletefoodmodal__button-delete" onClick={onDelete}>Delete</button>
-            </div>
+            <button className="deletefoodmodal__button-cancel" onClick={onClose}>Cancel</button>
+            <button className="deletefoodmodal__button-delete" onClick={onDelete}>Delete</button>
           </div>
 
         </div>

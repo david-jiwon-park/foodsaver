@@ -5,115 +5,46 @@
 @import '../../styles/partials/variables';
 
 .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1001; 
-    pointer-events: auto; 
-    background-color: rgba($color-transparent-background, 0.5);
+    @include modal-overlay;
 }
 
 .addfoodmodal {
-    z-index: 1002;
-    box-sizing: border-box;
-    position: fixed;
-    background-color: $white;
+    @include modal-container;
     height: 15rem;
-    width: 90%; 
-    border-radius: 20px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     &__form {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        @include modal-form;
     }
     &__heading-container {
-        width: 100%;
-        border-bottom: 1px solid $color-modal-divider;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @include modal-heading-container;
     }
     &__add-icon {
-        height: 1.25rem;
-        padding-right: 0.25rem;
+        @include modal-heading-icon;
     }
     &__heading {
-        padding: 0.75rem 0;
-        font-size: 1rem;
-        line-height: 1rem;
+        @include modal-heading;
     }
     &__field-container-1 {
-        padding: 2rem 0 1.5rem 3rem;
-        width: 100%;
+        @include inv-modal-field-container-1;
     }
     &__label {
-        font-size: 1rem;
-        line-height: 1rem;
-        padding-right: 0.25rem;
+        @include inv-modal-label;
     }
     &__field-1 {
-        outline: none;
-        box-sizing: border-box;
-        height: 2rem;
-        width: 57%;
-        background-color: $color-field-background;
-        border: none;
-        font-size: 0.8rem;
-        line-height: 1.25rem;
-        font-family: $base-font;
-        color: $black;
-        padding-left: 0.5rem;
-        &:focus {
-            border: 2px solid $color-main;
-        }
+        @include inv-modal-field-1;
     }
     &__field-container-2 {
-        padding: 0 0 2.5rem 3rem;
-        width: 100%;
+        @include inv-modal-field-container-2;
     }
     &__field-2 {
-        outline: none;
-        height: 2rem;
-        width: 8rem;
-        background-color: $color-field-background;
-        border: none;
-        font-size: 0.8rem;
-        line-height: 1.25rem;
-        font-family: $base-font;
-        color: $black;
-        padding-left: 0.5rem;
-        &:focus {
-            border: 2px solid $color-main;
-        }
+        @include inv-modal-field-2;
     }
     &__button-container {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        border-top: 1px solid $color-modal-divider;
+        @include modal-button-container;
     }
     &__button-cancel {
-        background-color: $white;
-        border: none;
-        margin: 0.4rem 0 0 2.25rem;
-        font-size: 0.9rem;
-        line-height: 1.25rem;
-        font-family: $base-font;
+        @include modal-cancel-button;
     }
     &__button-add {
-        background-color: $white;
-        border: none;
-        margin: 0.4rem 2.25rem 0 0;
-        font-size: 0.9rem;
-        line-height: 1.25rem;
-        font-family: $base-font;
-        font-weight: 600;
+        @include modal-action-button;
     }
 }

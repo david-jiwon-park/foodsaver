@@ -117,11 +117,6 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
           </div>
         </div>
 
-        <AddFoodModal 
-          isOpen={isAddFoodModalOpen} 
-          onClose={handleCloseAddFoodModal} 
-        />
-
         {userInventory.length === 0 ? 
         (<p className="inventory-page__no-inventory-text">
           Start adding food by clicking the 
@@ -147,7 +142,10 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
             </div>
           ))}
         </>)}
-
+        <AddFoodModal 
+          isOpen={isAddFoodModalOpen} 
+          onClose={handleCloseAddFoodModal} 
+        />
         <EditFoodModal 
           isOpen={isEditFoodModalOpen} 
           onClose={handleCloseEditFoodModal} 

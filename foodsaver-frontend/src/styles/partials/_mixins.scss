@@ -16,19 +16,42 @@
 /* Display Mixins */
 @mixin flex-center-center {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-spaceb-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin fixed-center-center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* Mobile Stlying */
 
-  /* Pre-Login Pages Background */
-  @mixin pre-login-background {
-    height: 100vh;
+  /* Page Heading */
+  @mixin page-heading {
+    font-family: $header-font;
+    font-size: 3rem;
+  }
+
+  @mixin food-icon-background {
     background-color: $color-main;
     background-image: url('../../assets/icons/food-icons.png');
     background-size: cover; 
     background-position: center; 
+  }
+
+  /* Pre-Login Pages Background */
+  @mixin pre-login-background {
+    height: 100vh;
+    @include food-icon-background;
     @include flex-center-center;
   }
 
@@ -58,26 +81,26 @@
   /* Signup and Login Fields */
   @mixin signup-login-fields {
     outline: none;
-      box-sizing: border-box;
-      width: 100%;
-      height: 2.5rem;
-      background-color: $color-field-background;
-      border: none;
-      border-radius: 20px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 2.5rem;
+    background-color: $color-field-background;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    line-height: 1.25rem;
+    font-family: $base-font;
+    color: $black;
+    padding-left: 1.25rem;
+    &::placeholder {
       font-size: 0.8rem;
       line-height: 1.25rem;
       font-family: $base-font;
-      color: $black;
-      padding-left: 1.25rem;
-      &::placeholder {
-        font-size: 0.8rem;
-        line-height: 1.25rem;
-        font-family: $base-font;
-        color: $color-placeholder-text;
-      }
-      &:focus {
-        border: 2px solid $color-main;
-      }
+      color: $color-placeholder-text;
+    }
+    &:focus {
+      border: 2px solid $color-main;
+    }
   }
 
   /* Signup and Login Error */
@@ -116,6 +139,136 @@
     padding-left: 0.25rem;
   }
 
+  @mixin inventory-page-text {
+    font-size: 0.8rem;
+    line-height: 1.2rem;
+    font-weight: 600;
+  }
 
+  @mixin inventory-page-text-large {
+    font-size: 1.1rem;
+    line-height: 1.5rem;
+  }
 
+  @mixin modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1001; 
+    pointer-events: auto; 
+    background-color: rgba($color-transparent-background, 0.5);
+  }
 
+  @mixin modal-container {
+    z-index: 1002;
+    box-sizing: border-box;
+    position: fixed;
+    background-color: $white;
+    width: 90%; 
+    border-radius: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  @mixin modal-form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  @mixin modal-heading-container {
+    width: 100%;
+    border-bottom: 1px solid $color-modal-divider;
+    @include flex-center-center;
+  }
+
+  @mixin modal-heading-icon {
+    height: 1.25rem;
+    padding-right: 0.25rem;
+  }
+
+  @mixin modal-heading {
+    padding: 0.75rem 0;
+    font-size: 1rem;
+    line-height: 1rem;
+  }
+
+  @mixin inv-modal-field-container-1 {
+    padding: 2rem 0 1.5rem 3.25rem;
+    width: 100%;
+  }
+
+  @mixin inv-modal-field-container-2 {
+    padding: 0 0 2.5rem 2rem;
+    width: 100%;
+  }
+
+  @mixin inv-modal-label {
+    font-size: 0.9rem;
+    line-height: 1rem;
+    padding-right: 0.25rem;
+  }
+
+  @mixin inv-modal-fields {
+    outline: none;
+    box-sizing: border-box;
+    height: 2rem;
+    background-color: $color-field-background;
+    border: none;
+    font-size: 0.8rem;
+    line-height: 1.25rem;
+    font-family: $base-font;
+    color: $black;
+    padding-left: 0.5rem;
+    &:focus {
+        border: 2px solid $color-main;
+    }
+  }
+
+  @mixin inv-modal-field-1 {
+    @include inv-modal-fields;
+    width: 59%;
+  } 
+
+  @mixin inv-modal-field-2 {
+    @include inv-modal-fields;
+    width: 9rem;
+  } 
+
+  @mixin modal-button-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid $color-modal-divider;
+  }
+
+  @mixin modal-cancel-button {
+    background-color: $white;
+    border: none;
+    margin: 0.4rem 0 0 2.25rem;
+    font-size: 0.9rem;
+    line-height: 1.25rem;
+    font-family: $base-font;
+  }
+
+  @mixin modal-action-button {
+    background-color: $white;
+    border: none;
+    margin: 0.4rem 2.25rem 0 0;
+    font-size: 0.9rem;
+    line-height: 1.25rem;
+    font-family: $base-font;
+    font-weight: 600;
+  }
+
+  @mixin delete-modal-text-container {
+    box-sizing: border-box;
+    height: 7rem;
+    display: flex;
+    align-items: center;
+  }

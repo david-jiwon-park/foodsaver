@@ -34,7 +34,7 @@ const EditFoodModal = ({ isOpen, onClose, foodId, foodName, foodExpDate }) => {
   return (
     <div className="overlay">
       <div className="editfoodmodal">
-        <form onSubmit={onEdit}>
+        <form className="editfoodmodal__form" onSubmit={onEdit}>
 
           <div className="editfoodmodal__heading-container">
             <img className="editfoodmodal__edit-icon" src={editIcon} alt='edit icon'/>
@@ -44,12 +44,12 @@ const EditFoodModal = ({ isOpen, onClose, foodId, foodName, foodExpDate }) => {
           <div className="editfoodmodal__field-container-1">
             <label htmlFor="food_item" className="editfoodmodal__label">Food Item:</label>
             <input
-                  className="editfoodmodal__field-1"
-                  name="food_item"
-                  id="food_item"
-                  type="text"
-                  defaultValue={foodName}
-                  required>
+                className="editfoodmodal__field-1"
+                name="food_item"
+                id="food_item"
+                type="text"
+                defaultValue={foodName}
+                required>
             </input>
           </div>
             

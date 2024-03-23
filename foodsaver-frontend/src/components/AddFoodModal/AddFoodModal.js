@@ -43,11 +43,11 @@ const AddFoodModal = ({ isOpen, onClose}) => {
             <div className="addfoodmodal__field-container-1">
               <label htmlFor="food_item" className="addfoodmodal__label">Food Item:</label>
               <input
-                    className="addfoodmodal__field-1"
-                    name="food_item"
-                    id="food_item"
-                    type="text"
-                    required>
+                  className="addfoodmodal__field-1"
+                  name="food_item"
+                  id="food_item"
+                  type="text"
+                  required>
               </input>
             </div>
             
