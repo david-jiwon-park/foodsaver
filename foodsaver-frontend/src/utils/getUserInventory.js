@@ -1,3 +1,5 @@
+// Function to get the inventory for a logged-in user from the database
+
 import axios from 'axios';
 
 const getUserInventory = () => {

@@ -1,3 +1,5 @@
+// Function to add default notification settings for new users 
+
 import axios from 'axios';
 
 const insertDefaultNotifications = (newUserId) => {
