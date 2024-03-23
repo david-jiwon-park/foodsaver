@@ -5,17 +5,13 @@
 @import '../../styles/partials/variables';
 
 .loading-error {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    @include fixed-center-center;
 }
 
 .profile-page {
     padding: 5rem 1.2rem 1rem;
     &__heading {
-        font-family: $header-font;
-        font-size: 3rem;
+        @include page-heading;
     }
     &__name-email {
         display: flex;
@@ -83,9 +79,36 @@
         width: 36%;
         font-weight: 600;
     }
-    // &__notifications-toggle {
-    //     padding-left: 1rem;
-    // }
+    &__toggle input {
+        display: none;
+    }
+    &__slider {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 26px;
+        background-color: #ccc;
+        border-radius: 15px;
+        transition: background-color 0.3s;
+        margin-left: 0.75rem;
+    }
+    &__slider:before {
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        left: 4px;
+        bottom: 3px;
+        background-color: white;
+        border-radius: 50%;
+        transition: transform 0.3s;
+    }
+    &__toggle input:checked + &__slider {
+        background-color: $color-main;
+    }
+    &__toggle input:checked + &__slider:before {
+        transform: translateX(22px);
+    }
     &__notify-container {
         display: flex;
         align-items: center;
@@ -130,50 +153,6 @@
         font-weight: 600;
     }
     &__loading {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        @include fixed-center-center;
     }
 }
-
-
-/* Hide the default checkbox */
-.toggle input {
-    display: none;
-  }
-  
-  /* Style the toggle slider */
-  .slider {
-    position: relative;
-    display: inline-block;
-    width: 50px;
-    height: 26px;
-    background-color: #ccc;
-    border-radius: 15px;
-    transition: background-color 0.3s;
-    margin-left: 0.75rem;
-  }
-  
-  /* Style the slider's indicator */
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 20px;
-    width: 20px;
-    left: 4px;
-    bottom: 3px;
-    background-color: white;
-    border-radius: 50%;
-    transition: transform 0.3s;
-  }
-  
-  /* Style the slider when checked */
-  .toggle input:checked + .slider {
-    background-color: $color-main;
-  }
-  
-  /* Move the slider indicator when checked */
-  .toggle input:checked + .slider:before {
-    transform: translateX(22px);
-  }

@@ -55,33 +55,33 @@ const query = db('users as u')
 
 
 cron.schedule('0 8 * * *', () => {
-    const combinedData = {};
-    query
-    .then((response) => {
-        response.forEach(item => { 
-            const key = `${item.name}-${item.email}`;
-            if (!combinedData[key]) {
-                combinedData[key] = {
-                name: item.name,
-                email: item.email,
-                days_before: item.days_before,
-                food_items: [item.food_item]
-            };
-            } else {
-                combinedData[key].food_items.push(item.food_item);
-            }
-        });
-        const result = Object.values(combinedData);
-        console.log(result);
-        return result;
+  const combinedData = {};
+  query
+  .then((response) => {
+    response.forEach(item => { 
+      const key = `${item.name}-${item.email}`;
+      if (!combinedData[key]) {
+        combinedData[key] = {
+        name: item.name,
+        email: item.email,
+        days_before: item.days_before,
+        food_items: [item.food_item]
+      };
+      } else {
+        combinedData[key].food_items.push(item.food_item);
+      }
+    });
+    const result = Object.values(combinedData);
+    console.log(result);
+    return result;
     })
     .then((response2) => {
-        response2.map((email) => {
-            sendEmail(email.name, email.email, email.days_before, email.food_items)
-        });
+      response2.map((email) => {
+        sendEmail(email.name, email.email, email.days_before, email.food_items)
+      });
     })
     .catch((error) => {
-        console.error(error);
+      console.error(error);
     })
     console.log('Daily task executed!');
   }).start();

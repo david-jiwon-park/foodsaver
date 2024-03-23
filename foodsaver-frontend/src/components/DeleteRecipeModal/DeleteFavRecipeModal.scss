@@ -1,0 +1,51 @@
+// Delete Recipe Modal Styling 
+
+@import '../../styles/partials/fonts';
+@import '../../styles/partials/mixins';
+@import '../../styles/partials/variables';
+
+.overlay {
+    @include modal-overlay;
+}
+
+.deletefavrecipemodal {
+    @include modal-container;
+    height: 14rem;
+    &__heading-container {
+        width: 100%;
+        border-bottom: 1px solid $color-modal-divider;
+        @include flex-center-center;
+    }
+    &__delete-icon {
+        @include modal-heading-icon;
+    }
+    &__heading {
+        @include modal-heading;
+    }
+    &__text-container {
+        @include delete-modal-text-container;
+        padding-top: 1.25rem;
+    }
+    &__text {
+        font-size: 0.95rem;
+        line-height: 1.25rem;
+        text-align: center;
+        padding: 0 1rem;
+    }
+    &__button-outer-container {
+        position: fixed;
+        width: 100%; 
+        top: 11.5rem;
+        box-sizing: border-box;
+    }
+    &__button-inner-container {
+        @include modal-button-container;
+    }
+    &__button-cancel {
+        @include modal-cancel-button;
+    }
+    &__button-delete {
+        @include modal-action-button;
+        color: $color-delete-button;
+    }
+}

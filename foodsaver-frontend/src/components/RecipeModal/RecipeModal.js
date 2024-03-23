@@ -36,7 +36,6 @@ const RecipeModal = ({ isOpen, onClose, uri, image, name, servings, ingredients,
     checkFavorite(uri);
   }, [uri, userFavorites]);
   
-  // incorporate useEffect, have if statement if isOpen is null or not
   if (!isOpen) return null
  
   const toggleFavorite = () => {

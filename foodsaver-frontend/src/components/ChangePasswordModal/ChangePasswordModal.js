@@ -68,7 +68,7 @@ const ChangePasswordModal = ({ isOpen, onClose }) => {
           <div className="changepasswordmodal__field-container-1">
             <label htmlFor="new_password" className="changepasswordmodal__label">New Password</label>
             <input
-                className="changepasswordmodal__field-1"
+                className="changepasswordmodal__field"
                 name="new_password"
                 id="new_password"
                 value={newPassword}
@@ -81,7 +81,7 @@ const ChangePasswordModal = ({ isOpen, onClose }) => {
           <div className="changepasswordmodal__field-container-2">
             <label htmlFor="confirm_password" className="changepasswordmodal__label">Confirm Password</label>
             <input
-                className="changepasswordmodal__field-2"
+                className="changepasswordmodal__field"
                 name="confirm_password"
                 id="confirm_password"
                 value={confirmPassword}

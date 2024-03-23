@@ -9,17 +9,13 @@ span {
 }
 
 .loading-error {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    @include fixed-center-center;
 }
 
 .favorites-page {
     padding: 5rem 0 0;
     &__heading {
-        font-family: $header-font;
-        font-size: 3rem;
+        @include page-heading;
         padding-left: 1rem;
         border-bottom: 1px solid $color-divider;
     }
@@ -51,9 +47,6 @@ span {
         z-index: 500;
     }
     &__loading {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        @include fixed-center-center;
     }
 }

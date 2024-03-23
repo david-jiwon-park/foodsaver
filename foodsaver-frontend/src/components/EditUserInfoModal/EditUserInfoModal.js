@@ -1,7 +1,7 @@
 //Edit User Info Modal Component
 
 import './EditUserInfoModal.scss';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import editIcon from '../../assets/icons/edit-icon.svg';
 
@@ -9,6 +9,15 @@ import editIcon from '../../assets/icons/edit-icon.svg';
 const EditUserInfoModal = ({ isOpen, onClose, userName, userEmail }) => {
   const [editUserErrorMessage, setEditUserErrorMessage] = useState("");
   
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    } else {
+      setEditUserErrorMessage("");
+    }
+  }, [isOpen]);
+
+
   if (!isOpen) return null;
 
   const apiBaseURL = 'http://localhost:8090'
@@ -26,7 +35,8 @@ const EditUserInfoModal = ({ isOpen, onClose, userName, userEmail }) => {
         Authorization: `Bearer ${token}`,
       }
     })
-    .then((response) => {
+    .then((_response) => {
+      setEditUserErrorMessage("");
       alert("User information has been updated!")
       onClose();
     })
@@ -39,7 +49,7 @@ const EditUserInfoModal = ({ isOpen, onClose, userName, userEmail }) => {
   return (
     <div className="overlay">
       <div className="edituserinfomodal">
-        <form onSubmit={onEdit}>
+        <form className="edituserinfomodal__form" onSubmit={onEdit}>
 
           <div className="edituserinfomodal__heading-container">
             <img className="edituserinfomodal__edit-icon" src={editIcon} alt='edit icon'/>
@@ -49,7 +59,7 @@ const EditUserInfoModal = ({ isOpen, onClose, userName, userEmail }) => {
           <div className="edituserinfomodal__field-container-1">
             <label htmlFor="name" className="edituserinfomodal__label">Name:</label>
             <input
-                  className="edituserinfomodal__field-1"
+                  className="edituserinfomodal__field"
                   name="name"
                   id="name"
                   type="text"
@@ -61,7 +71,7 @@ const EditUserInfoModal = ({ isOpen, onClose, userName, userEmail }) => {
           <div className="edituserinfomodal__field-container-2">
             <label htmlFor="email" className="edituserinfomodal__label edituserinfomodal__label--email">Email:</label>
             <input
-                className="edituserinfomodal__field-2"
+                className="edituserinfomodal__field"
                 name="email"
                 id="email"
                 type="email"

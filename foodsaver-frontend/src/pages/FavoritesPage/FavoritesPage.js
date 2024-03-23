@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../../components/Header/Header';
 import FavRecipeModal from '../../components/FavRecipeModal/FavRecipeModal';
-import DeleteRecipeModal from '../../components/DeleteRecipeModal/DeleteRecipeModal';
+import DeleteFavRecipeModal from '../../components/DeleteRecipeModal/DeleteFavRecipeModal';
 import getUserFavorites from '../../utils/getUserFavorites';
 import xIcon from '../../assets/icons/x-icon.svg';
 
@@ -13,7 +13,7 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
   const [userFavoritesExternalData, setUserFavoritesExternalData] = useState([]);
   const [isFavRecipeModalOpen, setIsFavRecipeModalOpen] = useState(false);
-  const [isDeleteRecipeModalOpen, setIsDeleteRecipeModalOpen] = useState(false);
+  const [isDeleteFavRecipeModalOpen, setIsDeleteFavRecipeModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [loadingText, setLoadingText] = useState("");
   const [loadingError, setLoadingError] = useState(false);
@@ -40,7 +40,7 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
     } else {
       navigate('/');
     }
-  }, [isLoggedIn, isFavRecipeModalOpen, isDeleteRecipeModalOpen]);
+  }, [isLoggedIn, isFavRecipeModalOpen, isDeleteFavRecipeModalOpen]);
     
   const getFavoriteRecipeInfo = async (res) => {
     const getRecipesURL = 'http://localhost:8090/edamamApi/favorites';
@@ -76,14 +76,14 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
     setIsFavRecipeModalOpen(false);
   };
 
-  const handleOpenDeleteRecipeModal = (e, name, uri) => {
+  const handleOpenDeleteFavRecipeModal = (e, name, uri) => {
     e.stopPropagation();
     setRecipeName(name);
     setRecipeURI(uri);
-    setIsDeleteRecipeModalOpen(true);
+    setIsDeleteFavRecipeModalOpen(true);
   };
-  const handleCloseDeleteRecipeModal = () => {
-    setIsDeleteRecipeModalOpen(false);
+  const handleCloseDeleteFavRecipeModal = () => {
+    setIsDeleteFavRecipeModalOpen(false);
   };
 
   useEffect(() => {
@@ -119,14 +119,14 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
             >
               <img className='favorites-page__recipe-image' src={r.recipe.image} alt="recipe"/>
               <h3 className='favorites-page__recipe-label'>{r.recipe.label}</h3>
-              <img className='favorites-page__recipe-delete' src={xIcon} alt="x-icon" onClick={(e) => handleOpenDeleteRecipeModal(e, r.recipe.label, r.recipe.uri)}/>
+              <img className='favorites-page__recipe-delete' src={xIcon} alt="x-icon" onClick={(e) => handleOpenDeleteFavRecipeModal(e, r.recipe.label, r.recipe.uri)}/>
             </div>
           ))}
         </>)}
 
-        <DeleteRecipeModal 
-          isOpen={isDeleteRecipeModalOpen} 
-          onClose={handleCloseDeleteRecipeModal} 
+        <DeleteFavRecipeModal 
+          isOpen={isDeleteFavRecipeModalOpen} 
+          onClose={handleCloseDeleteFavRecipeModal} 
           name={recipeName} 
           uri={recipeURI.substring(recipeURI.length - 32)}
         />

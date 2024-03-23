@@ -37,7 +37,7 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
         return getNotificationSettings();
       })
       .then((response2) => {
-        setNotificationSettings(response2);
+        setNotificationSettings(response2.data);
         setLoading(false);
         window.scrollTo(0, 0);
       })
@@ -101,7 +101,10 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
     })
     .then((response) => {
       console.log(response);
-      getNotificationSettings({ setNotificationSettings });
+      return getNotificationSettings();
+    })
+    .then((response2) => {
+      setNotificationSettings(response2.data);
     })
     .catch((error) => {
       console.log(error);
@@ -120,7 +123,10 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
     })
     .then((response) => {
       console.log(response);
-      getNotificationSettings({ setNotificationSettings });
+      return getNotificationSettings();
+    })
+    .then((response2) => {
+      setNotificationSettings(response2.data);
     })
     .catch((error) => {
       console.log(error);
@@ -139,7 +145,10 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
     })
     .then((response) => {
       console.log(response);
-      getNotificationSettings({ setNotificationSettings });
+      return getNotificationSettings();
+    })
+    .then((response2) => {
+      setNotificationSettings(response2.data);
     })
     .catch((error) => {
       console.log(error);
@@ -156,7 +165,7 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
   return (
     <>
       <Header 
-          setIsLoggedIn={setIsLoggedIn}
+        setIsLoggedIn={setIsLoggedIn}
       />
       {!loading && loadingError ? 
       (<h1 className="loading-error">Failed to load page</h1>)
@@ -180,13 +189,7 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
             <img className='profile-page__edit-name-email' src={editIcon} alt='edit icon' onClick={() => handleOpenEditUserInfoModal()}/>
           </div>
 
-          <EditUserInfoModal 
-            isOpen={isEditUserInfoModalOpen} 
-            onClose={handleCloseEditUserInfoModal} 
-            userName={name} 
-            userEmail={email}
-          />
-
+          
           <div className='profile-page__password-container'>
             <h5 className='profile-page__password-text'>Password</h5>
             <div className='profile-page__password-field'>
@@ -196,25 +199,21 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
           </div>
         </section>
 
-        <ChangePasswordModal 
-            isOpen={isChangePasswordModalOpen} 
-            onClose={handleCloseChangePasswordModal} 
-          />
+        
 
         <h1 className='profile-page__heading'>Preferences</h1>
         
         <form>
           <div className='profile-page__notifications-container'>
             <h5 className='profile-page__notifications-label'>Email Notifications</h5>
-            <label className="toggle">
+            <label className="profile-page__toggle">
               <input 
-                className='profile-page__notifications-toggle'
                 type="checkbox" 
                 id="toggleSwitch" 
                 checked={areNotificationsOn}
                 onChange={toggleNotifications}
               />
-              <span className="slider"></span>
+              <span className="profile-page__slider"></span>
             </label>
           </div>
           
@@ -227,7 +226,7 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
                 id="notify" 
                 defaultValue={days_before}
                 onChange={changeNotifyMe}
-                >
+              >
                 <option value="1">1 Day Before Exp</option>
                 <option value="2">2 Days Before Exp</option>
                 <option value="3">3 Days Before Exp</option>
@@ -237,8 +236,6 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
           </div>)}
         </form>
 
-        {/* <button>Delete Account</button> */}
-
         <div className="profile-page__signout-button-container">
           <button className="profile-page__signout-button" onClick={handleSignOut}>
               Sign Out
@@ -247,6 +244,19 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
       </div>)
       : 
       (<h1 className="profile-page__loading">{loadingText}</h1>)}
+
+      <EditUserInfoModal 
+        isOpen={isEditUserInfoModalOpen} 
+        onClose={handleCloseEditUserInfoModal} 
+        userName={name} 
+        userEmail={email}
+      />
+
+      <ChangePasswordModal 
+        isOpen={isChangePasswordModalOpen} 
+        onClose={handleCloseChangePasswordModal} 
+      />
+
     </>
   )
 }
