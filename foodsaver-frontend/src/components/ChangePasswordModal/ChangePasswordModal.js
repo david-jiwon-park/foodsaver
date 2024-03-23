@@ -1,7 +1,7 @@
 //Change Password Modal Component
 
 import './ChangePasswordModal.scss';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import editIcon from '../../assets/icons/edit-icon.svg';
 
@@ -11,6 +11,16 @@ const ChangePasswordModal = ({ isOpen, onClose }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordMatchError, setPasswordMatchError] = useState('');
   
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    } else {
+      setNewPassword('');
+      setConfirmPassword('');
+      setPasswordMatchError('');
+    }
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   const handleNewPasswordChange = (event) => {
