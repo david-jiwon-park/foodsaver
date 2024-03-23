@@ -6,6 +6,7 @@ const usersRoutes = require("./routes/users");
 const inventoryRoutes = require("./routes/inventory");
 const notificationsRoutes = require("./routes/notifications");
 const favoritesRoutes = require("./routes/favorites");
+const edamamApiRoutes = require("./routes/edamamApi");
 
 require('./emailNotifications/scheduleSendEmail');
 
@@ -22,6 +23,7 @@ app.use("/users", usersRoutes);
 app.use("/inventory", inventoryRoutes);
 app.use("/notifications", notificationsRoutes);
 app.use("/favorites", favoritesRoutes);
+app.use("/edamamApi", edamamApiRoutes)
 
 // Listener
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));

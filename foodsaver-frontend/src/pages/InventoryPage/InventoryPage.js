@@ -107,7 +107,7 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
       (<h1 className="loading-error">Failed to load page</h1>)
       : null 
       }
-      {!loading ? 
+      {!loading && !loadingError ? 
       (<div className="inventory-page">
         <div className="inventory-page__heading-container">
           <h1 className="inventory-page__heading">Inventory</h1>

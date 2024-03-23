@@ -52,22 +52,26 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
 
   const findRecipes = (e) => {
     e.preventDefault();
-    const apiURL = 'https://api.edamam.com/api/recipes/v2?type=public';
-    const appId = '73ad0e04';
-    const appKey = '5285fad8f8d27d8157cd7e13a79df213';	
+    const getRecipesURL = 'http://localhost:8090/edamamApi/recipes';
+    const token = sessionStorage.getItem('authToken');
     axios
-    .get(`${apiURL}&q=${selectedIngredients.join('+')}&app_id=${appId}&app_key=%20${appKey}`)
+    .post(getRecipesURL, { selectedIngredients }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    })
     .then((response) => {
       setSubmitted(true);
       setSuggestedRecipes(response.data.hits);
       console.log(selectedIngredients);
-      console.log(response.data.hits);
     })
     .catch((error) => {
+      console.log(selectedIngredients);
       setSubmitted(true);
       console.log(error);
     });
   };
+
     
   const handleOpenRecipeModal = (uri, image, name, servings, ingredients, nutrition, directionsLink) => {
     setRecipeURI(uri);
@@ -99,7 +103,7 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
       (<h1 className="loading-error">Failed to load page</h1>)
       : null 
       }
-      {!loading ? 
+      {!loading && !loadingError ? 
       (<div className="recipes-page">
         <h1 className="recipes-page__heading">Recipes</h1>
         <h2 className="recipes-page__subheading">Inventory</h2>
@@ -144,9 +148,6 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
           (<>
             <p className="recipes-page__no-recipes-text">
               Sorry, we couldn't find any recipes with your selected ingredients.
-            </p>
-            <p className="recipes-page__no-recipes-text">
-              Please try selecting a different set of ingredients!
             </p>
           </>)
           :

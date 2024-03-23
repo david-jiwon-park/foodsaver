@@ -162,7 +162,7 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
       (<h1 className="loading-error">Failed to load page</h1>)
       : null 
       }
-      {!loading ?
+      {!loading && !loadingError ?
       (<div className='profile-page'>
         <h1 className='profile-page__heading'>User Profile</h1>
         

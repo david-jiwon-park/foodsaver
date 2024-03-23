@@ -43,35 +43,23 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
   }, [isLoggedIn, isFavRecipeModalOpen, isDeleteRecipeModalOpen]);
     
   const getFavoriteRecipeInfo = async (res) => {
-    const apiURLforURI = 'https://api.edamam.com/api/recipes/v2/by-uri?type=public&uri=http%3A%2F%2Fwww.edamam.com%2Fontologies%2Fedamam.owl%23recipe_';
-    const appId = '73ad0e04';
-    const appKey = '5285fad8f8d27d8157cd7e13a79df213';	
-    const uriArray = res.map((favorite) => (favorite.recipe_uri))
-    
-    const dataPromises = uriArray.reverse().map(recipe_uri =>
-      axios.get(`${apiURLforURI}${recipe_uri}&app_id=${appId}&app_key=${appKey}%09`)
-        .then(response => response.data.hits)
-        .catch(error => {
-          console.log(error);
-          return []; // Return empty array in case of error
-        })
-    );
-
-    try {
-      const allData = await Promise.all(dataPromises);
-      // Concatenate allData arrays into one array
-      const mergedData = [].concat(...allData);
-      setUserFavoritesExternalData(mergedData);
-      
-      Promise.all(dataPromises)
-        .then(() => {
-        setLoading(false); 
-      });
-    } catch (error) {
-        setLoading(false); 
-        setLoadingError(true);
-        console.log(error);
-    }
+    const getRecipesURL = 'http://localhost:8090/edamamApi/favorites';
+    const token = sessionStorage.getItem('authToken');
+    axios
+    .post(getRecipesURL, { favorites: res }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    })
+    .then((response) => {
+      setUserFavoritesExternalData(response.data);
+      setLoading(false); 
+    })
+    .catch((error) => {
+      setLoading(false); 
+      setLoadingError(true);
+      console.log(error);
+    });
   };
 
   const handleOpenFavRecipeModal = (image, name, servings, ingredients, nutrition, directionsLink) => {
@@ -113,7 +101,7 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
       (<h1 className="loading-error">Failed to load page</h1>)
       : null 
       }
-      {!loading ? 
+      {!loading && !loadingError ? 
       (<div className='favorites-page'>
         <h1 className='favorites-page__heading'>Favorites</h1>
 
