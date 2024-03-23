@@ -5,12 +5,5 @@
 @import '../../styles/partials/variables';
 
 .login-page {
-    height: 100vh;
-    background-color: $color-main;
-    background-image: url('../../assets/icons/food-icons.png');
-    background-size: cover; 
-    background-position: center; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include pre-login-background;
 }

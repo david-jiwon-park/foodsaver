@@ -1,0 +1,121 @@
+/* Mixins */
+
+/* Screen Sizes */
+@mixin tablet {
+  @media screen and (min-width: $tablet-width) {
+    @content;
+  }
+}
+      
+@mixin desktop {
+  @media screen and (min-width: $desktop-width) {
+      @content;
+  }
+}
+
+/* Display Mixins */
+@mixin flex-center-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mobile Stlying */
+
+  /* Pre-Login Pages Background */
+  @mixin pre-login-background {
+    height: 100vh;
+    background-color: $color-main;
+    background-image: url('../../assets/icons/food-icons.png');
+    background-size: cover; 
+    background-position: center; 
+    @include flex-center-center;
+  }
+
+  /* Intro Page Buttons */
+  @mixin intro-page-buttons {
+    width: 100%;
+    height: 2.5rem;
+    border-radius: 20px;
+    border: solid 1px $black;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: $black;
+    font-family: $base-font;
+    font-weight: 600;
+  }
+
+  /* Signup and Login Containers */
+  @mixin signup-login-container {
+    background-color: $white;
+    height: 25rem;
+    width: 100%;
+    margin: 1.5rem;
+    padding: 1rem 1.5rem;
+    border-radius: 20px;
+  }
+
+  /* Signup and Login Fields */
+  @mixin signup-login-fields {
+    outline: none;
+      box-sizing: border-box;
+      width: 100%;
+      height: 2.5rem;
+      background-color: $color-field-background;
+      border: none;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      line-height: 1.25rem;
+      font-family: $base-font;
+      color: $black;
+      padding-left: 1.25rem;
+      &::placeholder {
+        font-size: 0.8rem;
+        line-height: 1.25rem;
+        font-family: $base-font;
+        color: $color-placeholder-text;
+      }
+      &:focus {
+        border: 2px solid $color-main;
+      }
+  }
+
+  /* Signup and Login Error */
+  @mixin signup-login-error {
+    color: $color-error;
+    font-size: 0.9rem;
+    line-height: 1.1rem;
+    padding-top: 1rem;
+  }
+
+  /* Signup and Login Buttons */
+  @mixin signup-login-buttons {
+    background-color: $color-main;
+    border: none;
+    box-sizing: border-box;
+    width: 100%;
+    height: 2.5rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    font-family: $base-font;
+    color: $black;
+  }
+
+  @mixin signup-login-link-container {
+    padding-top: 0.5rem;
+    font-size: 0.8rem;
+    line-height: 1.25rem;
+  }
+
+  @mixin signup-login-link {
+    text-decoration: none;
+    color: $color-signup-link;
+    font-weight: 600;
+    padding-left: 0.25rem;
+  }
+
+
+
+
