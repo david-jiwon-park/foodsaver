@@ -79,17 +79,17 @@
     outline: none;
     box-sizing: border-box;
     width: 100%;
-    height: 2.5rem;
+    height: 2.75rem;
     background-color: $color-field-background;
     border: none;
     border-radius: 20px;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     line-height: 1.25rem;
     font-family: $base-font;
     color: $black;
     padding-left: 1.25rem;
     &::placeholder {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       line-height: 1.25rem;
       font-family: $base-font;
       color: $color-placeholder-text;
@@ -199,10 +199,10 @@
   @mixin modal-fields {
     outline: none;
     box-sizing: border-box;
-    height: 2rem;
+    height: 2.5rem;
     background-color: $color-field-background;
     border: none;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     line-height: 1.25rem;
     font-family: $base-font;
     color: $black;

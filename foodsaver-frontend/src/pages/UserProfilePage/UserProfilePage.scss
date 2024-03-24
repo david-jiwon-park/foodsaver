@@ -41,9 +41,6 @@
             padding-bottom: 1.25rem;
         }
     }
-    &__edit-name-email{
-        margin-left: auto;
-    }
     &__password-container {
         display: flex;
         align-items: center;
@@ -68,6 +65,16 @@
         line-height: 1rem;
         padding-top: 0.6rem;
     }
+    &__edit-name-email {
+        margin-left: auto;
+    }
+    &__delete-account {
+        font-size: 0.75rem;
+        line-height: 1rem;
+        padding-top: 1.25rem;
+        text-align: right;
+        text-decoration: underline;
+    }
     &__notifications-container {
         display: flex;
         align-items: center;
@@ -78,6 +85,7 @@
         line-height: 1.25rem;
         width: 36%;
         font-weight: 600;
+        padding-bottom: 0.25rem;
     }
     &__toggle input {
         display: none;
@@ -90,7 +98,7 @@
         background-color: #ccc;
         border-radius: 15px;
         transition: background-color 0.3s;
-        margin-left: 1rem;
+        margin-left: 1.25rem;
     }
     &__slider:before {
         position: absolute;
@@ -112,7 +120,7 @@
     &__notify-container {
         display: flex;
         align-items: center;
-        padding-top: 1.5rem;
+        padding-top: 1.75rem;
     }
     &__notify-field {
         box-sizing: border-box;
@@ -123,7 +131,7 @@
         background-color: $color-field-background;
         font-family: $base-font;
         padding-left: 0.85rem;
-        margin-left: 0.7rem;
+        margin-left: 0.85rem;
         appearance: none;
         -webkit-appearance: none;
         -moz-appearance: none; 
@@ -136,7 +144,7 @@
         }
     }
     &__signout-button-container {
-        padding-top: 8rem;
+        padding-top: 7.5rem;
         display: flex;
         justify-content: center;
         align-items: flex-end;

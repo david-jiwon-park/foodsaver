@@ -10,7 +10,7 @@
 
 .editfoodmodal {
     @include modal-container;
-    height: 15rem;
+    height: 16rem;
     &__form {   
         @include modal-form;
     }
@@ -32,7 +32,7 @@
     &__field-1 {
        @include inv-modal-field-1;
         &::placeholder {
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             line-height: 1.25rem;
             font-family: $base-font;
             color: $black;
@@ -44,7 +44,7 @@
     &__field-2 {
        @include inv-modal-field-2;
         &::placeholder {
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             line-height: 1.25rem;
             font-family: $base-font;
             color: $black;

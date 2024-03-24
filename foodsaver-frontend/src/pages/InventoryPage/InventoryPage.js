@@ -102,12 +102,16 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
     }
   };
 
-  // Loading text to appear if the page still has not loaded after 800 milliseconds
+  // Loading text to appear if the page still has not loaded after 800 milliseconds and there was no loading error
   useEffect(() => {
     setTimeout(() => {
-      setLoadingText("Loading...")
-    }, 800);
-  }, []);
+      if (loading && !loadingError) {
+        setLoadingText("Loading...")
+      } else {
+        setLoadingText("");
+      }
+    }, 800)
+  }, [loading, loadingError]);
 
   return (
     <>

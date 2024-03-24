@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import EditUserInfoModal from '../../components/EditUserInfoModal/EditUserInfoModal';
 import ChangePasswordModal from '../../components/ChangePasswordModal/ChangePasswordModal';
+import DeleteUserModal from '../../components/DeleteUserModal/DeleteUserModal';
 import getUserInfo from '../../utils/getUserInfo';
 import getNotificationSettings from '../../utils/getNotificationSettings';
 import editIcon from '../../assets/icons/edit-icon.svg';
@@ -21,6 +22,7 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
   // State to keep track of when the Recipe modal is open or closed 
   const [isEditUserInfoModalOpen, setIsEditUserInfoModalOpen] = useState(false);
   const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] = useState(false);
+  const [isDeleteUserModalOpen, setIsDeleteUserModalOpen] = useState(false);
   
   // State tracking if the user has notifications on or off 
   const [areNotificationsOn, setAreNotificationsOn] = useState(false);
@@ -71,7 +73,6 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
     sessionStorage.setItem('loggedIn', JSON.stringify(false));
     sessionStorage.clear();
     setIsLoggedIn(false);
-    navigate('/');
   };
 
   // Functions to handle opening/closing modals
@@ -86,6 +87,12 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
   };
   const handleCloseChangePasswordModal = () => {
     setIsChangePasswordModalOpen(false);
+  };
+  const handleOpenDeleteUserModal = () => {
+    setIsDeleteUserModalOpen(true);
+  };
+  const handleCloseDeleteUserModal = () => {
+    setIsDeleteUserModalOpen(false);
   };
 
   // Functions to toggle notifications on/off
@@ -165,12 +172,17 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
     })
   }
 
-  // Loading text to appear if the page still has not loaded after 800 milliseconds
+  // Loading text to appear if the page still has not loaded after 800 milliseconds and there was no loading error
   useEffect(() => {
     setTimeout(() => {
-      setLoadingText("Loading...")
-    }, 800);
-  }, []);
+      if (loading && !loadingError) {
+        setLoadingText("Loading...")
+      } else {
+        setLoadingText("");
+      }
+    }, 800)
+  }, [loading, loadingError]);
+
 
   return (
     <>
@@ -203,6 +215,7 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
             </div>
             <img className='profile-page__edit-name-email' src={editIcon} alt='edit icon' onClick={() => handleOpenChangePasswordModal()}/>
           </div>
+          <p className='profile-page__delete-account' onClick={() => handleOpenDeleteUserModal()}>Delete Account</p>
         </section>
         <h1 className='profile-page__heading'>Preferences</h1>
         <form>
@@ -253,6 +266,11 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
       <ChangePasswordModal 
         isOpen={isChangePasswordModalOpen} 
         onClose={handleCloseChangePasswordModal} 
+      />
+      <DeleteUserModal 
+        isOpen={isDeleteUserModalOpen} 
+        onClose={handleCloseDeleteUserModal} 
+        setIsLoggedIn={setIsLoggedIn}
       />
     </>
   );

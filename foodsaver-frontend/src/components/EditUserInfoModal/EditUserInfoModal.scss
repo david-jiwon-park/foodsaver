@@ -10,7 +10,7 @@
 
 .edituserinfomodal {
     @include modal-container;
-    height: 15rem;
+    height: 16rem;
     &__form {
         @include modal-form;
     }
@@ -40,7 +40,7 @@
     }
     &__field {
         @include profile-modal-field;
-        width: 68%;
+        width: 72%;
      }
     &__field-container-2 {
         padding-bottom: 3.5rem;

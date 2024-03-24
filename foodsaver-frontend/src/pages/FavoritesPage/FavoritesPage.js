@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../../components/Header/Header';
 import FavRecipeModal from '../../components/FavRecipeModal/FavRecipeModal';
-import DeleteFavRecipeModal from '../../components/DeleteRecipeModal/DeleteFavRecipeModal';
+import DeleteFavRecipeModal from '../../components/DeleteFavRecipeModal/DeleteFavRecipeModal';
 import getUserFavorites from '../../utils/getUserFavorites';
 import xIcon from '../../assets/icons/x-icon.svg';
 
@@ -95,12 +95,17 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
     setIsDeleteFavRecipeModalOpen(false);
   };
 
-  // Loading text to appear if the page still has not loaded after 800 milliseconds
+  // Loading text to appear if the page still has not loaded after 800 milliseconds and there was no loading error
   useEffect(() => {
     setTimeout(() => {
-      setLoadingText("Loading...")
-    }, 800);
-  }, []);
+      if (loading && !loadingError) {
+        setLoadingText("Loading...")
+      } else {
+        setLoadingText("");
+      }
+    }, 800)
+  }, [loading, loadingError]);
+
 
   return (
     <>

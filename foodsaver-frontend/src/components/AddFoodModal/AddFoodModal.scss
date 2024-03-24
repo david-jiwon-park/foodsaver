@@ -10,7 +10,7 @@
 
 .addfoodmodal {
     @include modal-container;
-    height: 15rem;
+    height: 16rem;
     &__form {
         @include modal-form;
     }
