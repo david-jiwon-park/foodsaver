@@ -20,8 +20,7 @@ const EditUserInfoModal = ({ isOpen, onClose, userName, userEmail }) => {
 
   if (!isOpen) return null;
 
-  const apiBaseURL = 'http://localhost:8090'
-
+  const apiBaseURL = process.env.REACT_APP_SERVER;
   // Function to edit user information 
   const onEdit = (e) => {
     e.preventDefault();

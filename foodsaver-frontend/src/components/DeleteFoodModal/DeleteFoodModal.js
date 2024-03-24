@@ -7,8 +7,7 @@ import deleteIcon from '../../assets/icons/delete-icon.svg';
 const DeleteFoodModal = ({ isOpen, onClose, foodId, foodName }) => {
   if (!isOpen) return null;
 
-  const apiBaseURL = 'http://localhost:8090'
-
+  const apiBaseURL = process.env.REACT_APP_SERVER;
   // Function to delete food item from inventory
   const handleDeleteFood = (event) => {
     event.preventDefault();

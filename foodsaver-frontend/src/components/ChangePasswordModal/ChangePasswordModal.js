@@ -40,8 +40,7 @@ const ChangePasswordModal = ({ isOpen, onClose }) => {
     }
   };
 
-  const apiBaseURL = 'http://localhost:8090'
-
+  const apiBaseURL = process.env.REACT_APP_SERVER;
   // Function to change user password 
   const handleChangePassword = (e) => {
     e.preventDefault();

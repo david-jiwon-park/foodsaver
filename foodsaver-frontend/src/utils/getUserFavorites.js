@@ -2,11 +2,11 @@
 
 import axios from 'axios';
 
+const apiBaseURL = process.env.REACT_APP_SERVER;
 const getUserFavorites = () => {
-  const favoritesURL = 'http://localhost:8090/favorites';
   const token = sessionStorage.getItem('authToken');
   return axios
-    .get(favoritesURL , {
+    .get(`${apiBaseURL}/favorites` , {
       headers: {
         Authorization: `Bearer ${token}`,
       },

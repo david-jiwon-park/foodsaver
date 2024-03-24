@@ -52,8 +52,7 @@ const RecipeModal = ({ isOpen, onClose, uri, image, name, servings, ingredients,
     }
   };
 
-  const apiBaseURL = 'http://localhost:8090';
-
+  const apiBaseURL = process.env.REACT_APP_SERVER;
   // Function to favorite a recipe
   const handleFavoriteRecipe = () => {
     const token = sessionStorage.getItem('authToken');

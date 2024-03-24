@@ -2,11 +2,11 @@
 
 import axios from 'axios';
 
+const apiBaseURL = process.env.REACT_APP_SERVER;
 const getUserInventory = () => {
-  const inventoryURL = 'http://localhost:8090/inventory';
   const token = sessionStorage.getItem('authToken');
   return axios
-    .get(inventoryURL, {
+    .get(`${apiBaseURL}/inventory`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

@@ -6,8 +6,7 @@ import axios from 'axios';
 const DeleteUserModal = ({ isOpen, onClose, setIsLoggedIn }) => {
   if (!isOpen) return null;
 
-  const apiBaseURL = 'http://localhost:8090'
-
+  const apiBaseURL = process.env.REACT_APP_SERVER;
   // Function to delete user
   const handleDeleteUser = () => {
     const token = sessionStorage.getItem('authToken');

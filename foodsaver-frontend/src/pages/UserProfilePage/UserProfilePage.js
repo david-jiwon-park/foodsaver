@@ -104,8 +104,7 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
     }
   };
 
-  const apiBaseURL = 'http://localhost:8090';
-
+  const apiBaseURL = process.env.REACT_APP_SERVER;
   // Function to disable notifications in the backend
   const handleDisablingNotifications = () => {
     const token = sessionStorage.getItem('authToken');

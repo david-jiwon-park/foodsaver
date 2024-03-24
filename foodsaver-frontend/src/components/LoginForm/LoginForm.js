@@ -14,6 +14,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
   const [isLoginError, setIsLoginError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const apiBaseURL = process.env.REACT_APP_SERVER;
   // Function to handle login
   const handleLogin = (e) => {
     e.preventDefault();
@@ -21,7 +22,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
       return alert('Please enter both your email and password');
     }
     axios
-    .post('http://localhost:8090/users/login', {
+    .post(`${apiBaseURL}/users/login`, {
       email: formRef.current.email.value,
       password: formRef.current.password.value,
     })

@@ -7,8 +7,7 @@ import editIcon from '../../assets/icons/edit-icon.svg';
 const EditFoodModal = ({ isOpen, onClose, foodId, foodName, foodExpDate }) => {
   if (!isOpen) return null;
 
-  const apiBaseURL = 'http://localhost:8090'
-
+  const apiBaseURL = process.env.REACT_APP_SERVER;
   // Function to edit food items in inventory
   const handleEditUser = (e) => {
     e.preventDefault();

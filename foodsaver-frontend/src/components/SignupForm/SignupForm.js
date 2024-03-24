@@ -34,6 +34,7 @@ const SignupForm = () => {
     }
   };
 
+  const apiBaseURL = process.env.REACT_APP_SERVER;
   // Function to handle signup
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -44,7 +45,7 @@ const SignupForm = () => {
       return alert("Please ensure the passwords entered match.")
     } 
     axios
-    .post('http://localhost:8090/users/signup', {
+    .post(`${apiBaseURL}/users/signup`, {
       name: e.target.name.value,
       email: e.target.email.value,
       password: e.target.password.value 

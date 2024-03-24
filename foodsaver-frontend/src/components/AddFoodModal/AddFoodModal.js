@@ -7,8 +7,7 @@ import addIcon from '../../assets/icons/add-icon.png';
 const AddFoodModal = ({ isOpen, onClose}) => {
   if (!isOpen) return null;
 
-  const apiBaseURL = 'http://localhost:8090';
-
+  const apiBaseURL = process.env.REACT_APP_SERVER;
   // Function to add food item to inventory
   const handleAddFood = (e) => {
     e.preventDefault();

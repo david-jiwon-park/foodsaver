@@ -62,13 +62,13 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
     }
   };
 
+  const apiBaseURL = process.env.REACT_APP_SERVER;
   // Function to find recipes 
   const handleFindRecipes = (e) => {
     e.preventDefault();
-    const getRecipesURL = 'http://localhost:8090/edamamApi/recipes';
     const token = sessionStorage.getItem('authToken');
     axios
-    .post(getRecipesURL, { selectedIngredients }, {
+    .post(`${apiBaseURL}/edamamApi/recipes`, { selectedIngredients }, {
       headers: {
         Authorization: `Bearer ${token}`,
       }

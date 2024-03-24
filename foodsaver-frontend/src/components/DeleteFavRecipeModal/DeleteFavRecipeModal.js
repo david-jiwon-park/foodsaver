@@ -7,8 +7,7 @@ import deleteIcon from '../../assets/icons/delete-icon.svg';
 const DeleteFavRecipeModal = ({ isOpen, onClose, name, uri }) => {
   if (!isOpen) return null;
 
-  const apiBaseURL = 'http://localhost:8090'
-
+  const apiBaseURL = process.env.REACT_APP_SERVER;
   // Function to delete recipe that has been favorited 
   const handleDeleteFavRecipe = () => {
     const token = sessionStorage.getItem('authToken');

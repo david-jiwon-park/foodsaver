@@ -2,11 +2,11 @@
 
 import axios from 'axios';
 
+const apiBaseURL = process.env.REACT_APP_SERVER;
 const getUserInfo = () => {
-  const usersURL = 'http://localhost:8090/users';
   const token = sessionStorage.getItem('authToken');
   return axios
-    .get(usersURL, {
+    .get(`${apiBaseURL}/users`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

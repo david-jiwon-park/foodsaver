@@ -51,12 +51,12 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
     }
   }, [isLoggedIn, isFavRecipeModalOpen, isDeleteFavRecipeModalOpen]);
     
+  const apiBaseURL = process.env.REACT_APP_SERVER;
   // Function to get data on the user's favorite recipes 
   const getFavoriteRecipeInfo = async (res) => {
-    const getRecipesURL = 'http://localhost:8090/edamamApi/favorites';
     const token = sessionStorage.getItem('authToken');
     axios
-    .post(getRecipesURL, { favorites: res }, {
+    .post(`${apiBaseURL}/edamamApi/favorites`, { favorites: res }, {
       headers: {
         Authorization: `Bearer ${token}`,
       }

@@ -2,11 +2,11 @@
 
 import axios from 'axios';
 
+const apiBaseURL = process.env.REACT_APP_SERVER;
 const getNotificationSettings = () => {
-  const notificationsURL = 'http://localhost:8090/notifications';
   const token = sessionStorage.getItem('authToken');
   return axios
-    .get(notificationsURL , {
+    .get(`${apiBaseURL}/notifications` , {
       headers: {
         Authorization: `Bearer ${token}`,
       },

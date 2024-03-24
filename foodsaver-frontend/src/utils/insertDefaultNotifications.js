@@ -2,10 +2,10 @@
 
 import axios from 'axios';
 
+const apiBaseURL = process.env.REACT_APP_SERVER;
 const insertDefaultNotifications = (newUserId) => {
-  const notificationsURL = 'http://localhost:8090/notifications';
   return axios
-    .post(notificationsURL, {
+    .post(`${apiBaseURL}/notifications`, {
       user_id: newUserId
     })
 };
