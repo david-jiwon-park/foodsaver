@@ -1,11 +1,9 @@
 // Delete User Modal Component
 
 import './DeleteUserModal.scss';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const DeleteUserModal = ({ isOpen, onClose, setIsLoggedIn }) => {
-  const navigate = useNavigate();
   if (!isOpen) return null;
 
   const apiBaseURL = 'http://localhost:8090'
