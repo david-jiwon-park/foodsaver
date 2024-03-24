@@ -14,21 +14,21 @@ When running Knex.js migrations, please run the ```users``` migration file first
 
 ```.env.sample``` in ```foodsaver-backend``` provides a sample of environment variables required to run this project. You will need to add the following environment variables to your .env file:
 
-For Local Database
+For Local Database: 
 `PORT`
 `DB_HOST`
 `DB_DBNAME`
 `DB_USER`
 `DB_PASSWORD`
 
-JSON Web Token Secret Key
+JSON Web Token Secret Key: 
 `JWT_SECRET`
 
-MailJet API Credentials  
+MailJet API Credentials:   
 `MJ_APIKEY_PUBLIC`
 `MJ_APIKEY_PRIVATE`
 
-Edamam API Credentials
+Edamam API Credentials: 
 `EDAMAM_APP_ID`
 `EDAMAM_APP_KEY`
 
@@ -120,7 +120,7 @@ Run ```$ npx nodemon index.js``` in ```foodsaver-backend``` and ```$ npm start``
 | Auth |
 
 
-#### Update food item in user inventory
+#### Update or discard food item in user inventory
 
 ```
   PUT /inventory/:id
@@ -130,4 +130,92 @@ Run ```$ npx nodemon index.js``` in ```foodsaver-backend``` and ```$ npm start``
 | Auth |
 
 
+#### Get favorite recipes for user
+
+```
+  GET /favorites
+```
+| Requirements |            
+| :----| 
+| Auth |
+
+
+#### Add favorite recipe for user
+
+```
+  POST /favorites
+```
+| Requirements |            
+| :----| 
+| Auth |
+
+
+#### Delete favorite recipe for user
+
+```
+  DELETE /favorites
+```
+| Requirements |            
+| :----| 
+| Auth |
+
+#### Add default notification settings for new user
+
+```
+  POST /notifications
+```
+
+
+#### Get notification settings for user
+
+```
+  POST /notifications
+```
+| Requirements |            
+| :----| 
+| Auth |
+
+
+#### Edit notification settings for user 
+
+```
+  PUT /notifications
+```
+| Requirements |            
+| :----| 
+| Auth |
+
+
+#### Get suggested recipes from Edamam API for user
+
+```
+  POST /edamamAPI/recipes
+```
+| Requirements |            
+| :----| 
+| Auth |
+
+
+#### Get favorite recipes data from Edamam API for user
+
+```
+  POST /edamamAPI/favorites
+```
+| Requirements |            
+| :----| 
+| Auth |
+
+
+## Built with
+
+```React.js``` ```SASS``` ```Node.js``` ```Express``` ```Knex.js``` ```MySQL```
+
+
+## 🔗 Links
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://ca.linkedin.com/in/davidjiwonpark)
+
+
+## Support
+
+For support, email davidpark48@hotmail.com 
 
