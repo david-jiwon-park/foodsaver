@@ -9,6 +9,7 @@ const AddFoodModal = ({ isOpen, onClose}) => {
 
   const apiBaseURL = 'http://localhost:8090';
 
+  // Function to add food item to inventory
   const handleAddFood = (e) => {
     e.preventDefault();
     const token = sessionStorage.getItem('authToken');
@@ -34,12 +35,10 @@ const AddFoodModal = ({ isOpen, onClose}) => {
     <div className="overlay">
       <div className="addfoodmodal">
           <form className="addfoodmodal__form" onSubmit={handleAddFood}>
-            
             <div className="addfoodmodal__heading-container">
               <img className="addfoodmodal__add-icon" src={addIcon} alt='add icon'/>
               <h5 className="addfoodmodal__heading">Add Item</h5>
             </div>
-            
             <div className="addfoodmodal__field-container-1">
               <label htmlFor="food_item" className="addfoodmodal__label">Food Item:</label>
               <input
@@ -50,7 +49,6 @@ const AddFoodModal = ({ isOpen, onClose}) => {
                   required>
               </input>
             </div>
-            
             <div className="addfoodmodal__field-container-2">
               <label htmlFor="exp_date" className="addfoodmodal__label">Expiry Date:</label>
               <input
@@ -62,16 +60,14 @@ const AddFoodModal = ({ isOpen, onClose}) => {
                   required>
               </input>
             </div>
-
             <div className="addfoodmodal__button-container">
               <button type="button" className="addfoodmodal__button-cancel" onClick={onClose}>Cancel</button>
               <button type="submit" className="addfoodmodal__button-add">Add</button>
             </div>
-
           </form>
       </div>
     </div> 
-   );
-  };
+  );
+};
   
-  export default AddFoodModal;
+export default AddFoodModal;

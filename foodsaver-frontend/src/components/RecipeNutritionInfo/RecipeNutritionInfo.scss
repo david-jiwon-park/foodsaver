@@ -1,0 +1,14 @@
+// Recipe Nutrition Info Styling 
+
+@import '../../styles/partials/fonts';
+@import '../../styles/partials/mixins';
+@import '../../styles/partials/variables';
+
+.overlay {
+    @include modal-overlay;
+    overflow: auto;
+}
+
+.recipe-modal {
+    @include recipe-modal-nutrition-info;
+}

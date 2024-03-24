@@ -1,3 +1,5 @@
+// Login Form Component
+
 import './LoginForm.scss';
 import { useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
@@ -10,13 +12,12 @@ const LoginForm = ({ setIsLoggedIn }) => {
   const [isLoginError, setIsLoginError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const onSubmit = (e) => {
+  // Function to handle login
+  const handleLogin = (e) => {
     e.preventDefault();
-
     if (!formRef.current.email.value  || !formRef.current.password.value) {
       return alert('Please enter both your email and password');
     }
-
     axios
     .post('http://localhost:8090/users/login', {
       email: formRef.current.email.value,
@@ -25,11 +26,9 @@ const LoginForm = ({ setIsLoggedIn }) => {
     .then((res) => {
       sessionStorage.setItem('authToken', res.data.token);
       sessionStorage.setItem('loggedIn', 'true');
-
       setIsLoggedIn(true);
       setIsLoginError(false);
       setErrorMessage("");
-
       navigate('/');
     })
     .catch((error) => {
@@ -37,7 +36,6 @@ const LoginForm = ({ setIsLoggedIn }) => {
       setErrorMessage(error.response.data.message);
     });
   };
-
 
   return (
     <div className="login-form">
@@ -47,8 +45,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
         </Link>
         <h1 className="login-form__heading">Log In</h1>
       </div>
-      <form className="login-form__form" onSubmit={onSubmit} ref={formRef}>
-        
+      <form className="login-form__form" onSubmit={handleLogin} ref={formRef}>
         <div className="login-form__input-container">
           <input
             className="login-form__input"
@@ -58,7 +55,6 @@ const LoginForm = ({ setIsLoggedIn }) => {
             placeholder="Email"
           />
         </div>
-        
         <div className="login-form__input-container">
           <input
             className="login-form__input"
@@ -68,11 +64,8 @@ const LoginForm = ({ setIsLoggedIn }) => {
             placeholder="Password"
           />
         </div>
-
         {isLoginError && <p className="login-form__login-error">{errorMessage}</p>}
-
         <button className="login-form__login-button">Log In</button>
-
         <p className="login-form__link-container">Don't have an account?
           <Link className="login-form__signup-link" to='/signup'>
             Sign up here!

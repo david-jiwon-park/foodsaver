@@ -7,6 +7,10 @@ import Nav from '../Nav/Nav';
 const Header = ({ setIsLoggedIn }) => {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
+  const location = useLocation();
+  const currentLocation = location.pathname;
+
+  // Function to toggle navigation screen
   const toggleNav = () => {
     if (isNavOpen == false) {
       setIsNavOpen(true);
@@ -15,14 +19,12 @@ const Header = ({ setIsLoggedIn }) => {
     }
   };
 
-  const location = useLocation();
-  const currentLocation = location.pathname;
-
+  // Function to close navigation screen if the user clicks on the page they are already in
   const closeNavIfLocationMatches = (paths) => {
     if (paths.some(path => currentLocation.startsWith(path))) {
       setIsNavOpen(false);
     }
-  }
+  };
 
   return(
     <div className="header">
@@ -35,10 +37,8 @@ const Header = ({ setIsLoggedIn }) => {
         closeNavIfLocationMatches={closeNavIfLocationMatches}
         setIsLoggedIn={setIsLoggedIn} 
       />
-
     </div>
-
-    )
+  )
 };
 
 export default Header;

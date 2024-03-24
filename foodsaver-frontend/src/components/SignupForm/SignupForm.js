@@ -10,13 +10,12 @@ const SignupForm = () => {
   const navigate = useNavigate();
   const formRef = useRef();
 
-  const onSubmit = (e) => {
+  // Function to handle signup
+  const handleSignUp = (e) => {
     e.preventDefault();
-
     if (!formRef.current.name.value || !formRef.current.email.value || !formRef.current.password.value) {
       return alert('Make sure to fill out all the fields');
     }
-
     axios
     .post('http://localhost:8090/users/signup', {
       name: formRef.current.name.value,
@@ -24,6 +23,7 @@ const SignupForm = () => {
       password: formRef.current.password.value,
     })
     .then((response) => {
+      // Upon signup, users will have default notfications settings inserted 
       insertDefaultNotifications(response.data.user);
     })
     .then((response2) => {
@@ -45,8 +45,7 @@ const SignupForm = () => {
         </Link>
         <h1 className="signup-form__heading">Sign Up</h1>
       </div>
-      <form className="signup-form__form" onSubmit={onSubmit} ref={formRef}>
-          
+      <form className="signup-form__form" onSubmit={handleSignUp} ref={formRef}>
         <div className="signup-form__input-container">
           <input
             className="signup-form__input"
@@ -56,7 +55,6 @@ const SignupForm = () => {
             placeholder="Name"
           />
         </div>
-
         <div className="signup-form__input-container">
           <input
             className="signup-form__input"
@@ -66,7 +64,6 @@ const SignupForm = () => {
             placeholder="Email"
           />
         </div>
-
         <div className="signup-form__input-container">
           <input
             className="signup-form__input"
@@ -76,11 +73,8 @@ const SignupForm = () => {
             placeholder="Password"
           />
         </div>
-
         <p className="signup-form__signup-error">{signUpErrorMessage}</p>
-
         <button className="signup-form__signup-button">Sign Up</button>
-        
         <p className="signup-form__link-container">Got an account?
           <Link className="signup-form__login-link" to='/login'>
             Log in here!
@@ -88,7 +82,6 @@ const SignupForm = () => {
         </p>
       </form>
     </div>
- 
   );
 };
 

@@ -1,9 +1,12 @@
+// Navigation Component 
+
 import './Nav.scss'
 import { Link } from 'react-router-dom';
 
 const Nav = ({ isOpen, closeNavIfLocationMatches }) => {
   if (!isOpen) return null;
 
+  // All possible navigation paths to check to see if the current path is the same as the page the user is on
   const pathsToCheck = ["/inventory", "/recipes", "/favorites", "/profile"];
 
   return(
@@ -22,10 +25,8 @@ const Nav = ({ isOpen, closeNavIfLocationMatches }) => {
           <button className='nav__button'>User Profile</button>
         </Link>
       </div>
-      
     </div>
-
-    )
+  )
 };
 
 export default Nav;

@@ -1,10 +1,9 @@
-//Change Password Modal Component
+// Change Password Modal Component
 
 import './ChangePasswordModal.scss';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import editIcon from '../../assets/icons/edit-icon.svg';
-
 
 const ChangePasswordModal = ({ isOpen, onClose }) => {
   const [newPassword, setNewPassword] = useState('');
@@ -25,12 +24,14 @@ const ChangePasswordModal = ({ isOpen, onClose }) => {
 
   const handleNewPasswordChange = (event) => {
     setNewPassword(event.target.value);
+
     // Clear password match error when the new password changes
     setPasswordMatchError('');
   };
 
   const handleConfirmPasswordChange = (event) => {
     setConfirmPassword(event.target.value);
+
     // Check password match when the confirm password changes
     if (newPassword !== event.target.value) {
       setPasswordMatchError('Passwords do not match');
@@ -41,8 +42,11 @@ const ChangePasswordModal = ({ isOpen, onClose }) => {
 
   const apiBaseURL = 'http://localhost:8090'
 
+  // Function to change user password 
   const handleChangePassword = (e) => {
     e.preventDefault();
+
+    // Preventing password from being changed if the "New Password" and "Confirm Password" values do not match
     if (e.target.new_password.value !== e.target.confirm_password.value) {
       return alert("Please ensure the passwords entered match.")
     } 
@@ -55,7 +59,7 @@ const ChangePasswordModal = ({ isOpen, onClose }) => {
         Authorization: `Bearer ${token}`,
       }
     })
-    .then((response) => {
+    .then((_response) => {
       alert("Your password has been updated!")
       onClose();
     })
@@ -69,12 +73,10 @@ const ChangePasswordModal = ({ isOpen, onClose }) => {
     <div className="overlay">
       <div className="changepasswordmodal">
         <form onSubmit={handleChangePassword}>
-
           <div className="changepasswordmodal__heading-container">
             <img className="changepasswordmodal__edit-icon" src={editIcon} alt='edit icon'/>
             <h5 className="changepasswordmodal__heading">Change Password</h5>
           </div>
-            
           <div className="changepasswordmodal__field-container-1">
             <label htmlFor="new_password" className="changepasswordmodal__label">New Password</label>
             <input
@@ -86,8 +88,7 @@ const ChangePasswordModal = ({ isOpen, onClose }) => {
                 type="password"
                 required>
             </input>
-          </div>  
-
+          </div> 
           <div className="changepasswordmodal__field-container-2">
             <label htmlFor="confirm_password" className="changepasswordmodal__label">Confirm Password</label>
             <input
@@ -100,19 +101,15 @@ const ChangePasswordModal = ({ isOpen, onClose }) => {
                 required>
             </input>
           </div>  
-
           <p className='changepasswordmodal__password-match-error'>{passwordMatchError}</p>
-
           <div className="changepasswordmodal__button-container">
             <button type="button" className="changepasswordmodal__button-cancel" onClick={onClose}>Cancel</button>
             <button type="submit" className="changepasswordmodal__button-save">Save</button>
           </div>
-
         </form>
       </div>
     </div>
-    
   );
-  };
+};
   
-  export default ChangePasswordModal;
+export default ChangePasswordModal;

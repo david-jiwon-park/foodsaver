@@ -1,4 +1,4 @@
-//Edit User Info Modal Component
+// Edit User Info Modal Component
 
 import './EditUserInfoModal.scss';
 import { useState, useEffect } from 'react';
@@ -9,6 +9,7 @@ import editIcon from '../../assets/icons/edit-icon.svg';
 const EditUserInfoModal = ({ isOpen, onClose, userName, userEmail }) => {
   const [editUserErrorMessage, setEditUserErrorMessage] = useState("");
   
+  // useEffect to reset the edit user message everytime this modal is opened
   useEffect(() => {
     if (!isOpen) {
       return;
@@ -17,15 +18,14 @@ const EditUserInfoModal = ({ isOpen, onClose, userName, userEmail }) => {
     }
   }, [isOpen]);
 
-
   if (!isOpen) return null;
 
   const apiBaseURL = 'http://localhost:8090'
 
+  // Function to edit user information 
   const onEdit = (e) => {
     e.preventDefault();
     const token = sessionStorage.getItem('authToken');
-    
     axios
     .put(`${apiBaseURL}/users`, {
       name: e.target.name.value,
@@ -50,12 +50,10 @@ const EditUserInfoModal = ({ isOpen, onClose, userName, userEmail }) => {
     <div className="overlay">
       <div className="edituserinfomodal">
         <form className="edituserinfomodal__form" onSubmit={onEdit}>
-
           <div className="edituserinfomodal__heading-container">
             <img className="edituserinfomodal__edit-icon" src={editIcon} alt='edit icon'/>
             <h5 className="edituserinfomodal__heading">Edit User Info</h5>
           </div>
-          
           <div className="edituserinfomodal__field-container-1">
             <label htmlFor="name" className="edituserinfomodal__label">Name:</label>
             <input
@@ -67,7 +65,6 @@ const EditUserInfoModal = ({ isOpen, onClose, userName, userEmail }) => {
                   required>
             </input>
           </div>
-            
           <div className="edituserinfomodal__field-container-2">
             <label htmlFor="email" className="edituserinfomodal__label edituserinfomodal__label--email">Email:</label>
             <input
@@ -79,19 +76,15 @@ const EditUserInfoModal = ({ isOpen, onClose, userName, userEmail }) => {
                 required>
             </input>
           </div>  
-
           <p className="edituserinfomodal__edit-error">{editUserErrorMessage}</p>
-
           <div className="edituserinfomodal__button-container">
             <button type="button" className="edituserinfomodal__button-cancel" onClick={onClose}>Cancel</button>
             <button type="submit" className="edituserinfomodal__button-save">Save</button>
           </div>
-
         </form>
       </div>
     </div>
-    
   );
-  };
+};
   
-  export default EditUserInfoModal;
+export default EditUserInfoModal;
