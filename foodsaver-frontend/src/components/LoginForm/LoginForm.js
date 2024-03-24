@@ -9,6 +9,8 @@ import backArrow from '../../assets/icons/back-arrow.png';
 const LoginForm = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
   const formRef = useRef();
+
+  // States for handling login errors and messages
   const [isLoginError, setIsLoginError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -53,6 +55,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
             name="email"
             type="email"
             placeholder="Email"
+            maxLength="50"
           />
         </div>
         <div className="login-form__input-container">
@@ -62,6 +65,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
             name="password"
             type="password"
             placeholder="Password"
+            maxLength="50"
           />
         </div>
         {isLoginError && <p className="login-form__login-error">{errorMessage}</p>}

@@ -6,6 +6,7 @@
 
 .signup-form {
   @include signup-login-container;
+  height: 27rem;
   &__heading-container {
     display: flex;
   }
@@ -18,7 +19,6 @@
   &__form {
     display: flex;
     flex-direction: column;
-    padding-top: 0.5rem;
   }
   &__input-container {
     padding: 0.35rem 0;
@@ -31,7 +31,7 @@
   }
   &__signup-button {
     @include signup-login-buttons;
-    margin-top: 2.25rem;
+    margin-top: 1.25rem;
   }
   &__link-container {
     @include signup-login-link-container; 

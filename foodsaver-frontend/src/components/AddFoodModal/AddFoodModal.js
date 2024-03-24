@@ -46,6 +46,7 @@ const AddFoodModal = ({ isOpen, onClose}) => {
                   name="food_item"
                   id="food_item"
                   type="text"
+                  maxLength="50"
                   required>
               </input>
             </div>

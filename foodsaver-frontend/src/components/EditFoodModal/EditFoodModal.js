@@ -47,6 +47,7 @@ const EditFoodModal = ({ isOpen, onClose, foodId, foodName, foodExpDate }) => {
                 id="food_item"
                 type="text"
                 defaultValue={foodName}
+                maxLength="50"
                 required>
             </input>
           </div>

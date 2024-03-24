@@ -6,6 +6,7 @@
 
 .login-form {
   @include signup-login-container;
+  height: 25rem;
   &__heading-container {
     display: flex;
   }

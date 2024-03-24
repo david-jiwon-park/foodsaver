@@ -62,6 +62,7 @@ const EditUserInfoModal = ({ isOpen, onClose, userName, userEmail }) => {
                   id="name"
                   type="text"
                   defaultValue={userName}
+                  maxLength="50"
                   required>
             </input>
           </div>
@@ -73,6 +74,7 @@ const EditUserInfoModal = ({ isOpen, onClose, userName, userEmail }) => {
                 id="email"
                 type="email"
                 defaultValue={userEmail}
+                maxLength="50"
                 required>
             </input>
           </div>  
