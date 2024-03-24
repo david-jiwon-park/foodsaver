@@ -16,17 +16,6 @@ app.use(cors());
 // Enables JSON to be posted in request.body
 app.use(express.json());
 
-app.get("/*", function (req, res) {
-  res.sendFile(
-    path.join(__dirname, "../client/build/index.html"), 
-    function (err) {
-      if (err) {
-        res.status(500).send(err);
-      }
-    }
-  );
-});
-
 // Routes that retrieve data from database
 app.use("/users", usersRoutes);
 app.use("/inventory", inventoryRoutes);
