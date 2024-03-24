@@ -44,9 +44,9 @@ MailJet and Edamam are external APIs that are required for full functionality of
 
 Links to External APIs:
 
-MailJet: [(https://www.mailjet.com/)]
+MailJet: https://www.mailjet.com/
 
-Edamam: [(https://www.edamam.com/)]
+Edamam: https://www.edamam.com/
 
 #### Now you are all set!
 
