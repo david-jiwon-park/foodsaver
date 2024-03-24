@@ -19,7 +19,7 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
   const [userInfo, setUserInfo] = useState([]);
   const [notificationSettings, setNotificationSettings] = useState([]);
 
-  // State to keep track of when the Recipe modal is open or closed 
+  // States to keep track of when modals are open or closed 
   const [isEditUserInfoModalOpen, setIsEditUserInfoModalOpen] = useState(false);
   const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] = useState(false);
   const [isDeleteUserModalOpen, setIsDeleteUserModalOpen] = useState(false);
