@@ -10,7 +10,7 @@ To run this project, run ```$ npm install``` in both ```foodsaver-frontend``` an
 
 When running Knex.js migrations, please run the ```users``` migration file first in order to avoid any DB issues. Afterwards, please ensure to run the remaining migration files (```inventory```, ```notifications```, ```favorites```). 
 
-#### .env
+#### Backend .env
 
 ```.env.sample``` in ```foodsaver-backend``` provides a sample of environment variables required to run this project. You will need to add the following environment variables to your .env file:
 
@@ -31,6 +31,12 @@ MailJet API Credentials:
 Edamam API Credentials: 
 `EDAMAM_APP_ID`
 `EDAMAM_APP_KEY`
+
+#### Frontend .env.local
+
+```.env.local.sample``` in ```foodsaver-frontend``` provides a sample of the local server. You will need to add the following environment variable to your .env.local file:
+`REACT_APP_SERVER`
+
 
 #### External APIs
 
@@ -212,7 +218,7 @@ Run ```$ npx nodemon index.js``` in ```foodsaver-backend``` and ```$ npm start``
 
 
 ## 🔗 Links
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://ca.linkedin.com/in/davidjiwonpark)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://ca.linkedin.com/in/david-jiwon-park)
 
 
 ## Support
