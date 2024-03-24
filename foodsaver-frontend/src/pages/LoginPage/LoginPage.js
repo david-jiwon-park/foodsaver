@@ -1,6 +1,7 @@
+// Login Page 
+
 import './LoginPage.scss';
 import LoginForm from '../../components/LoginForm/LoginForm';
-
 
 const LoginPage = ({ setIsLoggedIn }) => {
   return (

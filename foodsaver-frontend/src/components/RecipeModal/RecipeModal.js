@@ -65,8 +65,7 @@ const RecipeModal = ({ isOpen, onClose, uri, image, name, servings, ingredients,
         Authorization: `Bearer ${token}`,
       }
     })
-    .then((response) => {
-      console.log(response);
+    .then((_response) => {
       return getUserFavorites();
     })
     .then((response2) => {
@@ -86,8 +85,7 @@ const RecipeModal = ({ isOpen, onClose, uri, image, name, servings, ingredients,
         Authorization: `Bearer ${token}`,
       }
     })
-    .then((response) => {
-      console.log(response);
+    .then((_response) => {
       return getUserFavorites();
     })
     .then((response2) => {

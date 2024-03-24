@@ -1,3 +1,5 @@
+// User Profile Page
+
 import './UserProfilePage.scss'
 import Header from '../../components/Header/Header'
 import { useEffect, useState } from 'react';
@@ -9,14 +11,21 @@ import getNotificationSettings from '../../utils/getNotificationSettings';
 import editIcon from '../../assets/icons/edit-icon.svg';
 import axios from 'axios';
 
-
 const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
+
+  // States to retrieve and store relevant data
   const [userInfo, setUserInfo] = useState([]);
   const [notificationSettings, setNotificationSettings] = useState([]);
+
+  // State to keep track of when the Recipe modal is open or closed 
   const [isEditUserInfoModalOpen, setIsEditUserInfoModalOpen] = useState(false);
   const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] = useState(false);
+  
+  // State tracking if the user has notifications on or off 
   const [areNotificationsOn, setAreNotificationsOn] = useState(false);
+
+  // Loading and loading error states 
   const [loading, setLoading] = useState(true);
   const [loadingText, setLoadingText] = useState("");
   const [loadingError, setLoadingError] = useState(false);
@@ -24,12 +33,13 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
   const { name, email } = userInfo;
   const { enabled, days_before } = notificationSettings;
 
+  // Function to check if user has notifications enabled 
   const checkNotifications = () => {
     setAreNotificationsOn(enabled === 1);
   };
 
   useEffect(() => {
-    // Get the user profile info if they are logged in 
+    // Get the user's profile info if they are logged in 
     if (isLoggedIn) {
       getUserInfo()
       .then((response) => {
@@ -51,11 +61,12 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
     }
     }, [isLoggedIn, isEditUserInfoModalOpen]);
 
+  // useEffect to check if notifications have been enabled every time notification settings are updated
   useEffect(() => {
     checkNotifications();
   }, [notificationSettings]);
 
-
+  // Function for the user to sign out 
   const handleSignOut = () => {
     sessionStorage.setItem('loggedIn', JSON.stringify(false));
     sessionStorage.clear();
@@ -63,22 +74,21 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
     navigate('/');
   };
 
+  // Functions to handle opening/closing modals
   const handleOpenEditUserInfoModal = () => {
     setIsEditUserInfoModalOpen(true);
   };
-
   const handleCloseEditUserInfoModal = () => {
     setIsEditUserInfoModalOpen(false);
   };
-
   const handleOpenChangePasswordModal = () => {
     setIsChangePasswordModalOpen(true);
   };
-
   const handleCloseChangePasswordModal = () => {
     setIsChangePasswordModalOpen(false);
   };
 
+  // Functions to toggle notifications on/off
   const toggleNotifications = () => {
     if (areNotificationsOn) {
       handleDisablingNotifications();
@@ -89,6 +99,7 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
 
   const apiBaseURL = 'http://localhost:8090';
 
+  // Function to disable notifications in the backend
   const handleDisablingNotifications = () => {
     const token = sessionStorage.getItem('authToken');
     axios
@@ -99,8 +110,7 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
         Authorization: `Bearer ${token}`,
       }
     })
-    .then((response) => {
-      console.log(response);
+    .then((_response) => {
       return getNotificationSettings();
     })
     .then((response2) => {
@@ -111,6 +121,7 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
     })
   };
 
+  // Function to enable notifications in the backend
   const handleEnablingNotifications = () => {
     const token = sessionStorage.getItem('authToken');
     axios
@@ -121,8 +132,7 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
         Authorization: `Bearer ${token}`,
       }
     })
-    .then((response) => {
-      console.log(response);
+    .then((_response) => {
       return getNotificationSettings();
     })
     .then((response2) => {
@@ -133,6 +143,7 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
     })
   };
 
+  // Function to change the notification timing preference 
   const changeNotifyMe = (e) => {
     const token = sessionStorage.getItem('authToken');
     axios
@@ -143,8 +154,7 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
         Authorization: `Bearer ${token}`,
       }
     })
-    .then((response) => {
-      console.log(response);
+    .then((_response) => {
       return getNotificationSettings();
     })
     .then((response2) => {
@@ -155,12 +165,12 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
     })
   }
 
+  // Loading text to appear if the page still has not loaded after 800 milliseconds
   useEffect(() => {
     setTimeout(() => {
       setLoadingText("Loading...")
     }, 800);
   }, []);
-
 
   return (
     <>
@@ -174,9 +184,7 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
       {!loading && !loadingError ?
       (<div className='profile-page'>
         <h1 className='profile-page__heading'>User Profile</h1>
-        
         <section className='profile-page__info'>
-          
           <div className='profile-page__name-email'>
             <div className='profile-page__label-container'>
               <h5 className='profile-page__label-text profile-page__label-text--top'>Name</h5>
@@ -188,8 +196,6 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
             </div>
             <img className='profile-page__edit-name-email' src={editIcon} alt='edit icon' onClick={() => handleOpenEditUserInfoModal()}/>
           </div>
-
-          
           <div className='profile-page__password-container'>
             <h5 className='profile-page__password-text'>Password</h5>
             <div className='profile-page__password-field'>
@@ -198,11 +204,7 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
             <img className='profile-page__edit-name-email' src={editIcon} alt='edit icon' onClick={() => handleOpenChangePasswordModal()}/>
           </div>
         </section>
-
-        
-
         <h1 className='profile-page__heading'>Preferences</h1>
-        
         <form>
           <div className='profile-page__notifications-container'>
             <h5 className='profile-page__notifications-label'>Email Notifications</h5>
@@ -216,7 +218,6 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
               <span className="profile-page__slider"></span>
             </label>
           </div>
-          
           {areNotificationsOn && 
           (<div className='profile-page__notify-container'>
             <label htmlFor="notify" className='profile-page__notifications-label'>Notify Me</label>
@@ -235,7 +236,6 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
               </select>
           </div>)}
         </form>
-
         <div className="profile-page__signout-button-container">
           <button className="profile-page__signout-button" onClick={handleSignOut}>
               Sign Out
@@ -244,21 +244,18 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
       </div>)
       : 
       (<h1 className="profile-page__loading">{loadingText}</h1>)}
-
       <EditUserInfoModal 
         isOpen={isEditUserInfoModalOpen} 
         onClose={handleCloseEditUserInfoModal} 
         userName={name} 
         userEmail={email}
       />
-
       <ChangePasswordModal 
         isOpen={isChangePasswordModalOpen} 
         onClose={handleCloseChangePasswordModal} 
       />
-
     </>
-  )
-}
+  );
+};
 
 export default UserProfilePage;

@@ -13,13 +13,21 @@ import deleteIcon from '../../assets/icons/delete-icon.svg';
 
 const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
+  
+  // State to retrieve and store data regarding the user's inventory
   const [userInventory, setUserInventory] = useState([]);
+
+  // States to keep track of when modals are open or closed 
   const [isAddFoodModalOpen, setIsAddFoodModalOpen] = useState(false);
   const [isDeleteFoodModalOpen, setIsDeleteFoodModalOpen] = useState(false);
   const [isEditFoodModalOpen, setIsEditFoodModalOpen] = useState(false);
+  
+  // States to pass food item information to modals
   const [modalFoodId, setModalFoodId] = useState(null);
   const [modalFoodName, setModalFoodName] = useState("");
   const [modalFoodExpDate, setModalFoodExpDate] = useState(null);
+  
+  // Loading and loading error states 
   const [loading, setLoading] = useState(true);
   const [loadingText, setLoadingText] = useState("");
   const [loadingError, setLoadingError] = useState(false);
@@ -29,6 +37,7 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
     if (isLoggedIn) {
       getUserInventory()
       .then((response) => {
+        // Sorting the inventory from earliest to latest expiration date 
         const sortedData = response.data.sort((a, b) => new Date(a.exp_date) - new Date(b.exp_date));
         setUserInventory(sortedData);
         setLoading(false);
@@ -44,13 +53,13 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
     }
     }, [isLoggedIn, isAddFoodModalOpen, isDeleteFoodModalOpen, isEditFoodModalOpen]);
 
+  // Functions to handle opening/closing modals
   const handleOpenAddFoodModal = () => {
     setIsAddFoodModalOpen(true);
   };
   const handleCloseAddFoodModal = () => {
     setIsAddFoodModalOpen(false);
   };
-
   const handleOpenDeleteFoodModal = (foodId, foodName) => {
     setModalFoodId(foodId);
     setModalFoodName(foodName);
@@ -59,7 +68,6 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
   const handleCloseDeleteFoodModal = () => {
     setIsDeleteFoodModalOpen(false);
   };
-
   const handleOpenEditFoodModal = (foodId, foodName, foodExpDate) => {
     setModalFoodId(foodId);
     setModalFoodName(foodName);
@@ -70,6 +78,7 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
     setIsEditFoodModalOpen(false);
   };
 
+  // Functions that returns the appropriate item container class based on how soon the food item will expire 
   let itemContainerClass = "inventory-page__item-container";
   const expDateStyling = (date) => {
     if (daysUntilExpiration(date) === "Expired!") {
@@ -82,6 +91,7 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
     return itemContainerClass;
   };
 
+  // Function that returns the appropriate text that comes right after the number of days the food item will expire in
   const expDateText = (date) => {
     if (daysUntilExpiration(date) === "Expired!") {
       return;
@@ -92,6 +102,7 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
     }
   };
 
+  // Loading text to appear if the page still has not loaded after 800 milliseconds
   useEffect(() => {
     setTimeout(() => {
       setLoadingText("Loading...")
@@ -116,7 +127,6 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
             <img className="inventory-page__add-icon" src={addIcon} alt="add icon"/>
           </div>
         </div>
-
         {userInventory.length === 0 ? 
         (<p className="inventory-page__no-inventory-text">
           Start adding food by clicking the 
@@ -129,9 +139,8 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
             <h4 className="inventory-page__subheading">Food Item</h4>
             <h4 className="inventory-page__subheading">Expires In</h4>
           </div>
-
           {userInventory.filter((item) => {
-            return item.discarded == 0
+            return item.discarded === 0
           })
           .map((item) => (
             <div className={expDateStyling(item.exp_date)} key={item.id}>
@@ -163,7 +172,7 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
       : 
       (<h1 className="inventory-page__loading">{loadingText}</h1>)}
     </>
-  )
+  );
 };
 
 export default InventoryPage;

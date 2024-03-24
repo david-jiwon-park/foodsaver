@@ -1,3 +1,5 @@
+// Favorites Page 
+
 import './FavoritesPage.scss';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -8,16 +10,22 @@ import DeleteFavRecipeModal from '../../components/DeleteRecipeModal/DeleteFavRe
 import getUserFavorites from '../../utils/getUserFavorites';
 import xIcon from '../../assets/icons/x-icon.svg';
 
-
 const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
+
+  // State to retrieve and store data regarding the user's favorited recipes
   const [userFavoritesExternalData, setUserFavoritesExternalData] = useState([]);
+
+  // States to keep track of when modals are open or closed 
   const [isFavRecipeModalOpen, setIsFavRecipeModalOpen] = useState(false);
   const [isDeleteFavRecipeModalOpen, setIsDeleteFavRecipeModalOpen] = useState(false);
+
+  // Loading and loading error states 
   const [loading, setLoading] = useState(true);
   const [loadingText, setLoadingText] = useState("");
   const [loadingError, setLoadingError] = useState(false);
 
+  // States to store information for a favorited recipe and pass it to the favorite recipe modal 
   const [recipeURI, setRecipeURI] = useState("");
   const [recipeImage, setRecipeImage] = useState("");
   const [recipeName, setRecipeName] = useState("");
@@ -27,6 +35,7 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
   const [recipeDirectionsLink, setRecipeDirectionsLink] = useState("");
 
   useEffect(() => {
+    // Get the user's favorite recipes if they are logged in 
     if (isLoggedIn) {
       getUserFavorites()
       .then((response) => {
@@ -42,6 +51,7 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
     }
   }, [isLoggedIn, isFavRecipeModalOpen, isDeleteFavRecipeModalOpen]);
     
+  // Function to get data on the user's favorite recipes 
   const getFavoriteRecipeInfo = async (res) => {
     const getRecipesURL = 'http://localhost:8090/edamamApi/favorites';
     const token = sessionStorage.getItem('authToken');
@@ -62,6 +72,7 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
     });
   };
 
+  // Functions to handle opening/closing modals
   const handleOpenFavRecipeModal = (image, name, servings, ingredients, nutrition, directionsLink) => {
     setRecipeImage(image);
     setRecipeName(name);
@@ -71,11 +82,9 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
     setRecipeDirectionsLink(directionsLink);
     setIsFavRecipeModalOpen(true);
   };
-
   const handleCloseFavRecipeModal = () => {
     setIsFavRecipeModalOpen(false);
   };
-
   const handleOpenDeleteFavRecipeModal = (e, name, uri) => {
     e.stopPropagation();
     setRecipeName(name);
@@ -86,6 +95,7 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
     setIsDeleteFavRecipeModalOpen(false);
   };
 
+  // Loading text to appear if the page still has not loaded after 800 milliseconds
   useEffect(() => {
     setTimeout(() => {
       setLoadingText("Loading...")
@@ -104,7 +114,6 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
       {!loading && !loadingError ? 
       (<div className='favorites-page'>
         <h1 className='favorites-page__heading'>Favorites</h1>
-
         {userFavoritesExternalData.length === 0 ? 
         (<p className="favorites-page__no-favorites-text">
           Head to the <span>Recipes</span> page to search for recipes to add as favorites!
@@ -123,14 +132,12 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
             </div>
           ))}
         </>)}
-
         <DeleteFavRecipeModal 
           isOpen={isDeleteFavRecipeModalOpen} 
           onClose={handleCloseDeleteFavRecipeModal} 
           name={recipeName} 
           uri={recipeURI.substring(recipeURI.length - 32)}
         />
-
         <FavRecipeModal 
           isOpen={isFavRecipeModalOpen} 
           onClose={handleCloseFavRecipeModal} 
@@ -141,12 +148,11 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
           nutrition={recipeNutrition}
           directionsLink={recipeDirectionsLink}
         />
-
       </div>)
       : 
       (<h1 className="favorites-page__loading">{loadingText}</h1>)}
     </>
-  )
+  );
 };
 
 export default FavoritesPage;

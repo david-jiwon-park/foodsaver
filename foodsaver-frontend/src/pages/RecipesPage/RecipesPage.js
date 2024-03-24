@@ -1,3 +1,5 @@
+// Recipes Page
+
 import './RecipesPage.scss';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -5,17 +7,25 @@ import Header from '../../components/Header/Header';
 import RecipeModal from '../../components/RecipeModal/RecipeModal';
 import getUserInventory from '../../utils/getUserInventory';
 
-
 const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
+  
+  // States to retrieve and store relevant data
   const [userInventory, setUserInventory] = useState([]);
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [suggestedRecipes, setSuggestedRecipes] = useState([]);
+  
+  // State to track if the user has clicked on the "Find Recipes" button
   const [submitted, setSubmitted] = useState(false);
+
+  // State to keep track of when the Recipe modal is open or closed 
   const [isRecipeModalOpen, setIsRecipeModalOpen] = useState(false);
+  
+  // Loading and loading error states 
   const [loading, setLoading] = useState(true);
   const [loadingText, setLoadingText] = useState("");
   const [loadingError, setLoadingError] = useState(false);
 
+  // States to store information for a recipe and pass it to the recipe modal 
   const [recipeURI, setRecipeURI] = useState("");
   const [recipeImage, setRecipeImage] = useState("");
   const [recipeName, setRecipeName] = useState("");
@@ -29,6 +39,7 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
     if (isLoggedIn) {
       getUserInventory()
       .then((response) => {
+        // Sorting the inventory from earliest to latest expiration date 
         const sortedData = response.data.sort((a, b) => new Date(a.exp_date) - new Date(b.exp_date));
         setUserInventory(sortedData);
         setLoading(false);
@@ -42,6 +53,7 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
     }
     }, [isLoggedIn]);
 
+  // Function to handle user selecting and de-selecting food items for recipe search 
   const handleIngredientToggle = (ingredient) => {
     if (selectedIngredients.includes(ingredient)) {
       setSelectedIngredients(selectedIngredients.filter(item => item !== ingredient));
@@ -50,7 +62,8 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
     }
   };
 
-  const findRecipes = (e) => {
+  // Function to find recipes 
+  const handleFindRecipes = (e) => {
     e.preventDefault();
     const getRecipesURL = 'http://localhost:8090/edamamApi/recipes';
     const token = sessionStorage.getItem('authToken');
@@ -63,16 +76,14 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
     .then((response) => {
       setSubmitted(true);
       setSuggestedRecipes(response.data.hits);
-      console.log(selectedIngredients);
     })
     .catch((error) => {
-      console.log(selectedIngredients);
       setSubmitted(true);
       console.log(error);
     });
   };
 
-    
+  // Functions to handle opening/closing Recipe Modal 
   const handleOpenRecipeModal = (uri, image, name, servings, ingredients, nutrition, directionsLink) => {
     setRecipeURI(uri);
     setRecipeImage(image);
@@ -83,11 +94,11 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
     setRecipeDirectionsLink(directionsLink);
     setIsRecipeModalOpen(true);
   };
-
   const handleCloseRecipeModal = () => {
     setIsRecipeModalOpen(false);
   };
 
+  // Loading text to appear if the page still has not loaded after 800 milliseconds
   useEffect(() => {
     setTimeout(() => {
       setLoadingText("Loading...")
@@ -107,7 +118,6 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
       (<div className="recipes-page">
         <h1 className="recipes-page__heading">Recipes</h1>
         <h2 className="recipes-page__subheading">Inventory</h2>
-
         {userInventory.length === 0 ? 
         (<> 
           <p className="recipes-page__no-inventory-text">
@@ -117,8 +127,7 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
             Head to the <span>Inventory</span> page to add food!
           </p>
         </>) : 
-
-        (<form onSubmit={findRecipes}>
+        (<form onSubmit={handleFindRecipes}>
           <div className="recipes-page__inventory-outer-container">
             <div className="recipes-page__inventory-inner-container">
               {userInventory.filter((item) => {
@@ -140,7 +149,6 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
             <button type="submit" className="recipes-page__find-button">Find Recipes</button>
           </div>
         </form>)}
-        
         {submitted ? 
         (<>
           <h2 className="recipes-page__subheading recipes-page__subheading--recipes">Suggested Recipes</h2>
@@ -168,7 +176,6 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
         </>
         )
         : null }
-
         <RecipeModal 
           isOpen={isRecipeModalOpen} 
           onClose={handleCloseRecipeModal} 
@@ -184,7 +191,7 @@ const RecipesPage = ({ isLoggedIn, setIsLoggedIn }) => {
       : 
       (<h1 className="recipes-page__loading">{loadingText}</h1>)}
     </>
-  )
+  );
 };
 
 export default RecipesPage;

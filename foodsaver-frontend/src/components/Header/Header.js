@@ -12,7 +12,7 @@ const Header = ({ setIsLoggedIn }) => {
 
   // Function to toggle navigation screen
   const toggleNav = () => {
-    if (isNavOpen == false) {
+    if (isNavOpen === false) {
       setIsNavOpen(true);
     } else {
       setIsNavOpen(false);
