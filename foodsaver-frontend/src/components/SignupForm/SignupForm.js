@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './SignupForm.scss';
 import backArrow from '../../assets/icons/back-arrow.png';
+import eyeIcon from '../../assets/icons/eye-icon.png';
 import insertDefaultNotifications from '../../utils/insertDefaultNotifications';
 
 const SignupForm = () => {
@@ -31,6 +32,25 @@ const SignupForm = () => {
       setPasswordMatchError('Passwords do not match');
     } else {
       setPasswordMatchError('');
+    }
+  };
+
+  // Toggle password visibility functions 
+  const togglePasswordVisibility = () => {
+    const passwordField = document.getElementById("password");
+    if (passwordField.type === "password") {
+      passwordField.type = "text";
+    } else {
+      passwordField.type = "password";
+    }
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    const confirmPasswordField = document.getElementById("confirm_password");
+    if (confirmPasswordField.type === "password") {
+      confirmPasswordField.type = "text";
+    } else {
+      confirmPasswordField.type = "password";
     }
   };
 
@@ -94,7 +114,7 @@ const SignupForm = () => {
             maxLength="50"
           />
         </div>
-        <div className="signup-form__input-container">
+        <div className="signup-form__input-container signup-form__password-container">
           <input
             className="signup-form__input"
             id="password"
@@ -105,8 +125,11 @@ const SignupForm = () => {
             onChange={handlePasswordChange}
             maxLength="50"
           />
+          <span class="toggle-password" onClick={() => togglePasswordVisibility()}>
+            <img className="eye-icon" src={eyeIcon} alt="eye-icon"/>
+          </span>
         </div>
-        <div className="signup-form__input-container">
+        <div className="signup-form__input-container signup-form__password-container">
           <input
             className="signup-form__input"
             id="confirm_password"
@@ -117,6 +140,9 @@ const SignupForm = () => {
             onChange={handleConfirmPasswordChange}
             maxLength="50"
           />
+          <span class="toggle-password" onClick={() => toggleConfirmPasswordVisibility()}>
+            <img className="eye-icon" src={eyeIcon} alt="eye-icon"/>
+          </span>
         </div>
         <p className="signup-form__signup-error">{passwordMatchError}</p>
         <p className="signup-form__signup-error">{signUpErrorMessage}</p>

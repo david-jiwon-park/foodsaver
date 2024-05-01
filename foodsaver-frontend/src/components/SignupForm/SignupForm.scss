@@ -29,6 +29,10 @@
   &__input-container {
     padding: 0.35rem 0;
   }
+  &__password-container {
+    position: relative;
+    width: 100%;
+  }
   &__input {
     @include signup-login-fields;
   }
@@ -45,4 +49,16 @@
   &__login-link {
     @include signup-login-link; 
   }
+}
+
+.toggle-password {
+  position: absolute;
+  top: 52%;
+  right: 0.8rem;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.eye-icon {
+  width: 2rem;
 }
