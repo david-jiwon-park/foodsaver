@@ -6,4 +6,12 @@
 
 .login-page {
     @include pre-login-background;
+    &__header {
+        font-family: $header-font;
+        font-size: 3.5rem;
+        @include tablet {
+            font-size: 4rem;
+        }
+    }
+
 }

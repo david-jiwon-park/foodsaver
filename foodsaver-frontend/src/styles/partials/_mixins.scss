@@ -46,9 +46,12 @@
   /* Food Icon Background */
   @mixin food-icon-background {
     background-color: $color-main;
-    background-image: url('../../assets/icons/food-icons.png');
+    background-image: url('../../assets/icons/food-icons-mobile.png');
     background-size: cover; 
     background-position: center; 
+    @include tablet {
+      background-image: url('../../assets/icons/food-icons-td.png');
+    }
   }
 
   /* Intro, Signup, and Login Page Styling */
@@ -56,6 +59,7 @@
     height: 100vh;
     @include food-icon-background;
     @include flex-center-center;
+    flex-direction: column;
   }
   @mixin intro-page-buttons {
     width: 100%;
@@ -67,13 +71,28 @@
     color: $black;
     font-family: $base-font;
     font-weight: 600;
+    &:hover {
+      filter: brightness(85%);
+    }
+    @include tablet {
+      height: 3rem;
+      font-size: 1rem;
+      line-height: 1.4rem;
+    }
   }
   @mixin signup-login-container {
     background-color: $white;
-    width: 100%;
+    width: 78%;
     margin: 1.5rem;
     padding: 1rem 1.5rem;
     border-radius: 20px;
+    @include tablet {
+      width: 35rem;
+      padding: 1.5rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
   }
   @mixin signup-login-fields {
     outline: none;
@@ -97,6 +116,9 @@
     &:focus {
       border: 2px solid $color-main;
     }
+    @include tablet {
+      width: 26rem;
+    }
   }
   @mixin signup-login-error {
     color: $color-error;
@@ -116,6 +138,9 @@
     font-weight: 600;
     font-family: $base-font;
     color: $black;
+    &:hover {
+      filter: brightness(85%);
+    }
   }
   @mixin signup-login-link-container {
     padding-top: 0.5rem;

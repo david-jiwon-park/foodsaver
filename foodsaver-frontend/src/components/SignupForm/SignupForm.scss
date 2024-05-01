@@ -6,15 +6,21 @@
 
 .signup-form {
   @include signup-login-container;
-  height: 28rem;
+  height: 30rem;
   &__heading-container {
     display: flex;
+    @include tablet {
+      align-self: flex-start;
+    }
   }
   &__back-arrow {
     margin: 1.5rem 1rem 0 0;
   }
   &__heading {
     @include page-heading; 
+    @include tablet {
+      padding-left: 2rem;
+    }
   }
   &__form {
     display: flex;
@@ -31,7 +37,7 @@
   }
   &__signup-button {
     @include signup-login-buttons;
-    margin-top: 1.25rem;
+    margin-top: 1.75rem;
   }
   &__link-container {
     @include signup-login-link-container; 

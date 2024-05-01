@@ -6,7 +6,8 @@ import SignupForm from '../../components/SignupForm/SignupForm';
 const SignupPage = () => {
   return (
     <div className="signup-page">
-      <SignupForm />
+      <h1 className="signup-page__header">Food Saver</h1>
+        <SignupForm />
     </div>
   );
 };

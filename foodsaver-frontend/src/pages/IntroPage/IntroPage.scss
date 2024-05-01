@@ -12,10 +12,18 @@
     padding-top: 30%;
     font-family: $header-font;
     font-size: 4rem;
+    @include tablet {
+      padding-top: 10%;
+      font-size: 6rem;
+    }
   }
   &__subheading {
     padding: 0 2.5rem 8rem;
     text-align: center;
+    @include tablet {
+      padding: 0 2.5rem 4rem;
+      font-size: 1.25rem;
+    }
   }
   &__links {
     @include flex-center-center;
@@ -23,12 +31,19 @@
     padding-top: 5rem;
     padding-bottom: 15%;
     flex-direction: column;
+    @include tablet {
+      width: 20rem;
+      padding-top: 6rem;
+    }
   }
   &__login-link {
     @include flex-center-center;
     margin-bottom: 0.5rem;
     width: 100%;
     text-decoration: none;   
+    @include tablet {
+      margin-bottom: 1rem;
+    }
   }
   &__login-button {
     @include intro-page-buttons;
