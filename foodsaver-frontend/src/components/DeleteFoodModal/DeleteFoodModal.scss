@@ -11,6 +11,8 @@
 .deletefoodmodal {
    @include modal-container;
     height: 12rem;
+    @include modal-container;
+    height: 12.5rem;
     &__heading-container {
         @include modal-heading-container;
     }

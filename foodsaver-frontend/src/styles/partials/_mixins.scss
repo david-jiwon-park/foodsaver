@@ -41,6 +41,9 @@
   @mixin page-heading {
     font-family: $header-font;
     font-size: 3rem;
+    @include tablet {
+      font-size: 4rem;
+    }
   }
 
   /* Food Icon Background */
@@ -159,6 +162,11 @@
     font-size: 0.8rem;
     line-height: 1.2rem;
     font-weight: 600;
+    @include tablet {
+      font-size: 0.95rem;
+      line-height: 1.3rem;
+      font-weight: 600;
+    }
   }
   @mixin inventory-page-text-large {
     font-size: 1.1rem;
@@ -186,6 +194,9 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    @include tablet {
+      width: 32rem;
+    }
   }
   @mixin modal-form {
     width: 100%;
@@ -211,15 +222,26 @@
   @mixin inv-modal-field-container-1 {
     padding: 2rem 0 1.5rem 3.25rem;
     width: 100%;
+    @include tablet {
+      padding: 2.5rem 0 2rem 4.25rem;
+    }
   }
   @mixin inv-modal-field-container-2 {
     padding: 0 0 2.5rem 2rem;
     width: 100%;
+    @include tablet {
+      padding: 0 0 2.5rem 3rem;
+    }
   }
   @mixin inv-modal-label {
     font-size: 0.9rem;
     line-height: 1rem;
     padding-right: 0.25rem;
+    @include tablet {
+      font-size: 1rem;
+      line-height: 1.25rem;
+      padding-right: 0.25rem;
+    }
   }
   @mixin modal-fields {
     outline: none;
@@ -233,7 +255,12 @@
     color: $black;
     padding-left: 0.5rem;
     &:focus {
-        border: 2px solid $color-main;
+      border: 2px solid $color-main;
+    }
+    @include tablet {
+      height: 2.75rem;
+      font-size: 1rem;
+      line-height: 1.25rem;
     }
   }
   @mixin inv-modal-field-1 {
@@ -266,6 +293,11 @@
     font-size: 0.9rem;
     line-height: 1.25rem;
     font-family: $base-font;
+    @include tablet {
+      font-size: 1rem;
+      line-height: 1.25rem;
+      margin: 0.55rem 0 0 2.25rem;
+    }
   }
   @mixin modal-action-button {
     background-color: $white;
@@ -275,6 +307,11 @@
     line-height: 1.25rem;
     font-family: $base-font;
     font-weight: 600;
+    @include tablet {
+      font-size: 1rem;
+      line-height: 1.25rem;
+      margin: 0.55rem 2.25rem 0 0;
+    }
   }
   @mixin delete-modal-text-container {
     box-sizing: border-box;
