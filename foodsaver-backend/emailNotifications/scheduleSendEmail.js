@@ -57,7 +57,7 @@ const queryForEmails = db('users as u')
   .where('inv.discarded', 0);
 
 // Function that runs daily at 8:00AM to check which users need to be sent email notifications for that day
-cron.schedule('0 8 * * *', () => {
+cron.schedule('0 12 * * *', () => {
   const combinedData = {};
   queryForEmails
   .then((response) => {

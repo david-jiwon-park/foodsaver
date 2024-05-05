@@ -79,7 +79,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
             placeholder="Password"
             maxLength="50"
           />
-          <span class="toggle-password" onClick={() => togglePasswordVisibility()}>
+          <span className="toggle-password" onClick={() => togglePasswordVisibility()}>
             <img className="eye-icon" src={eyeIcon} alt="eye-icon"/>
           </span>
         </div>

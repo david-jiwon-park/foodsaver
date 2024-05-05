@@ -125,7 +125,7 @@ const SignupForm = () => {
             onChange={handlePasswordChange}
             maxLength="50"
           />
-          <span class="toggle-password" onClick={() => togglePasswordVisibility()}>
+          <span className="toggle-password" onClick={() => togglePasswordVisibility()}>
             <img className="eye-icon" src={eyeIcon} alt="eye-icon"/>
           </span>
         </div>
@@ -140,7 +140,7 @@ const SignupForm = () => {
             onChange={handleConfirmPasswordChange}
             maxLength="50"
           />
-          <span class="toggle-password" onClick={() => toggleConfirmPasswordVisibility()}>
+          <span className="toggle-password" onClick={() => toggleConfirmPasswordVisibility()}>
             <img className="eye-icon" src={eyeIcon} alt="eye-icon"/>
           </span>
         </div>
