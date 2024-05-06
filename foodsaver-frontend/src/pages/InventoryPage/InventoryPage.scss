@@ -45,6 +45,9 @@ span {
     font-family: $base-font;
     border-radius: 5px;
     padding-left: 1.2rem;
+    &:hover {
+      filter: brightness(85%);
+    }
     @include tablet {
       height: 2.5rem;
       width: 10rem;

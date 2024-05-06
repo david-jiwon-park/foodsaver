@@ -14,8 +14,12 @@
     &__heart {
         position: fixed;
         height: 2.25rem;
-        right: 2.25rem;
+        right: 10%;
         top: 3.25em;
         z-index: 1003;
+        @include tablet {
+            right: 30%;
+            height: 2.5rem;
+          }
     }
 }

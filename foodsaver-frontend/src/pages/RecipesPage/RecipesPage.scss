@@ -13,7 +13,13 @@ span {
 }
 
 .recipes-page {
-    padding: 5rem 0rem 0 1.5rem;
+    padding: 5rem 0 0 1.5rem;
+    @include tablet {
+        padding: 7rem 2.5rem 0;
+    }
+    @include desktop {
+        padding: 7rem 3rem 0;
+    }
     &__heading {
         @include page-heading;
     }
@@ -21,8 +27,14 @@ span {
         font-size: 1.25rem;
         line-height: 1.5rem;
         padding-bottom: 1rem;
+        @include tablet {
+            font-size: 1.4rem;
+        }
         &--recipes {
             padding-top: 1rem;
+            @include tablet {
+                padding-bottom: 1.25rem;
+            }
         }
     }
     &__no-inventory-text {
@@ -32,10 +44,16 @@ span {
     }
     &__inventory-outer-container {
         overflow-x: auto; 
+        @include tablet {
+            overflow-x: none; 
+        }
     }
     &__inventory-inner-container {
         @include flex-wrap-start;
         width: 150%; 
+        @include tablet {
+            width: 100%; 
+        }
     }
     &__button-inventory {
         border: none;
@@ -46,8 +64,25 @@ span {
         margin: 0 0.5rem 0.5rem 0;
         font-family: $base-font;
         background-color: $color-field-background;
+        &:hover {
+            filter: brightness(85%);
+        }
         &--selected {
             background-color: $color-main;
+        }
+        @include tablet {
+            height: 2.75rem;
+            width: 8rem;
+            font-size: 0.9rem;
+            line-height: 1.2rem;
+            margin: 0 0.75rem 0.75rem 0;
+        }
+        @include desktop {
+            height: 3rem;
+            width: 9rem;
+            font-size: 1rem;
+            line-height: 1.2rem;
+            margin: 0 1rem 1rem 0;
         }
     }
     &__find-button-container {
@@ -63,6 +98,19 @@ span {
         border-radius: 20px;
         font-family: $base-font;
         font-weight: 600;
+        &:hover {
+            filter: brightness(85%);
+          }
+        @include tablet {
+            width: 10rem;
+            height: 2.75rem;
+            font-size: 0.95rem;
+        }
+        @include desktop {
+            width: 12rem;
+            height: 3rem;
+            font-size: 1rem;
+        }
     }
     &__no-recipes-text {
         padding-top: 0.25rem;
@@ -71,20 +119,43 @@ span {
     }
     &__recipes-outer-container {
         overflow-x: auto; 
+        @include tablet {
+            overflow-x: none; 
+        }
     }
     &__recipes-inner-container {
         @include flex-wrap-start;
         width: 200%; 
+        @include tablet {
+            width: 100%; 
+            justify-content: center;
+        }
     }
     &__recipe-container {
         display: flex;
         flex-direction: column;
         width: 6.25rem;
         margin: 0 1rem 1rem 0;
+        @include tablet {
+            width: 8rem;
+            margin: 0 1.5rem 1.25rem 0;
+        }
+        @include desktop {
+            width: 10rem;
+        }
     }
     &__recipe-image {
         height: 6.25rem;
         border-radius: 20px;
+        &:hover {
+            filter: brightness(85%);
+        }
+        @include tablet {
+            height: 8rem;
+        }
+        @include desktop {
+            height: 10rem;
+        }
     }
     &__recipe-name {
         display: -webkit-box; 
@@ -98,6 +169,11 @@ span {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: normal;
+        @include tablet {
+            font-size: 0.9rem;
+            -webkit-line-clamp: 3;
+            max-height: 3rem; 
+        }
     }
     &__loading {
         @include fixed-center-center;
