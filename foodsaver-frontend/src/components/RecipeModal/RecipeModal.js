@@ -97,15 +97,19 @@ const RecipeModal = ({ isOpen, onClose, uri, image, name, servings, ingredients,
 
   return (  
     <div className="overlay">
-      <img className="recipe-modal__back-arrow" src={backArrow} alt="back arrow" onClick={() => onClose()}/> 
-      {isFavorited ?  
-        (<img className="recipe-modal__heart" src={fullheartIcon} alt="heart" onClick={() => toggleFavorite()}/>) : 
-        (<img className="recipe-modal__heart" src={emptyheartIcon} alt="heart" onClick={() => toggleFavorite()}/>)
-      }
       <div className="recipe-modal">
-        <div className="recipe-modal__recipe-image-container">
-          <img className="recipe-modal__recipe-image" src={image} alt="recipe"/>
+        <div>
+          <img className="recipe-modal__back-arrow" src={backArrow} alt="back arrow" onClick={() => onClose()}/> 
+          <div className="recipe-modal__recipe-image-container">
+            <img className="recipe-modal__recipe-image" src={image} alt="recipe"/>
+          </div>
+          {isFavorited ?  
+            (<img className="recipe-modal__heart" src={fullheartIcon} alt="heart" onClick={() => toggleFavorite()}/>) : 
+            (<img className="recipe-modal__heart" src={emptyheartIcon} alt="heart" onClick={() => toggleFavorite()}/>)
+          }
         </div>
+
+
         <h3 className="recipe-modal__name">{name}</h3>
         <h5 className="recipe-modal__servings">{servings} {servings === 1 ? "serving" : "servings"}</h5>
         <RecipeIngredients

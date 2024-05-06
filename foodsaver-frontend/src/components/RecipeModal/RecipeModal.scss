@@ -15,11 +15,17 @@
         position: fixed;
         height: 2.25rem;
         right: 10%;
-        top: 3.25em;
+        top: 1.25rem;
         z-index: 1003;
         @include tablet {
-            right: 30%;
-            height: 2.5rem;
-          }
+            right: 14.17rem;
+            top: 0.5rem;
+            height: 3rem;
+        }
+        @include desktop {
+            right: 16.5rem;
+            top: 0.5rem;
+            height: 3rem;
+        }
     }
 }
