@@ -9,9 +9,25 @@
 }
 
 .profile-page {
+    box-sizing: border-box;
     padding: 5rem 1.2rem 1rem;
+    @include tablet {
+        padding: 7rem 2.5rem 2rem;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
     &__heading {
         @include page-heading;
+        @include tablet {
+            align-self: flex-start;
+        }
+    }
+    &__info {
+        @include tablet {
+            width: 27rem;
+        }
     }
     &__name-email {
         display: flex;
@@ -28,6 +44,10 @@
         &--top {
             padding-bottom: 1.25rem;
         }
+        @include tablet {
+            font-size: 1rem;
+            line-height: 1.25rem;
+        }
     }
     &__field-container {
         width: 65%;
@@ -40,6 +60,10 @@
         &--top {
             padding-bottom: 1.25rem;
         }
+        @include tablet {
+            font-size: 0.95rem;
+            line-height: 1.25rem;
+        }
     }
     &__password-container {
         display: flex;
@@ -50,6 +74,10 @@
         font-size: 0.85rem;
         line-height: 1.25rem;
         width: 25%;
+        @include tablet {
+            font-size: 1rem;
+            line-height: 1.25rem;
+        }
     }
     &__password-field {
         display: flex;
@@ -59,11 +87,20 @@
         height: 2rem;
         border-radius: 20px;
         background-color: $color-field-background;
+        @include tablet {
+            height: 2.25rem;
+            width: 12rem;
+        }
     }
     &__password {
         font-size: 1rem;
         line-height: 1rem;
         padding-top: 0.6rem;
+        @include tablet {
+            font-size: 1.1rem;
+            line-height: 1.25rem;
+            padding-top: 0.65rem;
+        }
     }
     &__edit-name-email {
         margin-left: auto;
@@ -74,6 +111,15 @@
         padding-top: 1.25rem;
         text-align: right;
         text-decoration: underline;
+        @include tablet {
+            font-size: 0.8rem;
+        }
+    }
+    &__form {
+        @include tablet {
+            width: 27rem;
+            padding-top: 0.5rem;
+        }
     }
     &__notifications-container {
         display: flex;
@@ -86,6 +132,10 @@
         width: 36%;
         font-weight: 600;
         padding-bottom: 0.25rem;
+        @include tablet {
+            font-size: 1rem;
+            line-height: 1.25rem;
+        }
     }
     &__toggle input {
         display: none;
@@ -99,6 +149,9 @@
         border-radius: 15px;
         transition: background-color 0.3s;
         margin-left: 1.25rem;
+        @include tablet {
+            margin-left: 1.75rem;
+        }
     }
     &__slider:before {
         position: absolute;
@@ -142,6 +195,12 @@
         &:focus {
             border: 2px solid $color-main;
         }
+        @include tablet {
+            margin-left: 1.75rem;
+            width: 11rem;
+            height: 2.5rem;
+            font-size: 0.875rem;
+        }
     }
     &__signout-button-container {
         padding-top: 7.5rem;
@@ -159,6 +218,15 @@
         line-height: 1rem;
         font-family: $base-font;
         font-weight: 600;
+        &:hover {
+            filter: brightness(85%);
+          }
+        @include tablet {
+            width: 11rem;
+            height: 2.5rem;
+            font-size: 1rem;
+            line-height: 1.25rem;
+        }
     }
     &__loading {
         @include fixed-center-center;

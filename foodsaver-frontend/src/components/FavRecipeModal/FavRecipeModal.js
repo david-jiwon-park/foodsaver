@@ -11,9 +11,9 @@ const FavRecipeModal = ({ isOpen, onClose, image, name, servings, ingredients, n
  
   return (  
     <div className="overlay">
-      <img className="recipe-modal__back-arrow" src={backArrow} alt="back arrow" onClick={() => onClose()}/> 
       <div className="recipe-modal">
         <div className="recipe-modal__recipe-image-container">
+        <img className="recipe-modal__back-arrow" src={backArrow} alt="back arrow" onClick={() => onClose()}/> 
           <img className="recipe-modal__recipe-image" src={image} alt="recipe"/>
         </div>
         <h3 className="recipe-modal__name">{name}</h3>

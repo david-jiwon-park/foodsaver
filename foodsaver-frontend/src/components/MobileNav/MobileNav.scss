@@ -1,10 +1,10 @@
-// Navigation Styling 
+// Mobile Navigation Styling 
 
 @import '../../styles/partials/fonts';
 @import '../../styles/partials/mixins';
 @import '../../styles/partials/variables';
 
-.nav {
+.mobile-nav {
   position: fixed;
   top: 4.5rem;
   left: 0;
@@ -18,13 +18,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 25% 3rem 0;
+    padding: 2rem 3rem 0;
   }
   &__link {
     margin-bottom: 2rem;
     width: 100%;
     @include flex-center-center;
     text-decoration: none;   
+    &--signout {
+      margin-top: 4rem;
+    }
   }
   &__button {
     width: 100%;
@@ -37,5 +40,8 @@
     color: $color-nav-text;
     font-family: $base-font;
     font-weight: 600;
+    &--signout {
+      background-color: $color-nav-signout-button;
+    }
   }
 }

@@ -141,19 +141,21 @@ const InventoryPage = ({ isLoggedIn, setIsLoggedIn }) => {
         (<>
           <div className="inventory-page__subheading-container">
             <h4 className="inventory-page__subheading">Food Item</h4>
-            <h4 className="inventory-page__subheading">Expires In</h4>
+            <h4 className="inventory-page__subheading inventory-page__subheading--right">Expires In</h4>
           </div>
-          {userInventory.filter((item) => {
-            return item.discarded === 0
-          })
-          .map((item) => (
-            <div className={expDateStyling(item.exp_date)} key={item.id}>
-              <p className="inventory-page__item-name">{item.food_item}</p>
-              <p className="inventory-page__item-exp">{daysUntilExpiration(item.exp_date)} {expDateText(item.exp_date)}</p>
-              <img className="inventory-page__edit-icon" src={editIcon} alt="edit icon" onClick={() => handleOpenEditFoodModal(item.id, item.food_item, item.exp_date)}/>
-              <img className="inventory-page__delete-icon" src={deleteIcon} alt="delete icon" onClick={() => handleOpenDeleteFoodModal(item.id, item.food_item)}/>
-            </div>
-          ))}
+          <div className="inventory-page__item-outer-container">
+            {userInventory.filter((item) => {
+              return item.discarded === 0
+            })
+            .map((item) => (
+              <div className={expDateStyling(item.exp_date)} key={item.id}>
+                <p className="inventory-page__item-name">{item.food_item}</p>
+                <p className="inventory-page__item-exp">{daysUntilExpiration(item.exp_date)} {expDateText(item.exp_date)}</p>
+                <img className="inventory-page__edit-icon" src={editIcon} alt="edit icon" onClick={() => handleOpenEditFoodModal(item.id, item.food_item, item.exp_date)}/>
+                <img className="inventory-page__delete-icon" src={deleteIcon} alt="delete icon" onClick={() => handleOpenDeleteFoodModal(item.id, item.food_item)}/>
+              </div>
+            ))}
+          </div>
         </>)}
         <AddFoodModal 
           isOpen={isAddFoodModalOpen} 

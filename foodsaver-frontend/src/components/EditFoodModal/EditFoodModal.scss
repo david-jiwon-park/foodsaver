@@ -11,6 +11,9 @@
 .editfoodmodal {
     @include modal-container;
     height: 16rem;
+    @include tablet {
+        height: 18rem;
+    }
     &__form {   
         @include modal-form;
     }

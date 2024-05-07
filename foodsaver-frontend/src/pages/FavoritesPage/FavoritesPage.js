@@ -8,7 +8,7 @@ import Header from '../../components/Header/Header';
 import FavRecipeModal from '../../components/FavRecipeModal/FavRecipeModal';
 import DeleteFavRecipeModal from '../../components/DeleteFavRecipeModal/DeleteFavRecipeModal';
 import getUserFavorites from '../../utils/getUserFavorites';
-import xIcon from '../../assets/icons/x-icon.svg';
+import deleteIcon from '../../assets/icons/delete-icon.svg';
 
 const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
@@ -124,7 +124,7 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
           Head to the <span>Recipes</span> page to search for recipes to add as favorites!
         </p>)
         : 
-        (<>
+        (<div className='favorites-page__recipes-container'>
           {userFavoritesExternalData.map((r) => (
             <div 
               key={r.recipe.uri}
@@ -133,10 +133,10 @@ const FavoritesPage = ({ isLoggedIn, setIsLoggedIn }) => {
             >
               <img className='favorites-page__recipe-image' src={r.recipe.image} alt="recipe"/>
               <h3 className='favorites-page__recipe-label'>{r.recipe.label}</h3>
-              <img className='favorites-page__recipe-delete' src={xIcon} alt="x-icon" onClick={(e) => handleOpenDeleteFavRecipeModal(e, r.recipe.label, r.recipe.uri)}/>
+              <img className='favorites-page__recipe-delete' src={deleteIcon} alt="delete icon" onClick={(e) => handleOpenDeleteFavRecipeModal(e, r.recipe.label, r.recipe.uri)}/>
             </div>
           ))}
-        </>)}
+        </div>)}
         <DeleteFavRecipeModal 
           isOpen={isDeleteFavRecipeModalOpen} 
           onClose={handleCloseDeleteFavRecipeModal} 

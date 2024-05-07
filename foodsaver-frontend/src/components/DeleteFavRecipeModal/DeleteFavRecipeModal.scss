@@ -11,6 +11,9 @@
 .deletefavrecipemodal {
     @include modal-container;
     height: 14rem;
+    @include tablet {
+        height: 15.5rem;
+    }
     &__heading-container {
         width: 100%;
         border-bottom: 1px solid $color-modal-divider;
@@ -25,18 +28,28 @@
     &__text-container {
         @include delete-modal-text-container;
         padding-top: 1.25rem;
+        @include tablet {
+            padding-top: 1.75rem;
+        }
     }
     &__text {
         font-size: 0.95rem;
         line-height: 1.25rem;
         text-align: center;
         padding: 0 1rem;
+        @include tablet {
+            font-size: 1rem;
+            line-height: 1.3rem;
+        }
     }
     &__button-outer-container {
         position: fixed;
         width: 100%; 
         top: 11.5rem;
         box-sizing: border-box;
+        @include tablet {
+            top: 12.5rem;
+        }
     }
     &__button-inner-container {
         @include modal-button-container;

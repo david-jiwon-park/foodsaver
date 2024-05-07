@@ -14,14 +14,32 @@
   background-color: $color-main;
   padding: 0.5rem 1.5rem;
   z-index: 1000;
+  @include tablet {
+    height: 6rem;
+    padding: 1rem 2.5rem;
+  }
+  @include desktop {
+    height: 6rem;
+    padding: 1rem 3rem;
+  }
   &__container {
     @include flex-spaceb-center;
+    @include tablet {
+      justify-content: flex-start;
+    }
   }
   &__heading {
     font-family: $header-font;
     font-size: 2.5rem;
+    @include tablet {
+      font-size: 3rem;
+      padding-right: 1.75rem;
+    }
   }
-  &__nav-icon {
+  &__mobile-nav-icon {
     height: 1rem;
+    @include tablet {
+      display: none;
+    }
   }
 }

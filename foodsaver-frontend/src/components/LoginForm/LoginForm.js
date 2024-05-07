@@ -5,6 +5,7 @@ import { useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import backArrow from '../../assets/icons/back-arrow.png';
+import eyeIcon from '../../assets/icons/eye-icon.png';
 
 const LoginForm = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
@@ -13,6 +14,16 @@ const LoginForm = ({ setIsLoggedIn }) => {
   // States for handling login errors and messages
   const [isLoginError, setIsLoginError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  // Toggle password visibility function
+  const togglePasswordVisibility = () => {
+    const passwordField = document.getElementById("password");
+    if (passwordField.type === "password") {
+      passwordField.type = "text";
+    } else {
+      passwordField.type = "password";
+    }
+  };
 
   const apiBaseURL = process.env.REACT_APP_SERVER;
   // Function to handle login
@@ -59,7 +70,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
             maxLength="50"
           />
         </div>
-        <div className="login-form__input-container">
+        <div className="login-form__input-container login-form__password-container">
           <input
             className="login-form__input"
             id="password"
@@ -68,6 +79,9 @@ const LoginForm = ({ setIsLoggedIn }) => {
             placeholder="Password"
             maxLength="50"
           />
+          <span className="toggle-password" onClick={() => togglePasswordVisibility()}>
+            <img className="eye-icon" src={eyeIcon} alt="eye-icon"/>
+          </span>
         </div>
         {isLoginError && <p className="login-form__login-error">{errorMessage}</p>}
         <button className="login-form__login-button">Log In</button>

@@ -14,8 +14,18 @@
     &__heart {
         position: fixed;
         height: 2.25rem;
-        right: 2.25rem;
-        top: 3.25em;
+        right: 10%;
+        top: 1.25rem;
         z-index: 1003;
+        @include tablet {
+            right: 14.17rem;
+            top: 0.5rem;
+            height: 3rem;
+        }
+        @include desktop {
+            right: 16.5rem;
+            top: 0.5rem;
+            height: 3rem;
+        }
     }
 }

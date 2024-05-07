@@ -14,37 +14,66 @@ span {
 
 .favorites-page {
     padding: 5rem 0 0;
+    @include tablet {
+        padding: 7rem 0 0;
+    }
     &__heading {
         @include page-heading;
-        padding-left: 1rem;
-        border-bottom: 1px solid $color-divider;
+        text-align: center;
     }
     &__no-favorites-text {
         padding: 1.25rem 1rem 0;
         font-size: 1.1rem;
         line-height: 1.5rem;
     }
+    &__recipes-container {
+        @include tablet {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    }
     &__recipe-container {
         display: flex;    
         align-items: center;
-        border-bottom: 1px solid $color-divider;
         padding: 0.75rem;
+        &:hover {
+            background-color: $color-hover-background;
+        }
+        @include tablet {
+            width: 34rem;
+        }
+        @include desktop {
+            width: 38rem;
+        }
     }
     &__recipe-image {
         height: 6.5rem;
         border-radius: 20px;
         margin-right: 0.75rem;
+        @include tablet {
+            height: 7.5rem;
+        }
     }
     &__recipe-label {
         font-size: 0.85rem;
         line-height: 1.2rem;
         text-align: left;
+        margin-right: 0.25rem;
+        @include tablet {
+            font-size: 1rem;
+            line-height: 1.25rem;
+            margin-right: 0.75rem;
+        }
     }
     &__recipe-delete {
         height: 1.5rem;
-        align-self: flex-start;
         margin-left: auto;
         z-index: 500;
+        @include tablet {
+            height: 1.75rem;
+        }
     }
     &__loading {
         @include fixed-center-center;

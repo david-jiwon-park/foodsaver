@@ -35,388 +35,525 @@
   transform: translate(-50%, -50%);
 }
 
-/* Mobile Stlying */
+/* Page Heading */
+@mixin page-heading {
+  font-family: $header-font;
+  font-size: 3rem;
+  @include tablet {
+    font-size: 4rem;
+  }
+}
 
-  /* Page Heading */
-  @mixin page-heading {
-    font-family: $header-font;
-    font-size: 3rem;
+/* Food Icon Background */
+@mixin food-icon-background {
+  background-color: $color-main;
+  background-image: url('../../assets/icons/food-icons-mobile.png');
+  background-size: cover; 
+  background-position: center; 
+  @include tablet {
+    background-image: url('../../assets/icons/food-icons-td.png');
   }
+}
 
-  /* Food Icon Background */
-  @mixin food-icon-background {
-    background-color: $color-main;
-    background-image: url('../../assets/icons/food-icons.png');
-    background-size: cover; 
-    background-position: center; 
+/* Intro, Signup, and Login Page Styling */
+@mixin pre-login-background {
+  height: 100vh;
+  @include food-icon-background;
+  @include flex-center-center;
+  flex-direction: column;
+}
+@mixin intro-page-buttons {
+  width: 100%;
+  height: 2.5rem;
+  border-radius: 20px;
+  border: solid 1px $black;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: $black;
+  font-family: $base-font;
+  font-weight: 600;
+  &:hover {
+    filter: brightness(85%);
   }
-
-  /* Intro, Signup, and Login Page Styling */
-  @mixin pre-login-background {
-    height: 100vh;
-    @include food-icon-background;
-    @include flex-center-center;
+  @include tablet {
+    height: 3rem;
+    font-size: 1rem;
+    line-height: 1.4rem;
   }
-  @mixin intro-page-buttons {
-    width: 100%;
-    height: 2.5rem;
-    border-radius: 20px;
-    border: solid 1px $black;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    color: $black;
-    font-family: $base-font;
-    font-weight: 600;
-  }
-  @mixin signup-login-container {
-    background-color: $white;
-    width: 100%;
-    margin: 1.5rem;
-    padding: 1rem 1.5rem;
-    border-radius: 20px;
-  }
-  @mixin signup-login-fields {
-    outline: none;
-    box-sizing: border-box;
-    width: 100%;
-    height: 2.75rem;
-    background-color: $color-field-background;
-    border: none;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    line-height: 1.25rem;
-    font-family: $base-font;
-    color: $black;
-    padding-left: 1.25rem;
-    &::placeholder {
-      font-size: 0.85rem;
-      line-height: 1.25rem;
-      font-family: $base-font;
-      color: $color-placeholder-text;
-    }
-    &:focus {
-      border: 2px solid $color-main;
-    }
-  }
-  @mixin signup-login-error {
-    color: $color-error;
-    font-size: 0.85rem;
-    line-height: 1.1rem;
-    padding-top: 0.25rem;
-  }
-  @mixin signup-login-buttons {
-    background-color: $color-main;
-    border: none;
-    box-sizing: border-box;
-    width: 100%;
-    height: 2.5rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    line-height: 1.25rem;
-    font-weight: 600;
-    font-family: $base-font;
-    color: $black;
-  }
-  @mixin signup-login-link-container {
-    padding-top: 0.5rem;
-    font-size: 0.8rem;
-    line-height: 1.25rem;
-  }
-  @mixin signup-login-link {
-    text-decoration: none;
-    color: $color-signup-link;
-    font-weight: 600;
-    padding-left: 0.25rem;
-  }
-
-  /* Inventory Page Styling */
-  @mixin inventory-page-text {
-    font-size: 0.8rem;
-    line-height: 1.2rem;
-    font-weight: 600;
-  }
-  @mixin inventory-page-text-large {
-    font-size: 1.1rem;
-    line-height: 1.5rem;
-  }
-
-  /* Modal Styling */
-  @mixin modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1001; 
-    pointer-events: auto; 
-    background-color: rgba($color-transparent-background, 0.5);
-  }
-  @mixin modal-container {
-    z-index: 1002;
-    box-sizing: border-box;
-    position: fixed;
-    background-color: $white;
-    width: 90%; 
-    border-radius: 20px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  @mixin modal-form {
-    width: 100%;
-    height: 100%;
+}
+@mixin signup-login-container {
+  background-color: $white;
+  width: 78%;
+  margin: 1.5rem;
+  padding: 1rem 1.5rem;
+  border-radius: 20px;
+  @include tablet {
+    width: 35rem;
+    padding: 1.5rem 2.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-  @mixin modal-heading-container {
-    width: 100%;
-    border-bottom: 1px solid $color-modal-divider;
-    @include flex-center-center;
+}
+@mixin signup-login-fields {
+  outline: none;
+  box-sizing: border-box;
+  width: 100%;
+  height: 2.75rem;
+  background-color: $color-field-background;
+  border: none;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  line-height: 1.25rem;
+  font-family: $base-font;
+  color: $black;
+  padding-left: 1.25rem;
+  &::placeholder {
+    font-size: 0.85rem;
+    line-height: 1.25rem;
+    font-family: $base-font;
+    color: $color-placeholder-text;
   }
-  @mixin modal-heading-icon {
-    height: 1.25rem;
-    padding-right: 0.25rem;
+  &:focus {
+    border: 2px solid $color-main;
   }
-  @mixin modal-heading {
-    padding: 0.75rem 0;
+  @include tablet {
+    width: 26rem;
+  }
+}
+@mixin signup-login-error {
+  color: $color-error;
+  font-size: 0.85rem;
+  line-height: 1.1rem;
+  padding-top: 0.25rem;
+}
+@mixin signup-login-buttons {
+  background-color: $color-main;
+  border: none;
+  box-sizing: border-box;
+  width: 100%;
+  height: 2.5rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  font-family: $base-font;
+  color: $black;
+  &:hover {
+    filter: brightness(85%);
+  }
+}
+@mixin signup-login-link-container {
+  padding-top: 0.75rem;
+  font-size: 0.8rem;
+  line-height: 1.25rem;
+}
+@mixin signup-login-link {
+  text-decoration: none;
+  color: $color-signup-link;
+  font-weight: 600;
+  padding-left: 0.25rem;
+}
+
+/* Inventory Page Styling */
+@mixin inventory-page-text {
+  font-size: 0.8rem;
+  line-height: 1.2rem;
+  font-weight: 600;
+  @include tablet {
+    font-size: 0.95rem;
+    line-height: 1.3rem;
+    font-weight: 600;
+  }
+}
+@mixin inventory-page-text-large {
+  font-size: 1.1rem;
+  line-height: 1.5rem;
+}
+
+/* Modal Styling */
+@mixin modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1001; 
+  pointer-events: auto; 
+  background-color: rgba($color-transparent-background, 0.5);
+}
+@mixin modal-container {
+  z-index: 1002;
+  box-sizing: border-box;
+  position: fixed;
+  background-color: $white;
+  width: 90%; 
+  border-radius: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  @include tablet {
+    width: 32rem;
+  }
+}
+@mixin modal-form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@mixin modal-heading-container {
+  width: 100%;
+  border-bottom: 1px solid $color-modal-divider;
+  @include flex-center-center;
+}
+@mixin modal-heading-icon {
+  height: 1.25rem;
+  padding-right: 0.25rem;
+}
+@mixin modal-heading {
+  padding: 0.75rem 0;
+  font-size: 1rem;
+  line-height: 1rem;
+}
+@mixin inv-modal-field-container-1 {
+  padding: 2rem 0 1.5rem 3.25rem;
+  width: 100%;
+  @include tablet {
+    padding: 2.5rem 0 2rem 4.25rem;
+  }
+}
+@mixin inv-modal-field-container-2 {
+  padding: 0 0 2.5rem 2rem;
+  width: 100%;
+  @include tablet {
+    padding: 0 0 2.5rem 3rem;
+  }
+}
+@mixin inv-modal-label {
+  font-size: 0.9rem;
+  line-height: 1rem;
+  padding-right: 0.25rem;
+  @include tablet {
     font-size: 1rem;
-    line-height: 1rem;
-  }
-  @mixin inv-modal-field-container-1 {
-    padding: 2rem 0 1.5rem 3.25rem;
-    width: 100%;
-  }
-  @mixin inv-modal-field-container-2 {
-    padding: 0 0 2.5rem 2rem;
-    width: 100%;
-  }
-  @mixin inv-modal-label {
-    font-size: 0.9rem;
-    line-height: 1rem;
+    line-height: 1.25rem;
     padding-right: 0.25rem;
   }
-  @mixin modal-fields {
-    outline: none;
-    box-sizing: border-box;
-    height: 2.5rem;
-    background-color: $color-field-background;
-    border: none;
-    font-size: 0.9rem;
+}
+@mixin modal-fields {
+  outline: none;
+  box-sizing: border-box;
+  height: 2.5rem;
+  background-color: $color-field-background;
+  border: none;
+  font-size: 0.9rem;
+  line-height: 1.25rem;
+  font-family: $base-font;
+  color: $black;
+  padding-left: 0.5rem;
+  &:focus {
+    border: 2px solid $color-main;
+  }
+  @include tablet {
+    height: 2.75rem;
+    font-size: 1rem;
+    line-height: 1.25rem;
+  }
+}
+@mixin inv-modal-field-1 {
+  @include modal-fields;
+  width: 59%;
+} 
+@mixin inv-modal-field-2 {
+  @include modal-fields;
+  width: 9rem;
+} 
+@mixin profile-modal-field {
+  @include modal-fields; 
+  &::placeholder {
+    font-size: 0.8rem;
     line-height: 1.25rem;
     font-family: $base-font;
     color: $black;
-    padding-left: 0.5rem;
-    &:focus {
-        border: 2px solid $color-main;
+  }
+}
+@mixin modal-button-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid $color-modal-divider;
+}
+@mixin modal-cancel-button {
+  background-color: $white;
+  border: none;
+  margin: 0.4rem 0 0 2.25rem;
+  font-size: 0.9rem;
+  line-height: 1.25rem;
+  font-family: $base-font;
+  @include tablet {
+    font-size: 1rem;
+    line-height: 1.25rem;
+    margin: 0.55rem 0 0 2.25rem;
+  }
+}
+@mixin modal-action-button {
+  background-color: $white;
+  border: none;
+  margin: 0.4rem 2.25rem 0 0;
+  font-size: 0.9rem;
+  line-height: 1.25rem;
+  font-family: $base-font;
+  font-weight: 600;
+  @include tablet {
+    font-size: 1rem;
+    line-height: 1.25rem;
+    margin: 0.55rem 2.25rem 0 0;
+  }
+}
+@mixin delete-modal-text-container {
+  box-sizing: border-box;
+  height: 7rem;
+  display: flex;
+  align-items: center;
+}
+@mixin recipe-modal-container {
+  z-index: 1002;
+  padding: 1rem 1.5rem 1.25rem;
+  box-sizing: border-box;
+  position: fixed;
+  background-color: $white;
+  width: 90%; 
+  height: 87.5%;
+  border-radius: 20px;
+  top: 2.5rem;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  overflow-y: scroll;
+  @include tablet {
+    width: 40rem; 
+    padding: 1.75rem 3rem 1.75rem;
+  }
+  @include desktop {
+    width: 45rem; 
+  }
+  &__back-arrow {
+    position: fixed;
+    left: 10%;
+    top: 2rem;
+    z-index: 1003;
+    @include tablet {
+      left: 2.5rem;
+      height: 1.2rem;
     }
   }
-  @mixin inv-modal-field-1 {
-    @include modal-fields;
-    width: 59%;
-  } 
-  @mixin inv-modal-field-2 {
-    @include modal-fields;
-    width: 9rem;
-  } 
-  @mixin profile-modal-field {
-    @include modal-fields; 
-    &::placeholder {
-      font-size: 0.8rem;
-      line-height: 1.25rem;
-      font-family: $base-font;
-      color: $black;
+  &__recipe-image-container {
+    display: flex;
+    justify-content: center;
+  }
+  &__recipe-image {
+    height: 7rem;
+    width: 7rem;
+    border-radius: 20px;
+    @include tablet {
+      height: 9rem;
+      width: 9rem;
     }
   }
-  @mixin modal-button-container {
+  &__name {
+    text-align: center;
+    padding-top: 1rem;
+    font-size: 1.1rem;
+    line-height: 1.25rem;
+    @include tablet {
+      font-size: 1.5rem;
+      line-height: 1.6rem;
+    }
+  }
+  &__servings {
+    text-align: center;
+    padding-top: 0.25rem;
+    font-weight: 400;
+    @include tablet {
+      font-size: 1rem;
+      line-height: 1rem;
+      padding-top: 0.5rem;
+    }
+  }
+}
+@mixin recipe-modal-ingredients {
+  &__ingredients-section {
+    padding-top: 0.5rem;
+    width: 100%;
+    @include tablet {
+      padding-top: 1rem;
+    }
+  }
+  &__section-heading {
+    width: 100%;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid $color-divider;
+    @include tablet {
+      font-size: 1.15rem;
+    }
+  }
+  &__ingredient {
+    font-size: 0.9rem;
+    line-height: 1rem;
+    padding-bottom: 0.25rem;
+    @include tablet {
+      font-size: 1rem;
+      line-height: 1.1rem;
+      padding-bottom: 0.4rem;
+    }
+  }
+}
+@mixin recipe-modal-nutrition-info {
+  &__nutrition-section {
+    padding-top: 0.25rem;
+    width: 100%;
+  }
+  &__section-heading {
+    width: 100%;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid $color-divider;
+    @include tablet {
+      font-size: 1.15rem;
+    } 
+  }
+  &__nutrition-content {
+    display: flex;
+    flex-direction: row;
+  }
+  &__left-column {
+    padding: 0.5rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    @include tablet {
+      padding: 1.25rem 1rem;
+    }
+    @include desktop {
+      padding: 1.25rem;
+    }
+  }
+  &__right-column {
+    padding: 0.5rem 0.5rem;
+    width: 50%;
+    @include tablet {
+      padding: 1.25rem 1rem;
+    }
+    @include desktop {
+      padding: 1.25rem;
+    }
+  }
+  &__macros {
+    width: 100%;
+  }
+  &__macro-micro-container {
     width: 100%;
     display: flex;
-    justify-content: space-between;
-    border-top: 1px solid $color-modal-divider;
-  }
-  @mixin modal-cancel-button {
-    background-color: $white;
-    border: none;
-    margin: 0.4rem 0 0 2.25rem;
-    font-size: 0.9rem;
-    line-height: 1.25rem;
-    font-family: $base-font;
-  }
-  @mixin modal-action-button {
-    background-color: $white;
-    border: none;
-    margin: 0.4rem 2.25rem 0 0;
-    font-size: 0.9rem;
-    line-height: 1.25rem;
-    font-family: $base-font;
-    font-weight: 600;
-  }
-  @mixin delete-modal-text-container {
-    box-sizing: border-box;
-    height: 7rem;
-    display: flex;
     align-items: center;
+    padding-bottom: 0.25rem;
+    @include tablet {
+      padding-bottom: 0.5rem;
+    } 
   }
-  @mixin recipe-modal-container {
-    z-index: 1002;
-    padding: 1rem 1.5rem 1.25rem;
-    box-sizing: border-box;
-    position: fixed;
-    background-color: $white;
-    width: 90%; 
-    height: 85%;
-    border-radius: 20px;
-    top: 2.5rem;
-    left: 50%;
-    transform: translate(-50%, 0%);
-    overflow-y: scroll;
-    &__back-arrow {
-      position: fixed;
-      left: 2.5rem;
-      top: 4rem;
-      z-index: 1003;
+  &__circle {
+    height: 0.5rem;
+    width: 0.5rem;
+    border-radius: 50%;
+    margin-right: 0.5rem; 
+    &--protein {
+      background-color: $color-main;
     }
-    &__recipe-image-container {
-      display: flex;
-      justify-content: center;
+    &--fat {
+      background-color: $color-fat;
     }
-    &__recipe-image {
-      height: 7rem;
-      width: 7rem;
-      border-radius: 20px;
+    &--carb {
+      background-color: $color-carb;
     }
-    &__name {
-      text-align: center;
-      padding-top: 1rem;
-      font-size: 1.1rem;
-      line-height: 1.25rem;
-    }
-    &__servings {
-      text-align: center;
-      padding-top: 0.25rem;
-      font-weight: 400;
-    }
+    @include tablet {
+      height: 0.7rem;
+      width: 0.7rem;
+    } 
   }
-  @mixin recipe-modal-ingredients {
-    &__ingredients-section {
-      padding-top: 0.5rem;
-      width: 100%;
-    }
-    &__section-heading {
-      width: 100%;
-      padding-bottom: 0.25rem;
-      border-bottom: 1px solid $color-divider;
-    }
-    &__ingredient {
-      font-size: 0.9rem;
-      line-height: 1rem;
-      padding-bottom: 0.25rem;
-    }
-  }
-  @mixin recipe-modal-nutrition-info {
-    &__nutrition-section {
-      padding-top: 0.5rem;
-      width: 100%;
-    }
-    &__section-heading {
-      width: 100%;
-      padding-bottom: 0.25rem;
-      border-bottom: 1px solid $color-divider;
-    }
-    &__nutrition-content {
-      display: flex;
-      flex-direction: column;
-    }
-    &__top-row {
-      padding-top: 1rem;
-      display: flex;
-      justify-content: center;
-      width: 100%;
-    }
-    &__macros {
-      width: 50%;
-    }
-    &__macro-micro-container {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      padding-bottom: 0.25rem;
-    }
-    &__circle {
-      height: 0.5rem;
-      width: 0.5rem;
-      border-radius: 50%;
-      margin-right: 0.5rem; 
-      &--protein {
-        background-color: $color-main;
-      }
-      &--fat {
-        background-color: $color-fat;
-      }
-      &--carb {
-        background-color: $color-carb;
-      }
-    }
-    &__macro-micro {
-      font-size: 0.85rem;
-      line-height: 1rem;
-      &--quantity {
-        font-size: 0.8rem;
-        margin-left: auto;
-        font-weight: 600;
-      }
-    }
-    &__bottom-row {
-      display: flex;
-      padding: 1rem 0;
-    }
-    &__kcal-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 40%;
-      margin-right: 0.25rem
-    }
-    &__kcal-border {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      width: 5.5rem;
-      height: 3.5rem;
-      border-radius: 20px;
-      border: 1px solid $color-kcal-border;
-    }
-    &__kcal {
-      text-align: center;
-      font-size: 0.85rem;
-      line-height: 1rem;
-      &--bold {
-        font-weight: 600;
-      }
-    }
-    &__micro-container {
-      width: 55%;
+  &__macro-micro {
+    font-size: 0.8rem;
+    line-height: 1rem;
+    &--quantity {
+      font-size: 0.75rem;
       margin-left: auto;
+      font-weight: 600;
+      @include tablet {
+        font-size: 0.85rem;
+      } 
+    }
+    @include tablet {
+      font-size: 1rem;
+    } 
+  }
+  &__kcal-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-top: 0.5rem;
+  }
+  &__kcal-border {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 5.5rem;
+    height: 3.5rem;
+    border-radius: 20px;
+    border: 1px solid $color-kcal-border;
+    @include tablet {
+      width: 7rem;
+      height: 4rem;
     }
   }
-  @mixin recipe-modal-cooking-instructions {
-    &__instructions-section {
-      padding-top: 0.25rem;
-    }
-    &__section-heading {
-      width: 100%;
-      padding-bottom: 0.25rem;
-      border-bottom: 1px solid $color-divider;
-    }
-    &__instructions-text {
-      padding-top: 0.5rem;
-      font-size: 0.9rem;
-      line-height: 1rem;
-    }
-    &__instructions-link {
-      text-decoration: none;
-      color: $color-recipe-link;
+  &__kcal {
+    text-align: center;
+    font-size: 0.85rem;
+    line-height: 1rem;
+    &--bold {
       font-weight: 600;
     }
+    @include tablet {
+      font-size: 1rem;
+    }
   }
+  &__micro-container {
+    width: 100%;
+    margin-left: auto;
+  }
+}
+@mixin recipe-modal-cooking-instructions {
+  &__instructions-section {
+    padding-top: 0.25rem;
+  }
+  &__section-heading {
+    width: 100%;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid $color-divider;
+    @include tablet {
+      font-size: 1.15rem;
+    } 
+  }
+  &__instructions-text {
+    padding-top: 0.5rem;
+    font-size: 0.9rem;
+    line-height: 1rem;
+    @include tablet {
+      font-size: 1rem;
+      padding-top: 0.75rem;
+    } 
+  }
+  &__instructions-link {
+    text-decoration: none;
+    color: $color-recipe-link;
+    font-weight: 600;
+  }
+}

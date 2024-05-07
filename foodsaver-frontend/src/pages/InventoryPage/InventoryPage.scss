@@ -14,12 +14,24 @@ span {
 
 .inventory-page {
   padding: 5rem 1.5rem 0;
+  @include tablet {
+    padding: 7rem 3rem 0;
+  }
   &__heading-container {
     @include flex-spaceb-center;
     padding-bottom: 0.5rem;
+    @include tablet {
+      @include flex-center-center;
+    }
   }
   &__heading {
     @include page-heading; 
+    @include tablet {
+      width: 35rem;
+    }
+    @include desktop {
+      width: 42rem;
+    }
   }
   &__add-button-container {
     position: relative;
@@ -33,12 +45,24 @@ span {
     font-family: $base-font;
     border-radius: 5px;
     padding-left: 1.2rem;
+    &:hover {
+      filter: brightness(85%);
+    }
+    @include tablet {
+      height: 2.5rem;
+      width: 10rem;
+    }
   }
   &__add-icon {
     position: absolute;
     top: 0.4rem;
     left: 0.5rem;
     height: 1.2rem;
+    @include tablet {
+      top: 0.5rem;
+      left: 0.65rem;
+      height: 1.5rem;
+    }
   }
   &__no-inventory-text {
     padding-top: 0.75rem;
@@ -48,12 +72,30 @@ span {
     display: flex;
     width: 100%;
     padding-bottom: 0.2rem;
+    @include tablet {
+      justify-content: center;
+    }
   }
   &__subheading {
     @include inventory-page-text-large;
     width: 42%;
     padding-right: 0.75rem;
+    @include tablet {
+      width: 15.35rem;
+      &--right {
+        width: 19.65rem;
+      }
+    }
   }
+
+  &__item-outer-container {
+    @include tablet {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
   &__item-container {
     display: flex;
     align-items: center;
@@ -66,6 +108,11 @@ span {
     }
     &--warning {
       background-color: $color-expiry-warning;
+    }
+    @include tablet {
+      width: 35rem;
+      margin: 0.35rem 0;
+      padding: 0.25rem 1rem;
     }
   }
   &__item-name {

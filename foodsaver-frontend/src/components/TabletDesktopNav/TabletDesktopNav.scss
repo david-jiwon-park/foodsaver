@@ -1,0 +1,41 @@
+// Tablet Desktop Navigation Styling 
+
+@import '../../styles/partials/fonts';
+@import '../../styles/partials/mixins';
+@import '../../styles/partials/variables';
+
+.nav {
+    display: none;
+    @include tablet {
+        display: flex;
+    } 
+    &__container {
+        border-left: 2px solid $white;
+        padding: 0.5rem 0.5rem;
+    }
+    &__link {
+        text-decoration: none;
+        color: $color-nav-text;
+        padding: 1.25rem;
+        font-size: 0.9rem;
+        font-weight: 600;
+        &:hover {
+            color: $black;
+        }
+        @include desktop {
+            padding: 1.75rem;
+        }
+    }
+    &__profile-link {
+        position: fixed;
+        top: 2.25rem;
+        right: 2.5rem;
+        @include desktop {
+            right: 3rem;
+        }
+
+    }
+    &__user-icon {
+        height: 1.8rem;
+    }
+}
