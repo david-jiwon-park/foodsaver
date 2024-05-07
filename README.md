@@ -42,9 +42,11 @@ Edamam API Credentials:
 
 MailJet and Edamam are external APIs that are required for full functionality of this application. The MailJet API is required for sending automatic email notifications, and the Edamam API is required for searching up recipe recommendations. Sign up is required to retreive API Credentials from these external APIs. 
 
-Links to External APIs: 
-MailJet: [(https://www.mailjet.com/)]
-Edamam: [(https://www.edamam.com/)]
+Links to External APIs:
+
+MailJet: https://www.mailjet.com/
+
+Edamam: https://www.edamam.com/
 
 #### Now you are all set!
 
