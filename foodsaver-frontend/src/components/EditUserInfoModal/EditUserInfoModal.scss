@@ -11,6 +11,9 @@
 .edituserinfomodal {
     @include modal-container;
     height: 16rem;
+    @include tablet {
+        height: 17.5rem;
+    }
     &__form {
         @include modal-form;
     }
@@ -29,6 +32,9 @@
         padding: 1.25rem 0 1.25rem;
         width: 100%;
         @include flex-center-center;
+        @include tablet {
+            padding: 1.5rem 0 1.5rem;
+        }
     }
     &__label {
         font-size: 0.9rem;
@@ -36,6 +42,10 @@
         padding-right: 0.25rem;
         &--email {
             padding-right: 0.4rem;
+        }
+        @include tablet {
+            font-size: 1rem;
+            line-height: 1.25rem;
         }
     }
     &__field {

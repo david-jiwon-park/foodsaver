@@ -194,8 +194,8 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
       }
       {!loading && !loadingError ?
       (<div className='profile-page'>
-        <h1 className='profile-page__heading'>User Profile</h1>
         <section className='profile-page__info'>
+          <h1 className='profile-page__heading'>User Profile</h1>
           <div className='profile-page__name-email'>
             <div className='profile-page__label-container'>
               <h5 className='profile-page__label-text profile-page__label-text--top'>Name</h5>
@@ -216,8 +216,8 @@ const UserProfilePage = ({ isLoggedIn, setIsLoggedIn }) => {
           </div>
           <p className='profile-page__delete-account' onClick={() => handleOpenDeleteUserModal()}>Delete Account</p>
         </section>
-        <h1 className='profile-page__heading'>Preferences</h1>
-        <form>
+        <form className='profile-page__form'>
+          <h1 className='profile-page__heading'>Preferences</h1>
           <div className='profile-page__notifications-container'>
             <h5 className='profile-page__notifications-label'>Email Notifications</h5>
             <label className="profile-page__toggle">
