@@ -3,8 +3,15 @@
 import './MobileNav.scss'
 import { Link } from 'react-router-dom';
 
-const MobileNav = ({ isOpen, closeMobileNavIfLocationMatches, setIsLoggedIn }) => {
+const MobileNav = ({ isOpen, setIsLoggedIn, setIsMobileNavOpen, currentLocation }) => {
   if (!isOpen) return null;
+
+  // Function to close navigation screen if the user clicks on the page they are already in
+  const closeMobileNavIfLocationMatches = (paths) => {
+    if (paths.some(path => currentLocation.startsWith(path))) {
+      setIsMobileNavOpen(false);
+    }
+  };
 
   // All possible navigation paths to check to see if the current path is the same as the page the user is on
   const pathsToCheck = ["/inventory", "/recipes", "/favorites", "/profile"];
@@ -32,7 +39,7 @@ const MobileNav = ({ isOpen, closeMobileNavIfLocationMatches, setIsLoggedIn }) =
         </Link>
         <div className="mobile-nav__link mobile-nav__link--signout">
           <button className="mobile-nav__button mobile-nav__button--signout" onClick={handleSignOut}>
-              Sign Out
+            Sign Out
           </button>
         </div>
       </div>

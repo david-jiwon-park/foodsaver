@@ -20,13 +20,6 @@ const Header = ({ setIsLoggedIn }) => {
     }
   };
 
-  // Function to close navigation screen if the user clicks on the page they are already in
-  const closeMobileNavIfLocationMatches = (paths) => {
-    if (paths.some(path => currentLocation.startsWith(path))) {
-      setIsMobileNavOpen(false);
-    }
-  };
-
   return(
     <div className="header">
       <div className="header__container">
@@ -36,8 +29,10 @@ const Header = ({ setIsLoggedIn }) => {
       </div>
       <MobileNav 
         isOpen={isMobileNavOpen} 
-        closeNavIfLocationMatches={closeMobileNavIfLocationMatches}
+        // closeNavIfLocationMatches={closeMobileNavIfLocationMatches}
         setIsLoggedIn={setIsLoggedIn} 
+        setIsMobileNavOpen={setIsMobileNavOpen}
+        currentLocation={currentLocation}
       />
     </div>
   )
