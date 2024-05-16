@@ -2,6 +2,9 @@
 
 Food Saver is an application that keeps track of your perishable food at home to help reduce food waste and guide sustainable grocery shopping. If any food item is closely approaching its expiration date, Food Saver will send notifications as a reminder to make use of that food soon. Food Saver also gives recipe recommendations to help you make the best use of your food.
 
+## Live Production
+https://foodsaver-frontend-d00898eb8c00.herokuapp.com/
+
 ## Getting Started
 
 To run this project, run ```$ npm install``` in both ```foodsaver-frontend``` and ```foodsaver-backend``` folders to get all dependencies and packages.
